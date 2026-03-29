@@ -18,4 +18,18 @@ export class TagList {
   getValue(): Tag[] {
     return this.value;
   }
+
+  static fromString(tagString: string): TagList {
+    if (!tagString || tagString.trim() === "") {
+      return new TagList([]);
+    }
+
+    const tags = tagString
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter((tagName) => tagName !== "")
+      .map((tagName) => new Tag(tagName));
+
+    return new TagList(tags);
+  }
 }
