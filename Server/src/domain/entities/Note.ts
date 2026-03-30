@@ -51,4 +51,8 @@ export class Note {
     this._tag = newTag;
     this._updateAt = new Date();
   }
+  updateReporter(newReporter: Email) {
+    this._reporter = newReporter;
+    this._updateAt = new Date();
+  }
 }

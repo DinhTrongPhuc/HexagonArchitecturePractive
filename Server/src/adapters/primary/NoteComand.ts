@@ -1,10 +1,14 @@
 import { CreateNoteUseCase, CreateNoteRequest } from "../../ports/inbound/CreateNoteUseCase";
-import { ListNoteUsecase } from "../../ports/inbound/ListNoteUsecase";
+import { ListNoteUseCase } from "../../ports/inbound/ListNoteUseCase";
+import { UpdateNoteRequest, UpdateNoteUseCase } from "../../ports/inbound/UpdateNoteUseCase";
+import { DeleteNoteUseCase } from "../../ports/inbound/DeleteNoteUseCase";
 
 export class NoteComand {
     constructor(
         private createNoteUseCase: CreateNoteUseCase,
-        private listNoteUsecase: ListNoteUsecase
+        private listNoteUseCase: ListNoteUseCase,
+        private updateNoteUseCase: UpdateNoteUseCase,
+        private deleteNoteUseCase: DeleteNoteUseCase
     ) { }
     async run(args: string[]) {
         const [entity, action] = args;
@@ -32,7 +36,7 @@ export class NoteComand {
                         console.log("[CLI] Note created successfully:", result.id);
                         break;
                     case "read":
-                        const notes = await this.listNoteUsecase.execute();
+                        const notes = await this.listNoteUseCase.execute();
                         console.log(notes.map(n => ({
                             id: n.id,
                             title: n.title.getValue(),
@@ -42,6 +46,35 @@ export class NoteComand {
                             createdAt: n.createdAt,
                             updateAt: n.updateAt
                         }))); break;
+                    case "update":
+                        const idUpdate = args[2];
+                        const titleUpdate = args[3];
+                        const contentUpdate = args[4];
+                        const tagsUpdate = args[5];
+                        const reporterUpdate = args[6];
+                        if (!idUpdate || !titleUpdate || !contentUpdate || !tagsUpdate || !reporterUpdate) {
+                            console.log("Missing arguments");
+                            break;
+                        }
+                        const requestUpdate: UpdateNoteRequest = {
+                            id: idUpdate,
+                            title: titleUpdate,
+                            content: contentUpdate,
+                            tags: tagsUpdate,
+                            reporter: reporterUpdate
+                        };
+                        const resultUpdate = await this.updateNoteUseCase.execute(requestUpdate);
+                        console.log("[CLI] Note updated successfully:", resultUpdate.id);
+                        break;
+                    case "delete":
+                        const idDelete = args[2];
+                        if (!idDelete) {
+                            console.log("Missing arguments");
+                            break;
+                        }
+                        await this.deleteNoteUseCase.execute(idDelete);
+                        console.log("[CLI] Note deleted successfully:", idDelete);
+                        break;
                     default:
                         console.log("Comands unknown action");
                         break;

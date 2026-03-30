@@ -1,7 +1,7 @@
 import { NoteRepository } from "../../ports/outbound/NoteRepository";
-import { ListNoteUsecase } from "../../ports/inbound/ListNoteUsecase";
+import { ListNoteUseCase } from "../../ports/inbound/ListNoteUseCase";
 
-export class ReadListNote implements ListNoteUsecase {
+export class ReadListNote implements ListNoteUseCase {
     constructor(private readonly noteReppository: NoteRepository) { }
 
     async execute() {

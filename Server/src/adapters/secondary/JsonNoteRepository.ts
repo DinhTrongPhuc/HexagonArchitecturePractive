@@ -58,4 +58,53 @@ export class JsonNoteRepository implements NoteRepository {
             new Date(data.updateAt)
         ));
     }
+    async findByID(id: string): Promise<Note> {
+        const notes = await this.readFromFile();
+        const noteData = notes.find(note => note.id === id);
+
+        if (!noteData) throw new Error("Note not found");
+        return new Note(
+            noteData.id,
+            new Title(noteData.title),
+            new Content(noteData.content),
+            TagList.fromString(noteData.tags),
+            new Email(noteData.reporter),
+            new Date(noteData.createdAt),
+            new Date(noteData.updateAt)
+        );
+    }
+
+
+    async delete(id: string): Promise<void> {
+        const rawNotes = await this.readFromFile();
+
+        const filteredNotes = rawNotes.filter(n => n.id !== id);
+
+        if (rawNotes.length === filteredNotes.length) {
+            throw new Error("Note to delete not found");
+        }
+
+        await fs.writeFile(this.filePath, JSON.stringify(filteredNotes, null, 2));
+    }
+
+
+    async update(note: Note): Promise<void> {
+        const rawNotes = await this.readFromFile();
+
+        const index = rawNotes.findIndex(n => n.id === note.id);
+
+        if (index === -1) {
+            throw new Error("Note not found in data.json");
+        }
+        rawNotes[index] = {
+            id: note.id,
+            title: note.title.getValue(),
+            content: note.content.getValue(),
+            tags: note.tag.getValue().map(t => t.getValue()).join(','),
+            reporter: note.reporter.getValue(),
+            createdAt: note.createdAt,
+            updateAt: note.updateAt
+        };
+        await fs.writeFile(this.filePath, JSON.stringify(rawNotes, null, 2));
+    }
 }

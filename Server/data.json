@@ -1,0 +1,29 @@
+[
+  {
+    "id": "c76540c1-dfce-4ce4-802c-71a64910c0c9",
+    "title": "test new creat from cli",
+    "content": "This is where the content stored",
+    "tags": "tag1,tag2",
+    "reporter": "reporter1@gmail.com",
+    "createdAt": "2026-03-30T06:53:47.856Z",
+    "updateAt": "2026-03-30T06:53:47.856Z"
+  },
+  {
+    "id": "9f22be2c-97d5-4721-9ade-b7273862d5dc",
+    "title": "Học Hexagonal",
+    "content": "Đây là nội dung ghi chú từ Web Server",
+    "tags": "study,nodejs,clean",
+    "reporter": "tester@gmail.com",
+    "createdAt": "2026-03-30T10:35:48.361Z",
+    "updateAt": "2026-03-30T10:35:48.361Z"
+  },
+  {
+    "id": "61b87180-5399-4537-8482-7136690cc678",
+    "title": "test new title",
+    "content": "Test new content",
+    "tags": "tag345,tag456",
+    "reporter": "reporterupdate@gmail.com",
+    "createdAt": "2026-03-30T06:54:35.004Z",
+    "updateAt": "2026-03-30T10:04:39.388Z"
+  }
+]

@@ -1,5 +1,5 @@
 import { Note } from "../../domain/entities/Note";
 
-export interface ListNoteUsecase {
+export interface ListNoteUseCase {
     execute(): Promise<Note[]>;
 }
