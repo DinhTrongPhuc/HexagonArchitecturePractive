@@ -10,10 +10,7 @@ import { DeleteNote } from "./application/usecases/DeleteNote";
 // stored data
 import { JsonNoteRepository } from "./adapters/secondary/persistence/JsonNoteRepository";
 import { InMemoryNoteRepository } from "./adapters/secondary/persistence/InMemoryNoteRepository";
-
-const app = express();
-const port = 5000;
-app.use(express.json());
+import { createNoteRouter } from "./adapters/primary/controllers/http/NoteRoutes";
 
 // khởi tạo repository
 const noteRepository = new JsonNoteRepository();
@@ -36,11 +33,12 @@ if (args.length > 0) {
         await noteComand.run(args);
     })();
 } else {
-    console.log("Web server running");
-    app.post("/notes", (req, res) => noteController.create(req, res));
-    app.get("/notes", (req, res) => noteController.read(req, res));
-    app.put("/notes/:id", (req, res) => noteController.update(req, res));
-    app.delete("/notes/:id", (req, res) => noteController.delete(req, res));
+    const app = express();
+    const port = 5000;
+    app.use(express.json());
+
+    app.use(createNoteRouter(noteController));
+
 
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);

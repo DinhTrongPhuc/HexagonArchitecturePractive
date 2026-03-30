@@ -18,12 +18,12 @@
     "updateAt": "2026-03-30T10:35:48.361Z"
   },
   {
-    "id": "61b87180-5399-4537-8482-7136690cc678",
-    "title": "test new title",
-    "content": "Test new content",
-    "tags": "tag345,tag456",
-    "reporter": "reporterupdate@gmail.com",
-    "createdAt": "2026-03-30T06:54:35.004Z",
-    "updateAt": "2026-03-30T10:04:39.388Z"
+    "id": "bc92784d-2177-4936-a44a-0dea50389058",
+    "title": "Refactor project",
+    "content": "Đây là nội dung ghi chú từ Web Server",
+    "tags": "study,nodejs",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-03-30T12:07:04.588Z",
+    "updateAt": "2026-03-30T12:07:04.588Z"
   }
 ]
