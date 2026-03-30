@@ -14,7 +14,7 @@ const port = 5000;
 app.use(express.json());
 
 // khởi tạo repository
-const noteRepository = new InMemoryNoteRepository();
+const noteRepository = new JsonNoteRepository();
 
 // khởi tạo usecase
 const createNoteUseCase = new CreateNote(noteRepository);
