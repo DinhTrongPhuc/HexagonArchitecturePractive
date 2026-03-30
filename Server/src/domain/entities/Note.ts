@@ -38,7 +38,7 @@ export class Note {
     return this._createdAt;
   }
 
-  //behaviors (setters)---------------------
+  //Domain behaviors---------------------
   updateTitle(newTitle: Title) {
     this._title = newTitle;
     this._updateAt = new Date();

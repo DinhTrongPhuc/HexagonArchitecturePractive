@@ -6,25 +6,18 @@ import { Title } from "../../domain/value-object/Title";
 import { Content } from "../../domain/value-object/Content";
 import { TagList } from "../../domain/value-object/NoteTag/TagList";
 import { Email } from "../../domain/value-object/Email";
+import { CreateNoteRequest, CreateNoteUseCase } from "../../ports/inbound/CreateNoteUseCase";
 
-export class CreateNote {
+export class CreateNote implements CreateNoteUseCase {
     constructor(private readonly noteRepository: NoteRepository) { }
 
-    async execute(
-        //id
-        title: string,
-        content: string,
-        tags: string,
-        reporter: string
-        //createdAt
-        //updateAt
-    ) {
+    async execute(request: CreateNoteRequest): Promise<Note> {
         const note = new Note(
             randomUUID(),
-            new Title(title),
-            new Content(content),
-            TagList.fromString(tags),
-            new Email(reporter),
+            new Title(request.title),
+            new Content(request.content),
+            TagList.fromString(request.tags),
+            new Email(request.reporter),
             new Date(),
             new Date()
         );
