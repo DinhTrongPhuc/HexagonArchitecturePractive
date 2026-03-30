@@ -1,12 +1,12 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-import { NoteRepository } from "../../ports/outbound/NoteRepository";
-import { Note } from "../../domain/entities/Note";
-import { Title } from "../../domain/value-object/Title";
-import { Content } from "../../domain/value-object/Content";
-import { TagList } from "../../domain/value-object/NoteTag/TagList";
-import { Email } from "../../domain/value-object/Email";
+import { NoteRepository } from "../../../ports/outbound/repositories/NoteRepository";
+import { Note } from "../../../domain/entities/Note";
+import { Title } from "../../../domain/value-object/Title";
+import { Content } from "../../../domain/value-object/Content";
+import { TagList } from "../../../domain/value-object/NoteTag/TagList";
+import { Email } from "../../../domain/value-object/Email";
 
 export class JsonNoteRepository implements NoteRepository {
     private filePath = path.join(process.cwd(), 'data.json');

@@ -1,15 +1,15 @@
 import express from "express";
 
-import { NoteController } from "./adapters/primary/NoteController";
-import { NoteComand } from "./adapters/primary/NoteComand";
+import { NoteController } from "./adapters/primary/controllers/http/NoteController";
+import { NoteComand } from "./adapters/primary/controllers/CLI/NoteComand";
 import { CreateNote } from "./application/usecases/CreateNote";
 import { ReadListNote } from "./application/usecases/ReadListNote";
 import { UpdateNote } from "./application/usecases/UpdateNote";
 import { DeleteNote } from "./application/usecases/DeleteNote";
 
 // stored data
-import { JsonNoteRepository } from "./adapters/secondary/JsonNoteRepository";
-import { InMemoryNoteRepository } from "./adapters/secondary/InMemoryNoteRepository";
+import { JsonNoteRepository } from "./adapters/secondary/persistence/JsonNoteRepository";
+import { InMemoryNoteRepository } from "./adapters/secondary/persistence/InMemoryNoteRepository";
 
 const app = express();
 const port = 5000;

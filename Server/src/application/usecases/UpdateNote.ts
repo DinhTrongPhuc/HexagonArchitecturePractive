@@ -1,5 +1,5 @@
-import { NoteRepository } from "../../ports/outbound/NoteRepository";
-import { UpdateNoteUseCase, UpdateNoteRequest } from "../../ports/inbound/UpdateNoteUseCase";
+import { NoteRepository } from "../../ports/outbound/repositories/NoteRepository";
+import { UpdateNoteUseCase, UpdateNoteRequest } from "../../ports/inbound/usecases/UpdateNoteUseCase";
 import { Note } from "../../domain/entities/Note";
 import { Title } from "../../domain/value-object/Title";
 import { Content } from "../../domain/value-object/Content";

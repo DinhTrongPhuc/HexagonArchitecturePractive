@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import { CreateNoteUseCase } from "../../ports/inbound/CreateNoteUseCase";
-import { ListNoteUseCase } from "../../ports/inbound/ListNoteUseCase";
-import { UpdateNoteUseCase } from "../../ports/inbound/UpdateNoteUseCase";
-import { DeleteNoteUseCase } from "../../ports/inbound/DeleteNoteUseCase";
+
+import { CreateNoteUseCase } from "../../../../ports/inbound/usecases/CreateNoteUseCase";
+import { ListNoteUseCase } from "../../../../ports/inbound/usecases/ListNoteUseCase";
+import { UpdateNoteUseCase } from "../../../../ports/inbound/usecases/UpdateNoteUseCase";
+import { DeleteNoteUseCase } from "../../../../ports/inbound/usecases/DeleteNoteUseCase";
 
 export class NoteController {
     constructor(

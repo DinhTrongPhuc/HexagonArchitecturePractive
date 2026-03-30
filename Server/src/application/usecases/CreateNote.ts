@@ -1,12 +1,12 @@
 import { randomUUID } from "crypto";
 
-import { NoteRepository } from "../../ports/outbound/NoteRepository";
+import { NoteRepository } from "../../ports/outbound/repositories/NoteRepository";
 import { Note } from "../../domain/entities/Note";
 import { Title } from "../../domain/value-object/Title";
 import { Content } from "../../domain/value-object/Content";
 import { TagList } from "../../domain/value-object/NoteTag/TagList";
 import { Email } from "../../domain/value-object/Email";
-import { CreateNoteRequest, CreateNoteUseCase } from "../../ports/inbound/CreateNoteUseCase";
+import { CreateNoteRequest, CreateNoteUseCase } from "../../ports/inbound/usecases/CreateNoteUseCase";
 
 export class CreateNote implements CreateNoteUseCase {
     constructor(private readonly noteRepository: NoteRepository) { }

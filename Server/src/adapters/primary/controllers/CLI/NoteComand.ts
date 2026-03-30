@@ -1,7 +1,7 @@
-import { CreateNoteUseCase, CreateNoteRequest } from "../../ports/inbound/CreateNoteUseCase";
-import { ListNoteUseCase } from "../../ports/inbound/ListNoteUseCase";
-import { UpdateNoteRequest, UpdateNoteUseCase } from "../../ports/inbound/UpdateNoteUseCase";
-import { DeleteNoteUseCase } from "../../ports/inbound/DeleteNoteUseCase";
+import { CreateNoteUseCase, CreateNoteRequest } from "../../../../ports/inbound/usecases/CreateNoteUseCase";
+import { ListNoteUseCase } from "../../../../ports/inbound/usecases/ListNoteUseCase";
+import { UpdateNoteRequest, UpdateNoteUseCase } from "../../../../ports/inbound/usecases/UpdateNoteUseCase";
+import { DeleteNoteUseCase } from "../../../../ports/inbound/usecases/DeleteNoteUseCase";
 
 export class NoteComand {
     constructor(
