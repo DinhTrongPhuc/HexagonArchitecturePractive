@@ -1,4 +1,5 @@
 import express from "express";
+import dotenv from "dotenv";
 
 import { NoteController } from "./adapters/primary/controllers/http/NoteController";
 import { NoteComand } from "./adapters/primary/controllers/CLI/NoteComand";
@@ -13,7 +14,6 @@ import { createNoteRouter } from "./adapters/primary/controllers/http/NoteRoutes
 // stored data
 import { JsonNoteRepository } from "./adapters/secondary/persistence/JsonNoteRepository";
 import { InMemoryNoteRepository } from "./adapters/secondary/persistence/InMemoryNoteRepository";
-
 
 export class App {
     static async bootstrap(args: string[]) {
@@ -33,10 +33,11 @@ export class App {
         } else {
             const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, updateNoteUseCase, deleteNoteUseCase);
             const server = express();
+            dotenv.config();
             server.use(express.json());
             server.use(createNoteRouter(noteController));
 
-            server.listen(5000, () => console.log("Server is running on port 5000"));
+            server.listen(process.env.PORT, () => console.log(`Server is running on port ${process.env.PORT}`));
         }
     }
 }
