@@ -70,5 +70,41 @@
     "reporter": "user@usergmai.usergmaicom",
     "createdAt": "2026-04-01T09:33:13.624Z",
     "updateAt": "2026-04-01T09:33:13.624Z"
+  },
+  {
+    "id": "3db019dd-d265-42ca-89ea-b0ec68f536e6",
+    "title": "cập nhật lại ngày Oder",
+    "content": "Hệ thống hoạt động với role, chỉ có role có quyền mới có thể điều chỉnh ngày.Bạn chỉ có thể add được payment sau khi tạo oder theo luồng hệ thống, do đã tạo oder vào 24/03/2026 nên không thể add payment vào trước.",
+    "tags": "ODER,CRM",
+    "reporter": "@gmial.gmialcom",
+    "createdAt": "2026-04-01T09:39:24.657Z",
+    "updateAt": "2026-04-01T09:39:24.657Z"
+  },
+  {
+    "id": "732c4993-e0d3-4731-8e37-90d86619d6b4",
+    "title": "Cập nhật lại ngày add payment",
+    "content": "Theo logic hệ thống bạn chỉ có thể add payment sau khi tạo oder,VÍ DỤ:  bạn đã tạo oder vào ngày 25/3 nên không thể add payment vào ngày 24/3 được.Quy định mới về thời gian add Payment T+7 ( 7 ngày sau ngày tạo order )",
+    "tags": "CRM,payment",
+    "reporter": "reporter1@gmail.com",
+    "createdAt": "2026-04-01T09:42:05.868Z",
+    "updateAt": "2026-04-01T09:42:05.868Z"
+  },
+  {
+    "id": "96a959c2-9e5c-4316-b20f-e83cd99891f4",
+    "title": "Withdraw học viên bảo lưu ra khỏi lớp",
+    "content": "Thứ nhất, vì đã thực hiện bảo lưu cho học sinh nên trạng thái hiện tại của học sinh trong lớp đã tắt (inactive) và tích uncompleted. Do đó không thể withdraw ra khỏi lớp học ở thời điểm hiện tại. để thực hiện withdraw thì cơ sở hãy chờ hết hạn bảo lưu của học sinh và thực hiện withdraw khỏi lớp học hiện tại và tiếp tục khóa học đó với lớp (mã lớp) khác.",
+    "tags": "withdraw,LMS",
+    "reporter": "report@gmail.com",
+    "createdAt": "2026-04-01T09:45:24.085Z",
+    "updateAt": "2026-04-01T09:45:24.085Z"
+  },
+  {
+    "id": "c5dd25db-9fdc-418d-9f00-6a99d9171306",
+    "title": "Điểm danh cho giáo viên",
+    "content": "do lớp đã finished nên không thể điểm danh. Cách xử lý,Truy cập vào lớp học và tạo yêu cầu mở lớp về trạng thái running (request re-running class), Khi đó hệ thống sẽ mở lại lớp và cho phép điểm danh, lúc đó hãy đánh dấu điểm danh tương ứng với thành viên lớp.",
+    "tags": "Điểm danh,LMS",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-01T09:48:19.818Z",
+    "updateAt": "2026-04-01T09:48:19.818Z"
   }
 ]
