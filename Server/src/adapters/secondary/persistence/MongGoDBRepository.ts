@@ -1,24 +1,51 @@
-import { Note } from "../../../domain/entities/Note";
-import { Title } from "../../../domain/value-object/Title";
-import { Content } from "../../../domain/value-object/Content";
-import { TagList } from "../../../domain/value-object/NoteTag/TagList";
-import { Email } from "../../../domain/value-object/Email";
-import { NoteRepository } from "../../../ports/outbound/repositories/NoteRepository";
+import { Collection, MongoClient } from "mongodb";
 
-export class MongoDBRepository implements NoteRepository {
+import { NoteMapper } from "./mappers/NoteMapper";
+import { NoteRepository } from "../../../ports/outbound/repositories/NoteRepository";
+import { Note } from "../../../domain/entities/Note";
+
+export class MongoDBNoteRepository implements NoteRepository {
+    private collection: Collection;
+
+    constructor(client: MongoClient) {
+        this.collection = client.db("note_app").collection("notes");
+    }
+
     async save(note: Note): Promise<void> {
-        throw new Error("null");
+        const document = NoteMapper.toPersistence(note);
+        await this.collection.insertOne(document as any);
     }
+
     async findAll(): Promise<Note[]> {
-        throw new Error("null");
+        const documents = await this.collection.find().toArray();
+        return documents.map(doc => NoteMapper.toDomain(doc));
     }
-    async findByID(id: string): Promise<Note> {
-        throw new Error("null");
+
+    async findByID(id: string): Promise<Note | null> {
+        const doc = await this.collection.findOne({ _id: id as any });
+        if (!doc) return null;
+
+        return NoteMapper.toDomain(doc);
     }
-    async delete(id: string): Promise<void> {
-        throw new Error("null");
-    }
+
     async update(note: Note): Promise<void> {
-        throw new Error("null");
+        const doc = NoteMapper.toPersistence(note);
+        const result = await this.collection.updateOne(
+            { _id: note.id as any },
+            { $set: doc }
+        );
+
+        if (result.matchedCount === 0) {
+            throw new Error(`No note found with ID ${note.id} to update`);
+        }
     }
+
+    async delete(id: string): Promise<void> {
+        const result = await this.collection.deleteOne({ _id: id as any });
+
+        if (result.deletedCount === 0) {
+            throw new Error(`No note found with ID ${id} to delete`);
+        }
+    }
+
 }

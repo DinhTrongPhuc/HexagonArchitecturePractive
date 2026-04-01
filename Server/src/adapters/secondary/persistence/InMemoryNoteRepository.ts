@@ -12,9 +12,9 @@ export class InMemoryNoteRepository implements NoteRepository {
         return this.Note;
     }
 
-    async findByID(id: string): Promise<Note> {
+    async findByID(id: string): Promise<Note | null> {
         const note = this.Note.find(note => note.id === id);
-        if (!note) throw new Error("Note not found");
+        if (!note) return null;
         return note;
     }
 

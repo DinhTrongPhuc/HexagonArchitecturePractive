@@ -20,13 +20,13 @@ export class JsonNoteRepository implements NoteRepository {
         }
     }
 
-    // private async writeToFile(notes: any[]): Promise<void> {
-    //     try {
-    //         await fs.writeFile(this.filePath, JSON.stringify(notes, null, 2));
-    //     } catch (error: any) {
-    //         throw new Error("Error writing to file" + error.message);
-    //     }
-    // }
+    private async writeToFile(notes: any[]): Promise<void> {
+        try {
+            await fs.writeFile(this.filePath, JSON.stringify(notes, null, 2));
+        } catch (error: any) {
+            throw new Error("Error writing to file" + error.message);
+        }
+    }
 
     async save(note: Note): Promise<void> {
         const notes = await this.readFromFile();
@@ -42,7 +42,7 @@ export class JsonNoteRepository implements NoteRepository {
         };
 
         notes.push(noteData);
-        await fs.writeFile(this.filePath, JSON.stringify(notes, null, 2));
+        await this.writeToFile(notes);
     }
 
     async findAll(): Promise<Note[]> {
@@ -58,11 +58,12 @@ export class JsonNoteRepository implements NoteRepository {
             new Date(data.updateAt)
         ));
     }
-    async findByID(id: string): Promise<Note> {
+
+    async findByID(id: string): Promise<Note | null> {
         const notes = await this.readFromFile();
         const noteData = notes.find(note => note.id === id);
 
-        if (!noteData) throw new Error("Note not found");
+        if (!noteData) return null;
         return new Note(
             noteData.id,
             new Title(noteData.title),
@@ -84,7 +85,7 @@ export class JsonNoteRepository implements NoteRepository {
             throw new Error("Note to delete not found");
         }
 
-        await fs.writeFile(this.filePath, JSON.stringify(filteredNotes, null, 2));
+        await this.writeToFile(filteredNotes);
     }
 
 
@@ -105,6 +106,6 @@ export class JsonNoteRepository implements NoteRepository {
             createdAt: note.createdAt,
             updateAt: note.updateAt
         };
-        await fs.writeFile(this.filePath, JSON.stringify(rawNotes, null, 2));
+        await this.writeToFile(rawNotes);
     }
 }
