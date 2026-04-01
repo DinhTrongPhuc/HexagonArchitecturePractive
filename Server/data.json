@@ -1,38 +1,74 @@
 [
   {
     "id": "c76540c1-dfce-4ce4-802c-71a64910c0c9",
-    "title": "test new creat from cli",
-    "content": "This is where the content stored",
-    "tags": "tag1,tag2",
+    "title": "Enroll Học viên",
+    "content": "Học viên ban đầu đăng ký khoá 12 tháng tuy nhiên, trong quá trình học bạn đã nâng cấp khóa học (upsale) từ 12 tháng lên khóa 24 tháng, upsale sẽ khiến slot lớp học tăng số tiền cần để mở lớp trên hệ thống nên slot hiện tại không được mở nhưng thực tế đã mua đủ 3 slot của khóa 12 tháng. Học viên được phép mở lớp và enroll vào lớp, tuy nhiên để được mở những slot còn lại thì bạn vẫn cần đóng đủ tiền của khóa 24 tháng.",
+    "tags": "Enroll HV, CRM, LMS",
     "reporter": "reporter1@gmail.com",
     "createdAt": "2026-03-30T06:53:47.856Z",
     "updateAt": "2026-03-30T06:53:47.856Z"
   },
   {
     "id": "9f22be2c-97d5-4721-9ade-b7273862d5dc",
-    "title": "Học Hexagonal",
-    "content": "Đây là nội dung ghi chú từ Web Server",
-    "tags": "study,nodejs,clean",
+    "title": "Lỗi enroll, không hiện mục slot để enroll",
+    "content": "Học viên đã đóng học phí nhưng do chưa phân bổ đều học phí nên slot không mở để enroll. Cách xử lý, phân bổ lại học phí cho học viên",
+    "tags": "CRM,LMS,Phân bổ học phí",
     "reporter": "tester@gmail.com",
     "createdAt": "2026-03-30T10:35:48.361Z",
     "updateAt": "2026-03-30T10:35:48.361Z"
   },
   {
     "id": "bc92784d-2177-4936-a44a-0dea50389058",
-    "title": "Refactor project",
-    "content": "Đây là nội dung ghi chú từ Web Server",
-    "tags": "study,nodejs",
+    "title": "Lỗi 0 slot học phần dù đã active trên CRM",
+    "content": "lỗi hệ thống khi tạo oder hoặc phân bổ học phí cho các slot chưa đúng, hệ thống không mở slot học cho học viên. Cách xử lý, tạo lại oder mới giống với thông tin oder trước đó, phân bổ đều lại học phí cho các slot, sau đó mở lại lớp học",
+    "tags": "CRM,BUG,ENROLL",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-03-30T12:07:04.588Z",
     "updateAt": "2026-03-30T12:07:04.588Z"
   },
   {
     "id": "c143a0e7-40cb-4628-969f-937690800375",
-    "title": "Refactor project",
-    "content": "Đây là nội dung ghi chú từ Web Server",
-    "tags": "study,nodejs",
+    "title": "Enroll học viên vào lớp do chưa active package",
+    "content": "Học viên đã thanh toán đủ tiền khóa học và phân bổ đủ nhưng hệ thống cho học viên enroll. Cách xử lý, active lại package cho học viên trên CRM và enroll bằng LMS",
+    "tags": "CRM,LMS,active",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-01T03:45:53.097Z",
     "updateAt": "2026-04-01T03:45:53.097Z"
+  },
+  {
+    "id": "3b651969-8b10-4a4c-a7dd-3f52be31044c",
+    "title": "Học viên đóng chưa đủ học phí",
+    "content": "học viên đóng chưa đủ học phí nên không có tiền phân bổ vào các slot lớp, yêu cầu người dùng (học viên) đóng bổ sung",
+    "tags": "Học Phí,CRM,Thông báo học viên",
+    "reporter": "reporter@reportergmail.com",
+    "createdAt": "2026-04-01T09:22:16.844Z",
+    "updateAt": "2026-04-01T09:22:16.844Z"
+  },
+  {
+    "id": "684e5b6e-a494-4c92-8042-c32a91bf6b58",
+    "title": "Hệ Thống không tạo request teacher để add GV vào lớp",
+    "content": "Theo luồng hệ thống, khi tạo lớp học mới trên hệ thống thì trạng thái của lớp học sẽ được thay đổi theo quy trình và khi lớp ở trạng thái open hệ thống sẽ tự động tạo Request teacher để Teaching add GV.Trên history của lớp team kiểm tra không ghi nhận lớp được chuyển sang trạng thái Open nên hệ thống không tự động tạo Request Teacher cho lớp cách xử lý, kiểm tra trạng thái của lớp trên mục histories của lớp và thao tác tạo mới request teacher cho lớp",
+    "tags": "request teacher,LMS",
+    "reporter": "phudt01@mindx.com.vn",
+    "createdAt": "2026-04-01T09:28:15.906Z",
+    "updateAt": "2026-04-01T09:28:15.906Z"
+  },
+  {
+    "id": "7e7e222d-bd9d-4da3-a1e6-84d8ebabf52c",
+    "title": "enroll học sinh nhưng slot không đúng thứ tự",
+    "content": "hệ thống CRM đang bị lỗi đồng bộ với hệ thống LMS nên khi enroll học viên slot nhập học của học viên chưa được điền đúng thứ tự lớp. Cách xử lý, enroll học sinh vào lớp thông qua LMS",
+    "tags": "CRM,LMS,BUG",
+    "reporter": "@gmail.com",
+    "createdAt": "2026-04-01T09:30:20.581Z",
+    "updateAt": "2026-04-01T09:30:20.581Z"
+  },
+  {
+    "id": "624f4a8f-9733-4003-98b9-99d59475f2ac",
+    "title": "tạo oder nhầm tên học viên thành tên phụ huynh",
+    "content": "Tại thời điểm tạo oder cơ sở chọn tên phụ huynh nên hệ thống hiểu rằng khóa học đó là dành cho phụ huynh và hiển thị tên phụ huynh thay vì tên học viên. Cách xử lý , (cần role) thay đổi tên trên profile của khách hàng",
+    "tags": "CRM,ORDER",
+    "reporter": "user@usergmai.usergmaicom",
+    "createdAt": "2026-04-01T09:33:13.624Z",
+    "updateAt": "2026-04-01T09:33:13.624Z"
   }
 ]
