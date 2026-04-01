@@ -11,7 +11,7 @@ export class UpdateNote implements UpdateNoteUseCase {
 
     async execute(request: UpdateNoteRequest): Promise<Note> {
         const note = await this.noteRepository.findByID(request.id);
-        if (!note) throw new Error("Note not found");
+        if (!note) throw new Error("Note with ID " + request.id + " not found");
 
         if (request.title) note.updateTitle(new Title(request.title));
         if (request.content) note.updateContent(new Content(request.content));

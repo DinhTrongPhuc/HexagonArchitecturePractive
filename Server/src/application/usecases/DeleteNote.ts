@@ -6,7 +6,7 @@ export class DeleteNote implements DeleteNoteUseCase {
 
     async execute(id: string): Promise<void> {
         const note = await this.noteRepository.findByID(id);
-        if (!note) throw new Error("Note not found");
+        if (!note) throw new Error("Note with ID " + id + " not found");
 
         await this.noteRepository.delete(id);
     }
