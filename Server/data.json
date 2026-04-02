@@ -65,7 +65,7 @@
   {
     "id": "624f4a8f-9733-4003-98b9-99d59475f2ac",
     "title": "tạo oder nhầm tên học viên thành tên phụ huynh",
-    "content": "Tại thời điểm tạo oder cơ sở chọn tên phụ huynh nên hệ thống hiểu rằng khóa học đó là dành cho phụ huynh và hiển thị tên phụ huynh thay vì tên học viên. Cách xử lý , (cần role) thay đổi tên trên profile của khách hàng",
+    "content": "Tại thời điểm tạo oder cơ sở chọn tên phụ huynh nên hệ thống hiểu rằng khóa học đó là dành cho phụ huynh và hiển thị tên phụ huynh thay vì tên học viên. Cách xử lý , (cần role) thay đổi tên trên profile của khách hàng bằng cách tạo một oder mới và điền lại thông tin",
     "tags": "CRM,ORDER",
     "reporter": "user@usergmai.usergmaicom",
     "createdAt": "2026-04-01T09:33:13.624Z",
@@ -106,5 +106,23 @@
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-01T09:48:19.818Z",
     "updateAt": "2026-04-01T09:48:19.818Z"
+  },
+  {
+    "id": "920b4335-cb8f-48d9-9a08-c96b2086701e",
+    "title": "Kiểm tra hợp đồng",
+    "content": "Kiểm tra hợp đồng xem thông tin người ký, số tiền đã đúng chưa, xem khách hàng đã ký chưa, nếu chưa thì là 0/2,rồi thì là 1/2, sau khi xác nhận khách hàng đã ký thì báo cáo lên để lead(chị Thùy) ký khi đó hợp đồng sẽ là 2/2 hoàn thành kiểm tra hợp đồng cần ký",
+    "tags": "Contract",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-01T09:53:27.270Z",
+    "updateAt": "2026-04-01T09:53:27.270Z"
+  },
+  {
+    "id": "a801a8bc-3f6f-4342-84ea-3efb06a243f3",
+    "title": "Các trường hợp bị tích uncomplete trên LMS",
+    "content": "Chuyển lớp (học viên đang học nhưng có mong muốn chuyển lớp khác thì tại lớp cũ sẽ được tick là uncomplete), drop-out (là những học viên đang học thì nghỉ ngang vì nhiều lý do hoặc không lý do), On-hold (Học sinh bảo lưu có thời hạn), Chuyển nhà ( học viên chuyển cơ sở học ) ",
+    "tags": "LMS,uncomplete status",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-01T10:20:36.528Z",
+    "updateAt": "2026-04-01T10:20:36.528Z"
   }
 ]
