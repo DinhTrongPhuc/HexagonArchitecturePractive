@@ -124,5 +124,32 @@
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-01T10:20:36.528Z",
     "updateAt": "2026-04-01T10:20:36.528Z"
+  },
+  {
+    "id": "7f065231-8331-4e2b-b979-e92a66f93294",
+    "title": "Enroll học viên từ khóa học cũ vào lớp của khóa học mới",
+    "content": "hệ thống ghi nhận oder của học viên đang gắn với sản phẩm cũ, nhưng muốn đăng ký học lại vào sản phẩm mới (enroll vào lớp của khóa học mới), hệ thống sẽ không cho phép enroll. Hướng xử lý: tạo một order mới với product (sản phẩm) mới, Order trên hệ thống sẽ ghi nhận khóa học mới từ product và mở thêm 1 slot lớp học cho học viên, khi đó cơ sở có thể enroll học viên vào lớp",
+    "tags": "LMS,CRM,Enroll",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-02T04:57:53.751Z",
+    "updateAt": "2026-04-02T04:57:53.751Z"
+  },
+  {
+    "id": "3c9f9708-5892-4f39-a19f-0315ffa35fbc",
+    "title": "Không đăng nhập được outlook",
+    "content": "Nhân viên không đăng nhập được tài khoản outlook, nguyên nhân đối với các tài khoản .com thông thường sẽ đăng nhập qua outlook tuy nhiên có những nhân viên sẽ sở hữu tài khoản đuôi .net họ sẽ đăng nhập thông qua một được link 'bitfly' được gắn trong Email, thường thì họ sẽ không đọc kỹ mail nên phải nhắc họ kiểm tra lại mail đăng nhập lại qua link đc gửi trong email",
+    "tags": "đăng nhập,OutLook",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-02T09:20:45.973Z",
+    "updateAt": "2026-04-02T09:20:45.973Z"
+  },
+  {
+    "id": "ac918e97-ec4a-4dad-8c66-74164f483c19",
+    "title": "Điểm danh lớp học ",
+    "content": "Lớp học đã hoàn thành và ở trạng thái finished người dùng yêu cầu mở lại trạng thái lớp học về running để có thể điểm danh, Lưu ý: Sau khi lớp được chuyển về trạng thái Running, người dùng cần tranh thủ thực hiện ngay các thao tác (điểm danh, nhập điểm...).Hệ thống sẽ tự động đóng lớp (về Finished) trong khoảng 00:00 - 08:00 sáng hôm sau Giới hạn: Mỗi lớp chỉ được phép sử dụng tính năng Re-running tối đa 02 lần.",
+    "tags": "LMS,Điểm danh",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-02T10:35:04.444Z",
+    "updateAt": "2026-04-02T10:35:04.444Z"
   }
 ]
