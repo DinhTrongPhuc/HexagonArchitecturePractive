@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { BookOpen, PlusCircle, Layers, Sun, Moon } from 'lucide-react';
 import Dashboard from './pages/Dashboard';
 import NoteForm from './pages/NoteForm';
+import AllocationPage from './pages/AllocationPage';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
@@ -43,6 +44,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/new" element={<NoteForm />} />
             <Route path="/edit/:id" element={<NoteForm />} />
+            <Route path="/allocation" element={<AllocationPage />} />
           </Routes>
         </main>
       </div>

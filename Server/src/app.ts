@@ -11,6 +11,7 @@ import { ReadNote } from "./application/usecases/ReadNote";
 import { UpdateNote } from "./application/usecases/UpdateNote";
 import { DeleteNote } from "./application/usecases/DeleteNote";
 import { NoteRepository } from "./ports/outbound/repositories/NoteRepository";
+import { ExternalCrmPort } from "./ports/outbound/repositories/ExternalCrmPort";
 
 // router
 import { createNoteRouter } from "./adapters/primary/controllers/http/NoteRoutes";
@@ -20,6 +21,12 @@ import { errorHandler } from "./adapters/primary/controllers/http/middlewares/Er
 import { JsonNoteRepository } from "./adapters/secondary/persistence/JsonNoteRepository";
 import { InMemoryNoteRepository } from "./adapters/secondary/persistence/InMemoryNoteRepository";
 import { MongoDBNoteRepository } from "./adapters/secondary/persistence/MongGoDBRepository";
+
+//automation tools
+import { MindXCrmAdapter } from "./adapters/secondary/external/MindXCrmAdapter";
+import { AllocateLeadPaymentsUseCase } from "./application/usecases/AllocateLeadPayments";
+import { AllocationController } from "./adapters/primary/controllers/http/AllocationController";
+import { AllocationRoutes } from "./adapters/primary/routes/AllocationRoutes";
 
 //express
 const server = express();
@@ -59,6 +66,9 @@ export class App {
             const updateNoteUseCase = new UpdateNote(noteRepository);
             const deleteNoteUseCase = new DeleteNote(noteRepository);
 
+            const crmAdapter = new MindXCrmAdapter(process.env.CRM_TOKEN!);
+            const allocateUseCase = new AllocateLeadPaymentsUseCase(crmAdapter);
+
             // 3. Khởi tạo Controller hoặc Command
             if (args.length > 0) {
                 // Command might break here if it hasn't been updated to accept readNoteUseCase, we will ignore it for now or assume it takes 4 args only. Wait, if NoteComand was using 4 args, I might break it. 
@@ -71,9 +81,11 @@ export class App {
                 process.exit(0);
             } else {
                 const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, readNoteUseCase, updateNoteUseCase, deleteNoteUseCase);
+                const allocationController = new AllocationController(allocateUseCase);
 
                 server.use(createNoteRouter(noteController));
-                
+                server.use(AllocationRoutes(allocationController));
+
                 // Add Global Error Handler Middleware after all routes
                 server.use(errorHandler);
 

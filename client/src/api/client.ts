@@ -33,3 +33,10 @@ export const notesApi = {
         return res.data;
     }
 };
+
+export const allocationApi = {
+    allocate: async (payload: { leadId: string, dryRun: boolean, crmVersion?: string }) => {
+        const res = await apiClient.post<{ logs: string[] }>('/allocate', payload);
+        return res.data;
+    }
+};
