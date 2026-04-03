@@ -1,4 +1,4 @@
-import { NoteRepository } from "../../../ports/outbound/repositories/NoteRepository";
+import { NoteRepository, NoteQueryOptions } from "../../../ports/outbound/repositories/NoteRepository";
 import { Note } from "../../../domain/entities/Note";
 
 export class InMemoryNoteRepository implements NoteRepository {
@@ -8,8 +8,25 @@ export class InMemoryNoteRepository implements NoteRepository {
         this.Note.push(note);
     }
 
-    async findAll(): Promise<Note[]> {
-        return this.Note;
+    async findAll(options?: NoteQueryOptions): Promise<{ data: Note[], total: number }> {
+        let filteredNotes = this.Note;
+        
+        if (options?.tag) {
+            filteredNotes = filteredNotes.filter(note => 
+                note.tag.getValue().some(t => t.getValue() === options.tag)
+            );
+        }
+        
+        const total = filteredNotes.length;
+        
+        if (options?.skip !== undefined) {
+             filteredNotes = filteredNotes.slice(options.skip);
+        }
+        if (options?.limit !== undefined) {
+             filteredNotes = filteredNotes.slice(0, options.limit);
+        }
+        
+        return { data: filteredNotes, total };
     }
 
     async findByID(id: string): Promise<Note | null> {

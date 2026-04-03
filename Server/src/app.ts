@@ -1,5 +1,5 @@
-import "express-async-errors";
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 
@@ -23,6 +23,7 @@ import { MongoDBNoteRepository } from "./adapters/secondary/persistence/MongGoDB
 
 //express
 const server = express();
+server.use(cors());
 server.use(express.json());
 
 //env

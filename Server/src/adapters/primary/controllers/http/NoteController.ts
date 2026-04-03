@@ -18,16 +18,44 @@ export class NoteController {
     async create(req: Request, res: Response) {
         const { title, content, tags, reporter } = req.body;
 
+        const tagsString = Array.isArray(tags) ? tags.join(',') : tags;
+
         const note = await this.createNote.execute(
-            { title, content, tags, reporter }
+            { title, content, tags: tagsString, reporter }
         );
 
-        res.status(201).json(note);
+        res.status(201).json({
+            id: note.id,
+            title: note.title.getValue(),
+            content: note.content.getValue(),
+            tags: note.tag.getValue().map((t: any) => t.getValue()),
+            reporter: note.reporter.getValue(),
+            createdAt: note.createdAt,
+            updateAt: note.updateAt
+        });
     }
 
     async read(req: Request, res: Response) {
-        const notes = await this.readListNote.execute();
-        res.status(200).json(notes);
+        const { limit, page, tag } = req.query;
+        let parsedLimit = limit ? parseInt(limit as string, 10) : undefined;
+        let parsedSkip = undefined;
+        
+        if (parsedLimit && page) {
+            const parsedPage = parseInt(page as string, 10);
+            if (parsedPage > 0) {
+                parsedSkip = (parsedPage - 1) * parsedLimit;
+            }
+        }
+        
+        const parsedTag = tag ? tag as string : undefined;
+
+        const options: any = {};
+        if (parsedLimit !== undefined) options.limit = parsedLimit;
+        if (parsedSkip !== undefined) options.skip = parsedSkip;
+        if (parsedTag !== undefined) options.tag = parsedTag;
+
+        const result = await this.readListNote.execute(options);
+        res.status(200).json(result);
     }
 
     async readById(req: Request, res: Response) {
@@ -41,11 +69,21 @@ export class NoteController {
         const id = req.params.id as string;
         const { title, content, tags, reporter } = req.body;
 
+        const tagsString = Array.isArray(tags) ? tags.join(',') : tags;
+
         const note = await this.updateNote.execute(
-            { id, title, content, tags, reporter }
+            { id, title, content, tags: tagsString, reporter }
         );
 
-        res.status(200).json(note);
+        res.status(200).json({
+            id: note.id,
+            title: note.title.getValue(),
+            content: note.content.getValue(),
+            tags: note.tag.getValue().map((t: any) => t.getValue()),
+            reporter: note.reporter.getValue(),
+            createdAt: note.createdAt,
+            updateAt: note.updateAt
+        });
     }
 
     async delete(req: Request, res: Response) {
