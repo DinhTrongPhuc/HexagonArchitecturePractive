@@ -35,10 +35,17 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, onDelete }) => {
                     ))}
                 </div>
                 <div className="meta">
-                    <span className="date">
-                        <Calendar size={14} /> 
-                        {format(new Date(note.createdAt), 'MMM dd, yyyy')}
-                    </span>
+                    <div className="date-container">
+                        <span className="date" title="Created At">
+                            <Calendar size={14} /> 
+                            {format(new Date(note.createdAt), 'MMM dd, yyyy')}
+                        </span>
+                        {note.updateAt && note.updateAt !== note.createdAt && (
+                            <span className="date updated" title="Updated At">
+                                Updated: {format(new Date(note.updateAt), 'MMM dd, yyyy HH:mm')}
+                            </span>
+                        )}
+                    </div>
                     <span className="reporter">{note.reporter}</span>
                 </div>
             </div>

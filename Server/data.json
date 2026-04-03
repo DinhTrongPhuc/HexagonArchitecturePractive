@@ -148,17 +148,8 @@
     "title": "Điểm danh lớp học ",
     "content": "Lớp học đã hoàn thành và ở trạng thái finished người dùng yêu cầu mở lại trạng thái lớp học về running để có thể điểm danh, Lưu ý: Sau khi lớp được chuyển về trạng thái Running, người dùng cần tranh thủ thực hiện ngay các thao tác (điểm danh, nhập điểm...).Hệ thống sẽ tự động đóng lớp (về Finished) trong khoảng 00:00 - 08:00 sáng hôm sau Giới hạn: Mỗi lớp chỉ được phép sử dụng tính năng Re-running tối đa 02 lần.",
     "tags": "LMS,Điểm danh",
-    "reporter": "phucdt01@gmail.com",
+    "reporter": "nguoidung@gmail.com",
     "createdAt": "2026-04-02T10:35:04.444Z",
-    "updateAt": "2026-04-02T10:35:04.444Z"
-  },
-  {
-    "id": "2797da00-2b1b-45a1-8c0d-28d09fdca978",
-    "title": "Test Note bằng react",
-    "content": "test content aaaa",
-    "tags": "testing,feature,CRM",
-    "reporter": "acccccccc@b.com",
-    "createdAt": "2026-04-03T04:16:23.686Z",
-    "updateAt": "2026-04-03T04:34:55.965Z"
+    "updateAt": "2026-04-03T08:09:58.151Z"
   }
 ]
