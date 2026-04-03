@@ -59,6 +59,7 @@ body {
   justify-content: center;
   gap: 8px;
   outline: none;
+  text-decoration: none;
 }
 
 .btn-primary {

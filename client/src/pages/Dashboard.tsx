@@ -42,16 +42,16 @@ export default function Dashboard() {
         <div className="dashboard">
             <div className="dashboard-header">
                 <div>
-                    <h1>Your Notes</h1>
-                    <p>Manage and organize your thoughts beautifully.</p>
+                    <h1>Ticket Notes Case</h1>
+                    <p>Manage and organize your ticket notes for learning and working with Ticket.</p>
                 </div>
-                
+
                 <div className="search-bar">
                     <Search className="search-icon" size={20} />
-                    <input 
-                        type="text" 
-                        className="input search-input" 
-                        placeholder="Search by tag (e.g. tech, personal)..." 
+                    <input
+                        type="text"
+                        className="input search-input"
+                        placeholder="Search by tag (e.g. tech, personal)..."
                         value={tagFilter}
                         onChange={(e) => setTagFilter(e.target.value)}
                     />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { BookOpen, PlusCircle } from 'lucide-react';
+import { BookOpen, PlusCircle, Layers } from 'lucide-react';
 import Dashboard from './pages/Dashboard';
 import NoteForm from './pages/NoteForm';
 
@@ -15,12 +15,15 @@ function App() {
           </div>
           <div className="nav-links">
             <Link to="/" className="nav-link">Dashboard</Link>
+            <Link to="/allocation" className="btn btn-primary">
+              <Layers size={18} /> Allocation
+            </Link>
             <Link to="/new" className="btn btn-primary">
               <PlusCircle size={18} /> New Note
             </Link>
           </div>
         </nav>
-        
+
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Dashboard />} />
