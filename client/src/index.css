@@ -14,6 +14,7 @@
   --input-bg: rgba(15, 23, 42, 0.6);
   --btn-ghost-hover: rgba(255, 255, 255, 0.05);
   --action-hover: rgba(255, 255, 255, 0.1);
+  color-scheme: dark;
 }
 
 [data-theme="light"] {
@@ -30,6 +31,7 @@
   --input-bg: rgba(255, 255, 255, 0.6);
   --btn-ghost-hover: rgba(0, 0, 0, 0.05);
   --action-hover: rgba(0, 0, 0, 0.05);
+  color-scheme: light;
 }
 
 * {
@@ -129,6 +131,22 @@ body {
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
+/* Date Input Fixes */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: var(--calendar-filter, invert(1));
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+[data-theme="light"] {
+  --calendar-filter: invert(0);
+}
+
 /* Typog */
 h1, h2, h3 { color: var(--text-primary); margin-bottom: 0.5rem; }
 p { color: var(--text-secondary); line-height: 1.6; }
@@ -203,6 +221,41 @@ p { color: var(--text-secondary); line-height: 1.6; }
   padding-left: 40px;
 }
 
+/* Date Picker Custom UI */
+.date-search-bar {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  height: 44px; /* Match height of other inputs */
+  position: relative;
+}
+.date-search-bar:hover {
+  border-color: var(--accent);
+  background: var(--btn-ghost-hover);
+}
+.date-placeholder {
+  padding-left: 40px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.date-placeholder.has-value {
+  color: var(--text-primary);
+}
+.date-input-hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none; /* We trigger via showPicker on parent click */
+}
+
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -254,6 +307,7 @@ p { color: var(--text-secondary); line-height: 1.6; }
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

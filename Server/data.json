@@ -3,10 +3,10 @@
     "id": "c76540c1-dfce-4ce4-802c-71a64910c0c9",
     "title": "Enroll Học viên",
     "content": "Học viên ban đầu đăng ký khoá 12 tháng tuy nhiên, trong quá trình học bạn đã nâng cấp khóa học (upsale) từ 12 tháng lên khóa 24 tháng, upsale sẽ khiến slot lớp học tăng số tiền cần để mở lớp trên hệ thống nên slot hiện tại không được mở nhưng thực tế đã mua đủ 3 slot của khóa 12 tháng. Học viên được phép mở lớp và enroll vào lớp, tuy nhiên để được mở những slot còn lại thì bạn vẫn cần đóng đủ tiền của khóa 24 tháng.",
-    "tags": "Enroll HV, CRM, LMS",
+    "tags": "Enroll,CRM,LMS",
     "reporter": "reporter1@gmail.com",
     "createdAt": "2026-03-30T06:53:47.856Z",
-    "updateAt": "2026-03-30T06:53:47.856Z"
+    "updateAt": "2026-04-03T09:58:15.338Z"
   },
   {
     "id": "9f22be2c-97d5-4721-9ade-b7273862d5dc",
@@ -21,10 +21,10 @@
     "id": "bc92784d-2177-4936-a44a-0dea50389058",
     "title": "Lỗi 0 slot học phần dù đã active trên CRM",
     "content": "lỗi hệ thống khi tạo oder hoặc phân bổ học phí cho các slot chưa đúng, hệ thống không mở slot học cho học viên. Cách xử lý, tạo lại oder mới giống với thông tin oder trước đó, phân bổ đều lại học phí cho các slot, sau đó mở lại lớp học",
-    "tags": "CRM,BUG,ENROLL",
+    "tags": "CRM,BUG,Enroll",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-03-30T12:07:04.588Z",
-    "updateAt": "2026-03-30T12:07:04.588Z"
+    "updateAt": "2026-04-03T09:58:28.074Z"
   },
   {
     "id": "c143a0e7-40cb-4628-969f-937690800375",
@@ -66,19 +66,19 @@
     "id": "624f4a8f-9733-4003-98b9-99d59475f2ac",
     "title": "tạo oder nhầm tên học viên thành tên phụ huynh",
     "content": "Tại thời điểm tạo oder cơ sở chọn tên phụ huynh nên hệ thống hiểu rằng khóa học đó là dành cho phụ huynh và hiển thị tên phụ huynh thay vì tên học viên. Cách xử lý , (cần role) thay đổi tên trên profile của khách hàng bằng cách tạo một oder mới và điền lại thông tin",
-    "tags": "CRM,ORDER",
+    "tags": "CRM,Order",
     "reporter": "user@usergmai.usergmaicom",
     "createdAt": "2026-04-01T09:33:13.624Z",
-    "updateAt": "2026-04-01T09:33:13.624Z"
+    "updateAt": "2026-04-03T10:04:41.984Z"
   },
   {
     "id": "3db019dd-d265-42ca-89ea-b0ec68f536e6",
     "title": "cập nhật lại ngày Oder",
     "content": "Hệ thống hoạt động với role, chỉ có role có quyền mới có thể điều chỉnh ngày.Bạn chỉ có thể add được payment sau khi tạo oder theo luồng hệ thống, do đã tạo oder vào 24/03/2026 nên không thể add payment vào trước.",
-    "tags": "ODER,CRM",
-    "reporter": "@gmial.gmialcom",
+    "tags": "Order,CRM",
+    "reporter": "reported@gmial.gmialcom",
     "createdAt": "2026-04-01T09:39:24.657Z",
-    "updateAt": "2026-04-01T09:39:24.657Z"
+    "updateAt": "2026-04-03T10:04:50.265Z"
   },
   {
     "id": "732c4993-e0d3-4731-8e37-90d86619d6b4",
