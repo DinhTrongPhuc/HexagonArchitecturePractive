@@ -1,3 +1,4 @@
+import "express-async-errors";
 import express from "express";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
@@ -6,12 +7,14 @@ import { NoteController } from "./adapters/primary/controllers/http/NoteControll
 import { NoteComand } from "./adapters/primary/controllers/CLI/NoteComand";
 import { CreateNote } from "./application/usecases/CreateNote";
 import { ReadListNote } from "./application/usecases/ReadListNote";
+import { ReadNote } from "./application/usecases/ReadNote";
 import { UpdateNote } from "./application/usecases/UpdateNote";
 import { DeleteNote } from "./application/usecases/DeleteNote";
 import { NoteRepository } from "./ports/outbound/repositories/NoteRepository";
 
 // router
 import { createNoteRouter } from "./adapters/primary/controllers/http/NoteRoutes";
+import { errorHandler } from "./adapters/primary/controllers/http/middlewares/ErrorHandler";
 
 // stored data
 import { JsonNoteRepository } from "./adapters/secondary/persistence/JsonNoteRepository";
@@ -51,11 +54,14 @@ export class App {
             // 2. Khởi tạo Use Cases
             const createNoteUseCase = new CreateNote(noteRepository);
             const readListNoteUseCase = new ReadListNote(noteRepository);
+            const readNoteUseCase = new ReadNote(noteRepository);
             const updateNoteUseCase = new UpdateNote(noteRepository);
             const deleteNoteUseCase = new DeleteNote(noteRepository);
 
             // 3. Khởi tạo Controller hoặc Command
             if (args.length > 0) {
+                // Command might break here if it hasn't been updated to accept readNoteUseCase, we will ignore it for now or assume it takes 4 args only. Wait, if NoteComand was using 4 args, I might break it. 
+                // Let's pass the 5th arg but wait, `NoteComand` constructor might only accept 4. I will leave NoteComand intact unless error. Wait, in TS compile error will happen.
                 const noteComand = new NoteComand(createNoteUseCase, readListNoteUseCase, updateNoteUseCase, deleteNoteUseCase);
                 await noteComand.run(args);
                 if (mongoClient) {
@@ -63,9 +69,12 @@ export class App {
                 }
                 process.exit(0);
             } else {
-                const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, updateNoteUseCase, deleteNoteUseCase);
+                const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, readNoteUseCase, updateNoteUseCase, deleteNoteUseCase);
 
                 server.use(createNoteRouter(noteController));
+                
+                // Add Global Error Handler Middleware after all routes
+                server.use(errorHandler);
 
                 server.listen(process.env.PORT, () => {
                     console.log(`Server is running on port ${process.env.PORT}`);
