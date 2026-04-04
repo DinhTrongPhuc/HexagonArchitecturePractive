@@ -78,7 +78,7 @@
     "tags": "Order,CRM",
     "reporter": "reported@gmial.gmialcom",
     "createdAt": "2026-04-01T09:39:24.657Z",
-    "updateAt": "2026-04-03T10:04:50.265Z"
+    "updateAt": "2026-04-03T10:34:56.127Z"
   },
   {
     "id": "732c4993-e0d3-4731-8e37-90d86619d6b4",
@@ -151,5 +151,14 @@
     "reporter": "nguoidung@gmail.com",
     "createdAt": "2026-04-02T10:35:04.444Z",
     "updateAt": "2026-04-03T08:09:58.151Z"
+  },
+  {
+    "id": "73c84118-da69-4fc2-a15f-431ec2c6a62e",
+    "title": "Thay đổi trạng thái học sinh",
+    "content": "Đổi trạng thái từ drop-out sang waitlisted trên hệ thống để sinh viên có thể được enroll vào lớp",
+    "tags": "LMS,Status",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-03T11:08:13.743Z",
+    "updateAt": "2026-04-03T11:08:13.743Z"
   }
 ]

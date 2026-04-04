@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { Note, notesApi } from '../api/client';
 import { NoteCard } from '../components/NoteCard';
+import { CustomSelect } from '../components/CustomSelect';
 import { Search, Loader2, Filter, Calendar as CalendarIcon, X, ArrowUpDown } from 'lucide-react';
 
 type SortOption = 'newest_update' | 'oldest_update' | 'newest_created' | 'oldest_created';
@@ -109,20 +110,18 @@ export default function Dashboard() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-end' }}>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                         {/* Sort Dropdown */}
-                        <div className="search-bar" style={{ width: '180px' }}>
-                            <ArrowUpDown className="search-icon" size={16} />
-                            <select 
-                                className="input search-input" 
-                                style={{ appearance: 'none', cursor: 'pointer', fontSize: '0.85rem', paddingLeft: '35px' }}
-                                value={sortBy}
-                                onChange={(e) => setSortBy(e.target.value as SortOption)}
-                            >
-                                <option value="newest_update">Recently Updated</option>
-                                <option value="oldest_update">Oldest Updated</option>
-                                <option value="newest_created">Newest Created</option>
-                                <option value="oldest_created">Oldest Created</option>
-                            </select>
-                        </div>
+                        <CustomSelect 
+                            value={sortBy}
+                            onChange={(val) => setSortBy(val as SortOption)}
+                            icon={<ArrowUpDown size={16} />}
+                            width="180px"
+                            options={[
+                                { value: 'newest_update', label: 'Recently Updated' },
+                                { value: 'oldest_update', label: 'Oldest Updated' },
+                                { value: 'newest_created', label: 'Newest Created' },
+                                { value: 'oldest_created', label: 'Oldest Created' },
+                            ]}
+                        />
 
                         {/* Search by Title */}
                         <div className="search-bar" style={{ width: '200px' }}>
@@ -137,20 +136,16 @@ export default function Dashboard() {
                         </div>
 
                         {/* Filter by Tag Dropdown */}
-                        <div className="search-bar" style={{ width: '140px' }}>
-                            <Filter className="search-icon" size={16} />
-                            <select 
-                                className="input search-input" 
-                                style={{ appearance: 'none', cursor: 'pointer', fontSize: '0.85rem', paddingLeft: '35px' }}
-                                value={tagFilter}
-                                onChange={(e) => setTagFilter(e.target.value)}
-                            >
-                                <option value="">All Tags</option>
-                                {availableTags.map(tag => (
-                                    <option key={tag} value={tag}>{tag}</option>
-                                ))}
-                            </select>
-                        </div>
+                        <CustomSelect 
+                            value={tagFilter}
+                            onChange={(val) => setTagFilter(val)}
+                            icon={<Filter size={16} />}
+                            width="140px"
+                            options={[
+                                { value: '', label: 'All Tags' },
+                                ...availableTags.map(tag => ({ value: tag, label: tag }))
+                            ]}
+                        />
                     </div>
 
                     {/* Date Filters */}
