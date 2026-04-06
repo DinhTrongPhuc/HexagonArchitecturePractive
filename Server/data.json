@@ -39,10 +39,10 @@
     "id": "3b651969-8b10-4a4c-a7dd-3f52be31044c",
     "title": "Học viên đóng chưa đủ học phí",
     "content": "học viên đóng chưa đủ học phí nên không có tiền phân bổ vào các slot lớp, yêu cầu người dùng (học viên) đóng bổ sung",
-    "tags": "Học Phí,CRM,Thông báo học viên",
+    "tags": "Học phí,CRM,Thông báo học viên",
     "reporter": "reporter@reportergmail.com",
     "createdAt": "2026-04-01T09:22:16.844Z",
-    "updateAt": "2026-04-01T09:22:16.844Z"
+    "updateAt": "2026-04-06T03:20:38.472Z"
   },
   {
     "id": "684e5b6e-a494-4c92-8042-c32a91bf6b58",
@@ -160,5 +160,23 @@
     "reporter": "phucdt01@mindx.com.vn",
     "createdAt": "2026-04-03T11:08:13.743Z",
     "updateAt": "2026-04-03T11:08:13.743Z"
+  },
+  {
+    "id": "492dff6c-098f-49d4-81da-2314a7e5c84a",
+    "title": "Enroll học viên nhưng học viên đã trong lớp sẵn",
+    "content": "Từ số điện thoại xác định học viên đang ở trong lớp sẵn rồi, thì chỉ cần phản hồi lại là yêu cầu cơ sở (CS) kiểm tra lại thông tin học viên.",
+    "tags": "LMS,Enroll",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-06T03:08:37.441Z",
+    "updateAt": "2026-04-06T03:08:49.586Z"
+  },
+  {
+    "id": "d1bb7f99-e2a7-416d-9684-0b98f4e5a778",
+    "title": "Enroll học viên vào lớp",
+    "content": "Học viên chưa đóng đủ học phí nên hệ thống chưa mở slot lớp học cho học viên.Team theo dõi phần thanh toán và thấy các khoản đóng phí bổ sung đều bị denied do phụ huynh đóng bổ sung x triệu đồng nhưng phần hóa đơn lại là y triệu đồng nên kế toán không thể xác nhận và thanh toán bị từ chối.Đối với những vấn đề trên, Team không thể hỗ trợ học viên enroll vào lớp học được, bạn hãy làm việc với kế toán để xác minh lại khoản học phí này",
+    "tags": "LMS,Enroll,Học phí",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-06T03:19:03.636Z",
+    "updateAt": "2026-04-06T03:19:03.636Z"
   }
 ]

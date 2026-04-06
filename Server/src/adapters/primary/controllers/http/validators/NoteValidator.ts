@@ -4,7 +4,10 @@ export const createNoteSchema = z.object({
     body: z.object({
         title: z.string().min(1, "Title is required").max(100, "Title is too long"),
         content: z.string().min(1, "Content is required"),
-        tags: z.array(z.string()).optional().default([]),
+        tags: z.preprocess((val) => {
+            if (typeof val === "string") return val.split(",").map(t => t.trim());
+            return val;
+        }, z.array(z.string())).optional().default([]),
         reporter: z.string().email("Invalid reporter email").optional(),
     }),
 });
