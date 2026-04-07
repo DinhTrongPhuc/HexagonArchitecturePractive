@@ -12,10 +12,10 @@
     "id": "9f22be2c-97d5-4721-9ade-b7273862d5dc",
     "title": "Lỗi enroll, không hiện mục slot để enroll",
     "content": "Học viên đã đóng học phí nhưng do chưa phân bổ đều học phí nên slot không mở để enroll. Cách xử lý, phân bổ lại học phí cho học viên",
-    "tags": "CRM,LMS,Phân bổ học phí",
+    "tags": "CRM,LMS,Allocation",
     "reporter": "tester@gmail.com",
     "createdAt": "2026-03-30T10:35:48.361Z",
-    "updateAt": "2026-03-30T10:35:48.361Z"
+    "updateAt": "2026-04-07T10:09:16.658Z"
   },
   {
     "id": "bc92784d-2177-4936-a44a-0dea50389058",
@@ -39,10 +39,10 @@
     "id": "3b651969-8b10-4a4c-a7dd-3f52be31044c",
     "title": "Học viên đóng chưa đủ học phí",
     "content": "học viên đóng chưa đủ học phí nên không có tiền phân bổ vào các slot lớp, yêu cầu người dùng (học viên) đóng bổ sung",
-    "tags": "Học phí,CRM,Thông báo học viên",
+    "tags": "Học phí,CRM",
     "reporter": "reporter@reportergmail.com",
     "createdAt": "2026-04-01T09:22:16.844Z",
-    "updateAt": "2026-04-06T03:20:38.472Z"
+    "updateAt": "2026-04-07T10:08:26.484Z"
   },
   {
     "id": "684e5b6e-a494-4c92-8042-c32a91bf6b58",
@@ -120,10 +120,10 @@
     "id": "a801a8bc-3f6f-4342-84ea-3efb06a243f3",
     "title": "Các trường hợp bị tích uncomplete trên LMS",
     "content": "Chuyển lớp (học viên đang học nhưng có mong muốn chuyển lớp khác thì tại lớp cũ sẽ được tick là uncomplete), drop-out (là những học viên đang học thì nghỉ ngang vì nhiều lý do hoặc không lý do), On-hold (Học sinh bảo lưu có thời hạn), Chuyển nhà ( học viên chuyển cơ sở học ) ",
-    "tags": "LMS,Uncomplete status",
+    "tags": "LMS,Student Status",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-01T10:20:36.528Z",
-    "updateAt": "2026-04-06T04:56:36.481Z"
+    "updateAt": "2026-04-07T10:07:36.004Z"
   },
   {
     "id": "7f065231-8331-4e2b-b979-e92a66f93294",
@@ -137,11 +137,11 @@
   {
     "id": "3c9f9708-5892-4f39-a19f-0315ffa35fbc",
     "title": "Không đăng nhập được outlook",
-    "content": "Nhân viên không đăng nhập được tài khoản outlook, nguyên nhân đối với các tài khoản .com thông thường sẽ đăng nhập qua outlook tuy nhiên có những nhân viên sẽ sở hữu tài khoản đuôi .net họ sẽ đăng nhập thông qua một được link 'bitfly' được gắn trong Email, thường thì họ sẽ không đọc kỹ mail nên phải nhắc họ kiểm tra lại mail đăng nhập lại qua link đc gửi trong email",
+    "content": "Nhân viên không đăng nhập được tài khoản outlook, nguyên nhân đối với các tài khoản .com thông thường sẽ đăng nhập qua outlook tuy nhiên có những nhân viên sẽ sở hữu tài khoản đuôi .net họ sẽ đăng nhập thông qua một đường link 'bitfly' được đính kèm trong Email khi gửi tài khoản cho nhân viên, thường thì họ sẽ không đọc kỹ mail nên phải nhắc họ kiểm tra lại mail đăng nhập lại qua link được gửi trong email.",
     "tags": "Đăng nhập,OutLook",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-02T09:20:45.973Z",
-    "updateAt": "2026-04-06T04:55:35.480Z"
+    "updateAt": "2026-04-07T10:10:35.232Z"
   },
   {
     "id": "ac918e97-ec4a-4dad-8c66-74164f483c19",
@@ -156,10 +156,10 @@
     "id": "73c84118-da69-4fc2-a15f-431ec2c6a62e",
     "title": "Thay đổi trạng thái học sinh",
     "content": "Đổi trạng thái từ drop-out sang waitlisted trên hệ thống để sinh viên có thể được enroll vào lớp",
-    "tags": "LMS,Status",
+    "tags": "LMS,Student Status",
     "reporter": "phucdt01@mindx.com.vn",
     "createdAt": "2026-04-03T11:08:13.743Z",
-    "updateAt": "2026-04-03T11:08:13.743Z"
+    "updateAt": "2026-04-07T10:06:33.247Z"
   },
   {
     "id": "492dff6c-098f-49d4-81da-2314a7e5c84a",
@@ -201,10 +201,10 @@
     "id": "ac0e5c74-e72a-44f6-a734-dfa64f6c140a",
     "title": "Yêu cầu mở lại lớp",
     "content": "- Kiểm tra trên hệ thống LMS chức năng 're-running request', kiểm tra lớp đã được hỗ trợ mở trước đó hay chưa (cần tài khoản nhân viên có đủ quyền để xem).\n- Mỗi lớp chỉ được mở lại (re-running) tối đa 2 lần (chỉ có HO và tài khoản có quyền mới có thể thay đổi trạng thái lớp học).\n- Hệ thống sẽ truy quét trong thời gian từ 0h tối đến 8h sáng, các lớp đã hoàn thành được mở vào thời gian đó sẽ quay trở về trạng thái đóng.\n- Yêu cầu CS/User thao tác trước thời gian cố định của hệ thống, nếu class quay lại trạng thái hoàn thành (finished), tức là đã đóng lớp, khi đó không thể thao tác thay đổi bất kỳ cái gì trên đó",
-    "tags": "LMS,Re-running class",
+    "tags": "LMS,Re-running class,Class Status",
     "reporter": "report@gmail.com",
     "createdAt": "2026-04-07T04:51:26.498Z",
-    "updateAt": "2026-04-07T04:51:30.954Z"
+    "updateAt": "2026-04-07T10:07:07.309Z"
   },
   {
     "id": "9ffddeff-0287-4bf6-8211-1b9e27f98c7e",
@@ -214,5 +214,23 @@
     "reporter": "nguoidung@gmail.com",
     "createdAt": "2026-04-07T04:57:34.601Z",
     "updateAt": "2026-04-07T04:57:34.601Z"
+  },
+  {
+    "id": "2cd7d47e-7dc8-46c8-8265-262e3ad65881",
+    "title": "Enroll học viên",
+    "content": "- Kiểm tra hệ thống CRM thấy học phí, phân bổ đã đầy đủ và đúng nhưng slot enroll trên LMS vẫn đang ở trạng thái close.\n- Hướng xử lý (không sử dụng chức năng tính toán lại): Thực hiện save allocation lại bên CRM và refresh lại bên LMS.",
+    "tags": "Enroll,LMS,CRM",
+    "reporter": "phucdt01@mind.com.vn",
+    "createdAt": "2026-04-07T08:20:24.615Z",
+    "updateAt": "2026-04-07T08:20:24.615Z"
+  },
+  {
+    "id": "a99a6f8a-e643-462e-8b19-034a3832d81f",
+    "title": " Trạng thái Lead trên CRM",
+    "content": "Lead đã từng ở trạng thái L6B (đã thanh toán toàn bộ học phí) nhưng bây giờ CS kiểm tra lại là L6A (đã thanh toán 1 phần học phí). Nguyên nhân vẫn chưa rõ, có thể là trong quá khứ CS tạo order lead với giá khác nhưng không tính toán lại hoặc do giá khóa học tăng hoặc liên quan đến mã giảm giá bị mất,thay đổi,.... Hướng xử lý tốt nhất tìm chị Thùy =)) (Leader helpdesk).",
+    "tags": "CRM,Lead Status",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-07T10:06:00.604Z",
+    "updateAt": "2026-04-07T10:06:00.604Z"
   }
 ]
