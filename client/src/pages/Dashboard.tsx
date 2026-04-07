@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { Note, notesApi } from '../api/client';
 import { NoteCard } from '../components/NoteCard';
 import { CustomSelect } from '../components/CustomSelect';
-import { Search, Loader2, Filter, Calendar as CalendarIcon, X, ArrowUpDown } from 'lucide-react';
+import { Search, Loader2, Filter, Calendar as CalendarIcon, X, ArrowUpDown, RotateCcw } from 'lucide-react';
 
 type SortOption = 'newest_update' | 'oldest_update' | 'newest_created' | 'oldest_created';
 
@@ -87,6 +87,16 @@ export default function Dashboard() {
         setStartDate('');
         setEndDate('');
     };
+
+    const clearAllFilters = () => {
+        setTitleQuery('');
+        setTagFilter('');
+        setStartDate('');
+        setEndDate('');
+        setSortBy('newest_update');
+    };
+
+    const isFiltered = titleQuery || tagFilter || startDate || endDate || sortBy !== 'newest_update';
 
     const handleDelete = async (id: string) => {
         if (!confirm('Are you sure you want to delete this note?')) return;
@@ -185,6 +195,16 @@ export default function Dashboard() {
                                 style={{ background: 'rgba(239, 68, 68, 0.1)', borderRadius: '50%' }}
                             >
                                 <X size={16} />
+                            </button>
+                        )}
+
+                        {isFiltered && (
+                            <button 
+                                className="btn btn-ghost" 
+                                onClick={clearAllFilters}
+                                style={{ height: '44px', color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.2)' }}
+                            >
+                                <RotateCcw size={16} /> Clear Filters
                             </button>
                         )}
                     </div>

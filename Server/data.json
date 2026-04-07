@@ -30,10 +30,10 @@
     "id": "c143a0e7-40cb-4628-969f-937690800375",
     "title": "Enroll học viên vào lớp do chưa active package",
     "content": "Học viên đã thanh toán đủ tiền khóa học và phân bổ đủ nhưng hệ thống cho học viên enroll. Cách xử lý, active lại package cho học viên trên CRM và enroll bằng LMS",
-    "tags": "CRM,LMS,active",
+    "tags": "CRM,LMS,Active",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-01T03:45:53.097Z",
-    "updateAt": "2026-04-01T03:45:53.097Z"
+    "updateAt": "2026-04-06T04:55:55.331Z"
   },
   {
     "id": "3b651969-8b10-4a4c-a7dd-3f52be31044c",
@@ -48,10 +48,10 @@
     "id": "684e5b6e-a494-4c92-8042-c32a91bf6b58",
     "title": "Hệ Thống không tạo request teacher để add GV vào lớp",
     "content": "Theo luồng hệ thống, khi tạo lớp học mới trên hệ thống thì trạng thái của lớp học sẽ được thay đổi theo quy trình và khi lớp ở trạng thái open hệ thống sẽ tự động tạo Request teacher để Teaching add GV.Trên history của lớp team kiểm tra không ghi nhận lớp được chuyển sang trạng thái Open nên hệ thống không tự động tạo Request Teacher cho lớp cách xử lý, kiểm tra trạng thái của lớp trên mục histories của lớp và thao tác tạo mới request teacher cho lớp",
-    "tags": "request teacher,LMS",
+    "tags": "Request teacher,LMS",
     "reporter": "phudt01@mindx.com.vn",
     "createdAt": "2026-04-01T09:28:15.906Z",
-    "updateAt": "2026-04-01T09:28:15.906Z"
+    "updateAt": "2026-04-06T04:56:23.234Z"
   },
   {
     "id": "7e7e222d-bd9d-4da3-a1e6-84d8ebabf52c",
@@ -84,19 +84,19 @@
     "id": "732c4993-e0d3-4731-8e37-90d86619d6b4",
     "title": "Cập nhật lại ngày add payment",
     "content": "Theo logic hệ thống bạn chỉ có thể add payment sau khi tạo oder,VÍ DỤ:  bạn đã tạo oder vào ngày 25/3 nên không thể add payment vào ngày 24/3 được.Quy định mới về thời gian add Payment T+7 ( 7 ngày sau ngày tạo order )",
-    "tags": "CRM,payment",
+    "tags": "CRM,Payment",
     "reporter": "reporter1@gmail.com",
     "createdAt": "2026-04-01T09:42:05.868Z",
-    "updateAt": "2026-04-01T09:42:05.868Z"
+    "updateAt": "2026-04-06T04:56:12.716Z"
   },
   {
     "id": "96a959c2-9e5c-4316-b20f-e83cd99891f4",
     "title": "Withdraw học viên bảo lưu ra khỏi lớp",
     "content": "Thứ nhất, vì đã thực hiện bảo lưu cho học sinh nên trạng thái hiện tại của học sinh trong lớp đã tắt (inactive) và tích uncompleted. Do đó không thể withdraw ra khỏi lớp học ở thời điểm hiện tại. để thực hiện withdraw thì cơ sở hãy chờ hết hạn bảo lưu của học sinh và thực hiện withdraw khỏi lớp học hiện tại và tiếp tục khóa học đó với lớp (mã lớp) khác.",
-    "tags": "withdraw,LMS",
+    "tags": "Withdraw,LMS",
     "reporter": "report@gmail.com",
     "createdAt": "2026-04-01T09:45:24.085Z",
-    "updateAt": "2026-04-01T09:45:24.085Z"
+    "updateAt": "2026-04-06T04:56:47.358Z"
   },
   {
     "id": "c5dd25db-9fdc-418d-9f00-6a99d9171306",
@@ -120,10 +120,10 @@
     "id": "a801a8bc-3f6f-4342-84ea-3efb06a243f3",
     "title": "Các trường hợp bị tích uncomplete trên LMS",
     "content": "Chuyển lớp (học viên đang học nhưng có mong muốn chuyển lớp khác thì tại lớp cũ sẽ được tick là uncomplete), drop-out (là những học viên đang học thì nghỉ ngang vì nhiều lý do hoặc không lý do), On-hold (Học sinh bảo lưu có thời hạn), Chuyển nhà ( học viên chuyển cơ sở học ) ",
-    "tags": "LMS,uncomplete status",
+    "tags": "LMS,Uncomplete status",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-01T10:20:36.528Z",
-    "updateAt": "2026-04-01T10:20:36.528Z"
+    "updateAt": "2026-04-06T04:56:36.481Z"
   },
   {
     "id": "7f065231-8331-4e2b-b979-e92a66f93294",
@@ -138,10 +138,10 @@
     "id": "3c9f9708-5892-4f39-a19f-0315ffa35fbc",
     "title": "Không đăng nhập được outlook",
     "content": "Nhân viên không đăng nhập được tài khoản outlook, nguyên nhân đối với các tài khoản .com thông thường sẽ đăng nhập qua outlook tuy nhiên có những nhân viên sẽ sở hữu tài khoản đuôi .net họ sẽ đăng nhập thông qua một được link 'bitfly' được gắn trong Email, thường thì họ sẽ không đọc kỹ mail nên phải nhắc họ kiểm tra lại mail đăng nhập lại qua link đc gửi trong email",
-    "tags": "đăng nhập,OutLook",
+    "tags": "Đăng nhập,OutLook",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-02T09:20:45.973Z",
-    "updateAt": "2026-04-02T09:20:45.973Z"
+    "updateAt": "2026-04-06T04:55:35.480Z"
   },
   {
     "id": "ac918e97-ec4a-4dad-8c66-74164f483c19",
@@ -178,5 +178,41 @@
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-06T03:19:03.636Z",
     "updateAt": "2026-04-06T03:19:03.636Z"
+  },
+  {
+    "id": "05841fe7-f3bd-42dc-8c91-061de214d8eb",
+    "title": "Xóa phiếu bảo lưu của học viên",
+    "content": "Hệ thống không hỗ trợ xóa phiếu bảo lưu vì hệ thống tính số lần bảo lưu của mỗi học viên (giới hạn số lần bảo lưu) nên không thể xóa phiếu bảo lưu của học viên được. Do đó chỉ có thể reject phiếu hoặc kết thúc bảo lưu trước hạn.Đối với học viên ABC, thời hạn kết thúc bảo lưu là DD/MM/YYYY, CSL/CM cần thực hiện thao tác 'Kết thúc'bảo lưu trước thời hạn, khi đó hệ thống sẽ tự động chuyển trạng thái của học viên và CS có thể enroll học viên vào lớp học như bình thường. Lưu ý: đối với thao tác kết thúc bảo lưu trước hạn chỉ có CSL/CM mới có quyền thao tác trên hệ thống LMS",
+    "tags": "LMS,Bảo lưu",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-06T04:54:24.540Z",
+    "updateAt": "2026-04-06T04:54:24.540Z"
+  },
+  {
+    "id": "ced3a066-484e-44b8-8232-dfdf35fd8fa2",
+    "title": "Thông tin tối thiểu cần để hỗ trợ enroll học viên",
+    "content": "Số điện thoại của lead, tên học viên, mã lớp mà học viên sẽ được enroll vào.",
+    "tags": "LMS,Enroll",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-07T02:54:17.044Z",
+    "updateAt": "2026-04-07T02:54:17.044Z"
+  },
+  {
+    "id": "ac0e5c74-e72a-44f6-a734-dfa64f6c140a",
+    "title": "Yêu cầu mở lại lớp",
+    "content": "- Kiểm tra trên hệ thống LMS chức năng 're-running request', kiểm tra lớp đã được hỗ trợ mở trước đó hay chưa (cần tài khoản nhân viên có đủ quyền để xem).\n- Mỗi lớp chỉ được mở lại (re-running) tối đa 2 lần (chỉ có HO và tài khoản có quyền mới có thể thay đổi trạng thái lớp học).\n- Hệ thống sẽ truy quét trong thời gian từ 0h tối đến 8h sáng, các lớp đã hoàn thành được mở vào thời gian đó sẽ quay trở về trạng thái đóng.\n- Yêu cầu CS/User thao tác trước thời gian cố định của hệ thống, nếu class quay lại trạng thái hoàn thành (finished), tức là đã đóng lớp, khi đó không thể thao tác thay đổi bất kỳ cái gì trên đó",
+    "tags": "LMS,Re-running class",
+    "reporter": "report@gmail.com",
+    "createdAt": "2026-04-07T04:51:26.498Z",
+    "updateAt": "2026-04-07T04:51:30.954Z"
+  },
+  {
+    "id": "9ffddeff-0287-4bf6-8211-1b9e27f98c7e",
+    "title": "Học viên không thể enroll do slot vẫn đang ở trạng thái close",
+    "content": "- Kiểm tra hệ thống CRM thấy đã đóng học phí và phân bổ đầy đủ.\n- Kiểm tra LMS thấy slot enroll học viên vào lớp vẫn đang ở trạng thái đóng\n- Nguyên nhân, do dữ liệu thanh toán trên CRM chưa được đẩy sang LMS.\n- Hướng xử lý: vào hệ thống CRM và sử dụng chức năng tính toán lại bên trong chức năng order của lead đó ( cần tài khoản có quyền ). khi đó kiểm tra lại trên LMS và phản hồi với User/CS ",
+    "tags": "Enroll",
+    "reporter": "nguoidung@gmail.com",
+    "createdAt": "2026-04-07T04:57:34.601Z",
+    "updateAt": "2026-04-07T04:57:34.601Z"
   }
 ]
