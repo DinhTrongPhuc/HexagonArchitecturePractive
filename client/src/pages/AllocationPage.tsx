@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { allocationApi } from '../api/client';
 import { Layers, Play, TestTube, Loader2, Clipboard } from 'lucide-react';
+import { CustomSelect } from '../components/CustomSelect';
 
 export default function AllocationPage() {
     const [leadId, setLeadId] = useState('');
@@ -43,7 +44,7 @@ export default function AllocationPage() {
                 <Layers size={24} className="text-accent" />
                 <h2>CRM Payment Allocation</h2>
             </div>
-            
+
             <p style={{ marginBottom: '1.5rem', opacity: 0.8 }}>
                 Distribute and reset lead payment allocations across product items.
             </p>
@@ -52,9 +53,9 @@ export default function AllocationPage() {
                 <div className="note-form">
                     <div className="form-group">
                         <label>Lead ID</label>
-                        <input 
-                            type="text" 
-                            className="input" 
+                        <input
+                            type="text"
+                            className="input"
                             placeholder="Enter Lead ID (e.g. 69cdc497...)"
                             value={leadId}
                             onChange={(e) => setLeadId(e.target.value)}
@@ -63,28 +64,27 @@ export default function AllocationPage() {
 
                     <div className="form-group">
                         <label>CRM Version</label>
-                        <select 
-                            className="input" 
+                        <CustomSelect
                             value={crmVersion}
-                            onChange={(e) => setCrmVersion(e.target.value as any)}
-                            style={{ appearance: 'none' }}
-                        >
-                            <option value="v1">Version 1 (Legacy)</option>
-                            <option value="v2">Version 2 (Modern)</option>
-                        </select>
+                            onChange={(val) => setCrmVersion(val as any)}
+                            options={[
+                                { value: 'v1', label: 'Version 1 (Legacy)' },
+                                { value: 'v2', label: 'Version 2 (Modern)' }
+                            ]}
+                        />
                     </div>
 
                     <div className="form-actions" style={{ gap: '1rem', justifyContent: 'flex-start' }}>
-                        <button 
-                            className="btn btn-ghost" 
+                        <button
+                            className="btn btn-ghost"
                             onClick={() => handleAllocate(true)}
                             disabled={loading}
                         >
                             {loading ? <Loader2 className="spinner" size={18} /> : <TestTube size={18} />}
                             Dry Run
                         </button>
-                        <button 
-                            className="btn btn-primary" 
+                        <button
+                            className="btn btn-primary"
                             onClick={() => handleAllocate(false)}
                             disabled={loading}
                             style={{ background: 'var(--danger)' }}
@@ -104,17 +104,17 @@ export default function AllocationPage() {
                             <Clipboard size={16} />
                         </button>
                     </div>
-                    <pre style={{ 
-                        maxHeight: '400px', 
-                        overflowY: 'auto', 
-                        fontSize: '0.85rem', 
+                    <pre style={{
+                        maxHeight: '400px',
+                        overflowY: 'auto',
+                        fontSize: '0.85rem',
                         fontFamily: 'monospace',
                         color: 'var(--text-secondary)',
                         whiteSpace: 'pre-wrap',
                         lineHeight: '1.4'
                     }}>
                         {logs.map((log, i) => (
-                            <div key={i} style={{ 
+                            <div key={i} style={{
                                 marginBottom: '4px',
                                 borderLeft: '2px solid rgba(255,255,255,0.1)',
                                 paddingLeft: '8px'
