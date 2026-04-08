@@ -232,5 +232,14 @@
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-07T10:06:00.604Z",
     "updateAt": "2026-04-07T10:06:00.604Z"
+  },
+  {
+    "id": "e77b923b-ca23-40b5-8e8e-fcff215876e8",
+    "title": "Xóa/ đổi lịch học",
+    "content": "Chỉ có thể xóa hoặc đổi lịch học khi lớp đang ở trạng thái running, nếu lớp đang ở trạng thái finished thì phải chuyển về running. Chỉ có thể thay đổi lịch học với buổi học chưa diễn ra. Thay đổi lịch học sẽ dần đến dữ liệu giáo viên cho buổi học đó bị mất, phải thông báo với bên CS nhờ TE điều phối lại giáo viên vào lịch học mới.",
+    "tags": "Teacher,Class Schedule",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-08T07:56:33.894Z",
+    "updateAt": "2026-04-08T07:56:33.894Z"
   }
 ]

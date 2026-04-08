@@ -11,7 +11,6 @@ import { ReadNote } from "./application/usecases/ReadNote";
 import { UpdateNote } from "./application/usecases/UpdateNote";
 import { DeleteNote } from "./application/usecases/DeleteNote";
 import { NoteRepository } from "./ports/outbound/repositories/NoteRepository";
-import { ExternalCrmPort } from "./ports/outbound/repositories/ExternalCrmPort";
 
 // router
 import { createNoteRouter } from "./adapters/primary/controllers/http/NoteRoutes";
