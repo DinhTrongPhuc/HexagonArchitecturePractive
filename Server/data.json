@@ -241,5 +241,32 @@
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-08T07:56:33.894Z",
     "updateAt": "2026-04-08T07:56:33.894Z"
+  },
+  {
+    "id": "611bf4ad-8c55-485c-b53f-d9942a6d4f44",
+    "title": "Enroll học viên",
+    "content": "Trạng thái enroll của học viên trên LMS và CRM đang đóng chưa active, để có thể active được cần điền những thông tin cần thiết mà hệ thống yêu cầu, chắc chắn rằng đã điền đủ thông tin và chỉ khi đó ta refresh sẽ thấy nút active, active để có thể enroll học viên.",
+    "tags": "Enroll,LMS,CRM",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-09T04:17:16.892Z",
+    "updateAt": "2026-04-09T04:17:16.892Z"
+  },
+  {
+    "id": "1263ff45-5153-45c1-adb3-27afe642bac9",
+    "title": "Lưu ý khi Enroll học viên",
+    "content": "Kiểm tra chính xác thông tin lớp học (mã lớp, khóa học), hình thức học (hybird/online/offline) và thông tin học viên rồi mới ấn enroll, tránh trường hợp enroll nhầm.",
+    "tags": "Enroll,Information",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-09T04:19:14.880Z",
+    "updateAt": "2026-04-09T04:19:14.880Z"
+  },
+  {
+    "id": "07c19a18-46df-4371-acc3-6e7bd8ef59f6",
+    "title": "Học viên chưa đóng bất kỳ khoản học phí nào ",
+    "content": "Mặc định khi tạo order thì lead sẽ ở trạng thái L5 và chỉ khi đóng học phí lead sẽ chuyển trạng thái sang L6 (đóng 1 phần hoặc toàn phần) và chỉ khi đó mới có thể thực hiện thao tác enroll",
+    "tags": "Enroll,Học phí,Lead Status",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-09T04:22:07.845Z",
+    "updateAt": "2026-04-09T04:22:07.845Z"
   }
 ]
