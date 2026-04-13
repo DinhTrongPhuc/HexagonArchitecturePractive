@@ -277,5 +277,32 @@
     "reporter": "phucdt01@mindx.com.vn",
     "createdAt": "2026-04-10T08:40:45.354Z",
     "updateAt": "2026-04-10T08:40:45.354Z"
+  },
+  {
+    "id": "31048294-d2b2-4f07-af57-d440d7322a4b",
+    "title": "Lỗi hiển thị điểm thưởng.",
+    "content": "Học viên có nhiều tài khoản để đăng nhập denise, những tài khoản có mức điểm thưởng khác nhau. thông báo với học viên đăng nhập đúng tài khoản để xem điểm.",
+    "tags": "Reward points,Denise,LMS",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-13T10:19:04.778Z",
+    "updateAt": "2026-04-13T10:19:04.778Z"
+  },
+  {
+    "id": "ab9ddf8f-8875-4b27-ae70-33a63de737f6",
+    "title": "Xóa điểm thưởng.",
+    "content": "Học viên bị cộng nhầm 2 lần nhận điểm thưởng, Team tech sử dụng tài khoản có quyền trên LMS để trực tiếp thao tác xóa điểm thưởng cho học viên.",
+    "tags": "Reward points,Denise,LMS",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-13T10:20:17.024Z",
+    "updateAt": "2026-04-13T10:20:17.024Z"
+  },
+  {
+    "id": "c0a3513b-6e87-4eef-9ca8-8ab38c363d38",
+    "title": "Enroll học viên",
+    "content": "Học viên ko được enroll vì chưa thanh toán đủ học phí, kiểm tra thấy có khoản phí bị từ chối. Hướng xử lý, team yêu cầu CS kiểm tra xác minh lại với kế toán, khi học phí được đóng đủ thì hệ thống sẽ tự động mở slot để enroll học viên .",
+    "tags": "Enroll,Học phí,Payment",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-13T10:22:51.822Z",
+    "updateAt": "2026-04-13T10:22:51.822Z"
   }
 ]

@@ -23,9 +23,13 @@ import { MongoDBNoteRepository } from "./adapters/secondary/persistence/MongGoDB
 
 //automation tools
 import { MindXCrmAdapter } from "./adapters/secondary/external/MindXCrmAdapter";
+import { GraphEmailAdapter } from "./adapters/secondary/external/GraphEmailAdapter";
 import { AllocateLeadPaymentsUseCase } from "./application/usecases/AllocateLeadPayments";
+import { ScanSupportTicketsUseCase } from "./application/usecases/ScanSupportTicketsUseCase";
 import { AllocationController } from "./adapters/primary/controllers/http/AllocationController";
+import { SupportTicketController } from "./adapters/primary/controllers/http/SupportTicketController";
 import { AllocationRoutes } from "./adapters/primary/routes/AllocationRoutes";
+import { SupportTicketRoutes } from "./adapters/primary/routes/SupportTicketRoutes";
 
 //express
 const server = express();
@@ -67,6 +71,8 @@ export class App {
 
             const crmAdapter = new MindXCrmAdapter(process.env.CRM_TOKEN!);
             const allocateUseCase = new AllocateLeadPaymentsUseCase(crmAdapter);
+            const emailScannerAdapter = new GraphEmailAdapter();
+            const scanSupportTicketsUseCase = new ScanSupportTicketsUseCase(emailScannerAdapter);
 
             // 3. Khởi tạo Controller hoặc Command
             if (args.length > 0) {
@@ -81,9 +87,11 @@ export class App {
             } else {
                 const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, readNoteUseCase, updateNoteUseCase, deleteNoteUseCase);
                 const allocationController = new AllocationController(allocateUseCase);
+                const supportTicketController = new SupportTicketController(scanSupportTicketsUseCase);
 
                 server.use(createNoteRouter(noteController));
                 server.use(AllocationRoutes(allocationController));
+                server.use(SupportTicketRoutes(supportTicketController));
 
                 // Add Global Error Handler Middleware after all routes
                 server.use(errorHandler);
