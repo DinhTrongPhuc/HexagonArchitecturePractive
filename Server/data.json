@@ -268,5 +268,14 @@
     "reporter": "phucdt01@mindx.com.vn",
     "createdAt": "2026-04-09T04:22:07.845Z",
     "updateAt": "2026-04-09T04:22:07.845Z"
+  },
+  {
+    "id": "0ff105e7-8783-483e-aa37-2360e988381c",
+    "title": "Xóa buổi học",
+    "content": "Để có thể xóa buổi học thì cần phải tài khoản có quyền thao tác. Khi xóa buổi học trước thì buổi học sau sẽ được đẩy lên làm lịch thay thế tuy nhiên đảm bảo một lớp phải luôn đủ 14 buổi, do đó ta cần phải yêu cầu tới CS thêm lịch học cho buổi 14 (buổi bổ sung) sau đó CS thông báo với TE để TE điều phối giáo viên vào lớp cho buổi học ngày hôm đó ",
+    "tags": "Teacher,Class Schedule,LMS",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-10T08:40:45.354Z",
+    "updateAt": "2026-04-10T08:40:45.354Z"
   }
 ]
