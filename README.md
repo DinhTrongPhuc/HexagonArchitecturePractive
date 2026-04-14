@@ -1,89 +1,86 @@
-# 📓 NotesPro — Full-Stack Note Management with CRM Integration
+# 📓 NotesPro — Full-Stack Portfolio with Outlook Automator
 
-Một ứng dụng quản lý ghi chú (Notes) hiện đại, tích hợp công cụ tự động hóa phân bổ thanh toán CRM, được xây dựng trên kiến trúc bền vững.
-
----
-
-## ✨ Ứng dụng làm được gì? (Features)
-
-### 1. Quản lý Ghi chú (Note Hub)
-*   **CRUD Hoàn chỉnh**: Tạo, đọc, cập nhật và xóa ghi chú dễ dàng.
-*   **Tìm kiếm thông minh**: Lọc ghi chú theo Tiêu đề hoặc Tag ngay lập tức (Debounce search).
-*   **Giao diện Premium**: Hỗ trợ **Dark Mode** và **Light Mode** với hiệu ứng kính (Glassmorphism).
-
-### 2. Công cụ Phân bổ CRM (Allocation Tool)
-*   **Tích hợp CRM**: Kết nối trực tiếp với hệ thống MindX CRM (hỗ trợ cả V1 và V2).
-*   **Tự động hóa**: Reset và phân bổ lại số tiền thanh toán vào các mặt hàng (Product Items) chỉ với 1 click.
-*   **Chế độ Chạy thử (Dry Run)**: Kiểm tra log tính toán trước khi thực hiện thay đổi thật trên dữ liệu.
-*   **Bảng Log trực quan**: Hiển thị chi tiết từng bước xử lý ngay trên giao diện web.
-
-### 3. Linh hoạt lưu trữ (Storage)
-*   Hỗ trợ lưu trữ dữ liệu vào **MongoDB**, **File JSON**, hoặc **RAM (In-Memory)** thông qua cấu hình đơn giản.
+Một hệ thống quản lý ghi chú hiện đại và công cụ tự động hóa công việc (CRM Allocation & Outlook Scanning), được xây dựng trên **Kiến trúc Lục giác (Hexagonal Architecture)** bền vững và linh hoạt.
 
 ---
 
-## 🛠️ Cần cài đặt những gì? (Prerequisites)
+## ✨ Các Tính năng Chính (Features)
 
-1.  **Node.js**: Phiên bản 18.0 trở lên.
-2.  **npm**: Đi kèm khi cài Node.js.
-3.  **MongoDB** (Tùy chọn): Chỉ cần nếu bạn muốn lưu dữ liệu vào Database thật. Nếu không, ứng dụng sẽ dùng file `data.json` có sẵn.
+### 1. 📧 Outlook Support Scanner (Mới)
+*   **Tích hợp Microsoft Graph API**: Kết nối trực tiếp với hòm thư Outlook công ty thông qua Azure App Registration.
+*   **Quét Mail Thông minh**: Tự động tìm kiếm các email chưa đọc có nội dung liên quan đến Odoo Support (ví dụ: "xem phiếu hỗ trợ").
+*   **Bóc tách link tự động**: Sử dụng Cheerio để trích xuất link Ticket trực tiếp từ nội dung mail HTML.
+*   **Chế độ Quét Ngầm (Auto Scan)**: Server tự động lắng nghe mail mới theo chu kỳ và cập nhật tức thì lên giao diện Frontend mà không cần load lại trang.
+
+### 2. 📝 Quản lý Ghi chú (Note Hub)
+*   **Full CRUD**: Tạo, đọc, cập nhật và xóa ghi chú với giao diện mượt mà.
+*   **Tìm kiếm & Lọc**: Tìm kiếm theo tiêu đề hoặc lọc theo tag với kỹ thuật Debounce để tối ưu hiệu năng.
+*   **Giao diện Premium**: Hỗ trợ **Dark/Light Mode**, hiệu ứng **Glassmorphism** (kính mờ) và thiết kế Responsive.
+
+### 3. ⚙️ Công cụ Phân bổ CRM (Allocation Tool)
+*   **Xử lý dữ liệu Lead**: Reset và phân bổ lại số tiền thanh toán vào các mặt hàng (Product Items) trên MindX CRM (v1/v2).
+*   **Dry Run Mode**: Chế độ chạy thử nghiệm để kiểm tra Log tính toán trước khi tác động vào dữ liệu thật.
 
 ---
 
-## ⚙️ Hướng dẫn cài đặt & Chạy dự án (Setup & Run)
+## 🛠️ Yêu cầu Hệ thống (Prerequisites)
 
-### Bước 1: Cài đặt Backend (Server)
-```bash
-cd Server
-npm install
-```
+*   **Node.js**: v18.0 trở lên.
+*   **Azure App Registration**: Cần có một App trên Azure với quyền `Mail.Read` và `Mail.Send` (dạng Delegated) để dùng tính năng Outlook.
+*   **Database**: Tự động hỗ trợ **MongoDB**, **File JSON**, hoặc **In-Memory**.
 
-**Cấu hình file `.env`:**
-Tạo file `.env` trong thư mục `Server/` và dán nội dung sau:
+---
+
+## ⚙️ Hướng dẫn Cài đặt & Chạy (Setup)
+
+### Bước 1: Cấu hình Backend (Server)
+1. Di chuyển vào thư mục Server: `cd Server`
+2. Cài đặt thư viện: `npm install`
+3. Tạo file `.env` và cấu hình các biến sau:
+
 ```env
-PORT=5000 # Chọn port cho server
-REPO_TYPE=JSON  # Chọn: JSON hoặc MONGODB hoặc MEMORY
-CRM_TOKEN=pat_your_token_here  # Token truy cập CRM (nếu dùng tính năng Allocation)
-MONGODB_URI=mongodb://localhost:27017/note_app # (Nếu dùng MONGODB)
+PORT=5000
+REPO_TYPE=JSON # JSON | MONGODB | MEMORY
+
+# Outlook / Azure Configuration
+OUTLOOK_CLIENT_ID=your_azure_client_id
+OUTLOOK_TENANT_ID=your_azure_tenant_id
+OUTLOOK_TARGET_MAILBOX=your_email@domain.com
+OUTLOOK_SEARCH_PHRASE="xem phiếu hỗ trợ"
+
+# CRM Configuration (Optional)
+CRM_TOKEN=your_crm_pat_token
 ```
 
-**Chạy Server:**
-```bash
-npm run dev
-```
+4. Chạy server: `npm run dev`
 
-### Bước 2: Cài đặt Frontend (Client)
-```bash
-cd ../client
-npm install
-```
-
-**Chạy Client:**
-```bash
-npm run dev
-```
-Sau đó truy cập: **http://localhost:5173** (hoặc port hiển thị trên terminal).
+### Bước 2: Cấu hình Frontend (Client)
+1. Di chuyển vào thư mục Client: `cd client`
+2. Cài đặt thư viện: `npm install`
+3. Chạy ứng dụng: `npm run dev`
+4. Truy cập: `http://localhost:5173`
 
 ---
 
-## 📖 Hướng dẫn sử dụng nhanh
+## 📖 Hướng dẫn Sử dụng Outlook Scanner
 
-1.  **Quản lý Note**: Sử dụng nút **"New Note"** để tạo, biểu tượng ✏️ để sửa và 🗑️ để xóa. Dùng ô Search để tìm nhanh.
-2.  **Đổi giao diện**: Bấm biểu tượng ☀️/🌙 trên thanh Navbar để đổi Dark/Light mode.
-3.  **Allocation**: 
-    - Truy cập menu **Allocation**.
-    - Dán **Lead ID** từ CRM vào.
-    - Chọn phiên bản CRM (v1 hoặc v2).
-    - Bấm **Dry Run** để xem log tính toán.
-    - Bấm **Run Real** để thực hiện phân bổ thật trên CRM.
+1.  Truy cập menu **Outlook Scan**.
+2.  Nếu là lần đầu chạy, Terminal của Server sẽ hiển thị một **Code xác thực**. Hãy truy cập [microsoft.com/devicelogin](https://microsoft.com/devicelogin) và nhập mã để cấp quyền truy cập mail.
+3.  Sử dụng **"Run Manual Scan"** để tìm mail ngay lập tức.
+4.  Nhấn **"Start Auto Scanning"** để bật chế độ tự động cập nhật. Hệ thống sẽ giữ đồng bộ mỗi 5 phút (Backend) và cập nhật giao diện mỗi 1 phút (Frontend).
 
 ---
 
-## 📁 Cấu trúc dự án rút gọn
-*   `/Server`: Mã nguồn Backend (Express + TypeScript).
-*   `/client`: Mã nguồn Frontend (React + Vite).
-*   `README.md`: Hướng dẫn này.
+## 🏗️ Kiến trúc Dự án (Architecture)
+
+Dự án tuân thủ nghiêm ngặt **Hexagonal Architecture**:
+*   **Domain**: Chứa logic nghiệp vụ cốt lõi và các thực thể (Entities).
+*   **Application**: Chứa các Use Cases (ví dụ: `ScanSupportTicketsUseCase`).
+*   **Ports**: Định nghĩa các Interface cho Input (Inbound) và Output (Outbound).
+*   **Adapters**:
+    *   *Primary*: Các Controller HTTP (Express).
+    *   *Secondary*: Kết nối với Outlook (Microsoft Graph), CRM, hoặc Database (MongoDB/JSON).
 
 ---
-*Dự án được tối ưu hóa cho trải nghiệm người dùng và tính ổn định cao.*
-* *Author: Đinh Trọng Phúc -MindX Tech Team*
+*Dự án được phát triển nhằm mục đích Onboarding và thực hành kiến trúc phần mềm sạch.*
+**Author: Đinh Trọng Phúc - MindX Tech Team**
