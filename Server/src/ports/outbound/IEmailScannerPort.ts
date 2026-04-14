@@ -22,7 +22,7 @@ export interface ScanSupportTicketsRequest {
     searchPhrase: string;
     limit?: number;
     includeBodyContent?: boolean;
-    senderAddress?: string;
+    senderAddresses?: string[];
     unreadOnly?: boolean;
 }
 

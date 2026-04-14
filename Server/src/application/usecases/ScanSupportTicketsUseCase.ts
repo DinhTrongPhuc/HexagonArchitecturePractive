@@ -30,7 +30,11 @@ export class ScanSupportTicketsUseCase
             includeBodyContent: true,
             unreadOnly: true,
             ...(process.env.OUTLOOK_TARGET_MAILBOX
-                ? { senderAddress: process.env.OUTLOOK_TARGET_MAILBOX }
+                ? {
+                    senderAddresses: process.env.OUTLOOK_TARGET_MAILBOX.split(",")
+                        .map((s) => s.trim().toLowerCase())
+                        .filter((s) => !!s),
+                }
                 : {}),
         });
 

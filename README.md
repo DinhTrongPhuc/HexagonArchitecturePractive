@@ -67,7 +67,7 @@ CRM_TOKEN=your_crm_pat_token
 1.  Truy cập menu **Outlook Scan**.
 2.  Nếu là lần đầu chạy, Terminal của Server sẽ hiển thị một **Code xác thực**. Hãy truy cập [microsoft.com/devicelogin](https://microsoft.com/devicelogin) và nhập mã để cấp quyền truy cập mail.
 3.  Sử dụng **"Run Manual Scan"** để tìm mail ngay lập tức.
-4.  Nhấn **"Start Auto Scanning"** để bật chế độ tự động cập nhật. Hệ thống sẽ giữ đồng bộ mỗi 5 phút (Backend) và cập nhật giao diện mỗi 1 phút (Frontend).
+4.  Nhấn **"Start Auto Scanning"** để bật chế độ tự động cập nhật. Hệ thống sẽ giữ đồng bộ mỗi phút trên cả frontend (client) và backend(server).
 
 ---
 

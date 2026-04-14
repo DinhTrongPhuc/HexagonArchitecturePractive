@@ -74,7 +74,7 @@ export class GraphEmailAdapter implements IEmailScannerPort {
             throw new Error("searchPhrase is required");
         }
 
-        const senderAddress = request.senderAddress?.trim().toLowerCase();
+        const senderAddresses = request.senderAddresses;
 
         const accessToken = await this.authCache.getAccessToken();
         const client = Client.init({
@@ -85,7 +85,7 @@ export class GraphEmailAdapter implements IEmailScannerPort {
         const messages = await this.fetchMatchingMessages(
             client,
             searchPhrase,
-            senderAddress,
+            senderAddresses,
             limit,
             request.unreadOnly === true,
         );
@@ -166,7 +166,7 @@ export class GraphEmailAdapter implements IEmailScannerPort {
     private async fetchMatchingMessages(
         client: Client,
         searchPhrase: string,
-        senderAddress: string | undefined,
+        senderAddresses: string[] | undefined,
         limit: number,
         unreadOnly: boolean,
     ): Promise<GraphMessage[]> {
@@ -174,7 +174,7 @@ export class GraphEmailAdapter implements IEmailScannerPort {
         const seenIds = new Set<string>();
         const pageSize = this.resolveFetchBatchSize(
             limit,
-            !!senderAddress || unreadOnly,
+            (senderAddresses && senderAddresses.length > 0) || unreadOnly,
         );
         let nextLink: string | undefined;
         let page = 0;
@@ -216,7 +216,7 @@ export class GraphEmailAdapter implements IEmailScannerPort {
 
                 seenIds.add(message.id);
                 return (
-                    this.matchesSender(message, senderAddress) &&
+                    this.matchesSender(message, senderAddresses) &&
                     this.matchesUnreadFilter(message, unreadOnly)
                 );
             });
@@ -234,16 +234,14 @@ export class GraphEmailAdapter implements IEmailScannerPort {
 
     private matchesSender(
         message: GraphMessage,
-        senderAddress?: string,
+        senderAddresses?: string[],
     ): boolean {
-        if (!senderAddress) {
+        if (!senderAddresses || senderAddresses.length === 0) {
             return true;
         }
 
-        return (
-            message.from?.emailAddress?.address?.trim().toLowerCase() ===
-            senderAddress
-        );
+        const fromAddress = message.from?.emailAddress?.address?.trim().toLowerCase();
+        return senderAddresses.some((addr) => addr === fromAddress);
     }
 
     private matchesUnreadFilter(
