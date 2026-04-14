@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { supportTicketsApi, type ScannedSupportTicket, type ScanSupportTicketsResponse } from '../api/client';
 import { MailSearch, Loader2, Search, RefreshCw, Link as LinkIcon, ExternalLink, Inbox, User, Calendar, Hash } from 'lucide-react';
 
-const DEFAULT_SEARCH_PHRASE = 'xem phiếu hỗ trợ';
+const DEFAULT_SEARCH_PHRASE = import.meta.env.VITE_OUTLOOK_SEARCH_PHRASE || 'xem phiếu hỗ trợ';
+const DEFAULT_LIMIT = import.meta.env.VITE_OUTLOOK_SEARCH_LIMIT ? parseInt(import.meta.env.VITE_OUTLOOK_SEARCH_LIMIT) : 10;
+const SCAN_INTERVAL = import.meta.env.VITE_OUTLOOK_SCAN_INTERVAL ? parseInt(import.meta.env.VITE_OUTLOOK_SCAN_INTERVAL) : 60000;
 
 function formatDateTime(value?: string) {
     if (!value) {
@@ -97,7 +99,7 @@ function TicketCard({ ticket }: { ticket: ScannedSupportTicket }) {
 
 export default function OutlookScanPage() {
     const [searchPhrase, setSearchPhrase] = useState(DEFAULT_SEARCH_PHRASE);
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(DEFAULT_LIMIT);
     const [result, setResult] = useState<ScanSupportTicketsResponse | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -164,10 +166,10 @@ export default function OutlookScanPage() {
         let refreshInterval: any = null;
 
         if (isAutoScanning) {
-            // Tự động fetch lại dữ liệu mỗi 1 phút để đồng bộ với những gì hệ thống quét được đồng bộ với backend
+            // Tự động fetch lại dữ liệu định kỳ để đồng bộ với kết quả từ nền (Background Scan)
             refreshInterval = setInterval(() => {
                 runScan(true);
-            }, 60000);
+            }, SCAN_INTERVAL);
         }
 
         return () => {

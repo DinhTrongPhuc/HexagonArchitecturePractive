@@ -8,8 +8,8 @@ import {
     type ScanSupportTicketsUseCase as IScanSupportTicketsUseCase,
 } from "../../ports/inbound/usecases/ScanSupportTicketsUseCase";
 
-const DEFAULT_SEARCH_PHRASE = "xem phiếu hỗ trợ";
-const DEFAULT_LIMIT = 10;
+const DEFAULT_SEARCH_PHRASE = process.env.OUTLOOK_SEARCH_PHRASE || "xem phiếu hỗ trợ";
+const DEFAULT_LIMIT = process.env.OUTLOOK_SEARCH_LIMIT ? parseInt(process.env.OUTLOOK_SEARCH_LIMIT) : 10;
 
 export class ScanSupportTicketsUseCase
     implements IScanSupportTicketsUseCase

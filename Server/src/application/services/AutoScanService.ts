@@ -7,7 +7,10 @@ export class AutoScanService {
 
     constructor(private readonly scanSupportTicketsUseCase: ScanSupportTicketsUseCase) { }
 
-    public startAutoScan(intervalMs: number = 60000): boolean { // Mặc định 1 phút
+    public startAutoScan(intervalMs?: number): boolean {
+        const envInterval = process.env.OUTLOOK_SCAN_INTERVAL ? parseInt(process.env.OUTLOOK_SCAN_INTERVAL) : 300000;
+        const finalInterval = intervalMs ?? envInterval;
+
         if (this.isScanning) {
             console.log("Auto scan is already running.");
             return false;
@@ -18,14 +21,14 @@ export class AutoScanService {
         // Chạy ngay lập tức lần đầu tiên
         this.runScanJob();
 
-        // Đặt lịch lặp lại sau mỗi intervalMs
+        // Đặt lịch lặp lại sau mỗi finalInterval
         this.timerId = setInterval(() => {
             if (this.isScanning) {
                 this.runScanJob();
             }
-        }, intervalMs);
+        }, finalInterval);
 
-        console.log(`Auto scan started with interval ${intervalMs}ms`);
+        console.log(`Auto scan started with interval ${finalInterval}ms`);
         return true;
     }
 
