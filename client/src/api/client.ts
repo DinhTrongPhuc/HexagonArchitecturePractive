@@ -15,6 +15,32 @@ export interface Note {
     updateAt: string;
 }
 
+export interface EmailLink {
+    text: string;
+    href: string;
+}
+
+export interface ScannedSupportTicket {
+    id: string;
+    conversationId?: string;
+    subject: string;
+    bodyPreview: string;
+    bodyContent?: string;
+    webLink?: string;
+    receivedAt?: string;
+    senderName?: string;
+    senderAddress?: string;
+    isRead?: boolean;
+    links: EmailLink[];
+    matchedQuery: string;
+}
+
+export interface ScanSupportTicketsResponse {
+    searchPhrase: string;
+    total: number;
+    tickets: ScannedSupportTicket[];
+}
+
 export const notesApi = {
     getAll: async (params?: { page?: number; limit?: number; tag?: string }) => {
         const res = await apiClient.get<{ data: Note[], total: number, limit: number, skip: number }>('/notes', { params });
@@ -37,6 +63,25 @@ export const notesApi = {
 export const allocationApi = {
     allocate: async (payload: { leadId: string, dryRun: boolean, crmVersion?: string }) => {
         const res = await apiClient.post<{ logs: string[] }>('/allocate', payload);
+        return res.data;
+    }
+};
+
+export const supportTicketsApi = {
+    scan: async (params?: { searchPhrase?: string; limit?: number }) => {
+        const res = await apiClient.get<ScanSupportTicketsResponse>('/support-tickets/scan', { params });
+        return res.data;
+    },
+    startAuto: async () => {
+        const res = await apiClient.post<{ success: boolean; message: string }>('/support-tickets/auto/start');
+        return res.data;
+    },
+    stopAuto: async () => {
+        const res = await apiClient.post<{ success: boolean; message: string }>('/support-tickets/auto/stop');
+        return res.data;
+    },
+    getAutoStatus: async () => {
+        const res = await apiClient.get<{ isScanning: boolean }>('/support-tickets/auto/status');
         return res.data;
     }
 };

@@ -3,10 +3,12 @@ import {
     ScanSupportTicketsUseCase,
     type ScanSupportTicketsRequest,
 } from "../../../../ports/inbound/usecases/ScanSupportTicketsUseCase";
+import { AutoScanService } from "../../../../application/services/AutoScanService";
 
 export class SupportTicketController {
     constructor(
         private readonly scanSupportTicketsUseCase: ScanSupportTicketsUseCase,
+        private readonly autoScanService: AutoScanService
     ) {}
 
     async scan(req: Request, res: Response) {
@@ -25,6 +27,20 @@ export class SupportTicketController {
         const result = await this.scanSupportTicketsUseCase.execute(request);
 
         res.status(200).json(result);
+    }
+
+    async startAuto(req: Request, res: Response) {
+        const started = this.autoScanService.startAutoScan();
+        res.status(200).json({ success: started, message: started ? 'Auto scanning started' : 'Auto scan already running' });
+    }
+
+    async stopAuto(req: Request, res: Response) {
+        const stopped = this.autoScanService.stopAutoScan();
+        res.status(200).json({ success: stopped, message: stopped ? 'Auto scanning stopped' : 'Auto scan is not running' });
+    }
+
+    async getAutoStatus(req: Request, res: Response) {
+        res.status(200).json(this.autoScanService.getStatus());
     }
 
     private parseLimit(limit: Request["query"]["limit"]): number | undefined {

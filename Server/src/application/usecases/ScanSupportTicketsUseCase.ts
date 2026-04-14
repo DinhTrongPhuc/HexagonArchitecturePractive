@@ -26,6 +26,7 @@ export class ScanSupportTicketsUseCase
             searchPhrase,
             limit,
             includeBodyContent: true,
+            unreadOnly: true,
             ...(process.env.OUTLOOK_TARGET_MAILBOX
                 ? { senderAddress: process.env.OUTLOOK_TARGET_MAILBOX }
                 : {}),

@@ -32,6 +32,7 @@ interface GraphMessage {
     body?: {
         content?: string;
     };
+    isRead?: boolean;
 }
 
 interface GraphMessagesResponse {
@@ -86,6 +87,7 @@ export class GraphEmailAdapter implements IEmailScannerPort {
             searchPhrase,
             senderAddress,
             limit,
+            request.unreadOnly === true,
         );
 
         return messages
@@ -125,6 +127,9 @@ export class GraphEmailAdapter implements IEmailScannerPort {
             ...(message.from?.emailAddress?.address
                 ? { senderAddress: message.from.emailAddress.address }
                 : {}),
+            ...(typeof message.isRead === "boolean"
+                ? { isRead: message.isRead }
+                : {}),
             links,
             matchedQuery,
         };
@@ -163,10 +168,14 @@ export class GraphEmailAdapter implements IEmailScannerPort {
         searchPhrase: string,
         senderAddress: string | undefined,
         limit: number,
+        unreadOnly: boolean,
     ): Promise<GraphMessage[]> {
         const matches: GraphMessage[] = [];
         const seenIds = new Set<string>();
-        const pageSize = this.resolveFetchBatchSize(limit, !!senderAddress);
+        const pageSize = this.resolveFetchBatchSize(
+            limit,
+            !!senderAddress || unreadOnly,
+        );
         let nextLink: string | undefined;
         let page = 0;
 
@@ -193,6 +202,7 @@ export class GraphEmailAdapter implements IEmailScannerPort {
                               "bodyPreview",
                               "body",
                               "from",
+                              "isRead",
                               "receivedDateTime",
                               "webLink",
                           ].join(","),
@@ -205,7 +215,10 @@ export class GraphEmailAdapter implements IEmailScannerPort {
                 }
 
                 seenIds.add(message.id);
-                return this.matchesSender(message, senderAddress);
+                return (
+                    this.matchesSender(message, senderAddress) &&
+                    this.matchesUnreadFilter(message, unreadOnly)
+                );
             });
 
             matches.push(...filteredMessages);
@@ -231,6 +244,17 @@ export class GraphEmailAdapter implements IEmailScannerPort {
             message.from?.emailAddress?.address?.trim().toLowerCase() ===
             senderAddress
         );
+    }
+
+    private matchesUnreadFilter(
+        message: GraphMessage,
+        unreadOnly?: boolean,
+    ): boolean {
+        if (!unreadOnly) {
+            return true;
+        }
+
+        return message.isRead === false;
     }
 
     private normalizeLimit(limit?: number): number {

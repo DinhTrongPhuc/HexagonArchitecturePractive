@@ -13,6 +13,7 @@ export interface ScannedSupportTicket {
     receivedAt?: string;
     senderName?: string;
     senderAddress?: string;
+    isRead?: boolean;
     links: EmailLink[];
     matchedQuery: string;
 }
@@ -22,6 +23,7 @@ export interface ScanSupportTicketsRequest {
     limit?: number;
     includeBodyContent?: boolean;
     senderAddress?: string;
+    unreadOnly?: boolean;
 }
 
 export interface IEmailScannerPort {
