@@ -5,7 +5,7 @@ export class AutoScanService {
     private isScanning: boolean = false;
     private timerId: NodeJS.Timeout | null = null;
 
-    constructor(private readonly scanSupportTicketsUseCase: ScanSupportTicketsUseCase) {}
+    constructor(private readonly scanSupportTicketsUseCase: ScanSupportTicketsUseCase) { }
 
     public startAutoScan(intervalMs: number = 300000): boolean { // Mặc định 5 phút
         if (this.isScanning) {
@@ -14,7 +14,7 @@ export class AutoScanService {
         }
 
         this.isScanning = true;
-        
+
         // Chạy ngay lập tức lần đầu tiên
         this.runScanJob();
 
@@ -34,12 +34,12 @@ export class AutoScanService {
             console.log("Auto scan is not running.");
             return false;
         }
-        
+
         if (this.timerId) {
             clearInterval(this.timerId);
             this.timerId = null;
         }
-        
+
         this.isScanning = false;
         console.log("Auto scan stopped.");
         return true;
@@ -54,13 +54,13 @@ export class AutoScanService {
         try {
             const limit = process.env.OUTLOOK_SEARCH_LIMIT ? Number(process.env.OUTLOOK_SEARCH_LIMIT) : 5;
             const searchPhrase = process.env.OUTLOOK_SEARCH_PHRASE || "xem phiếu hỗ trợ";
-            
+
             const result = await this.scanSupportTicketsUseCase.execute({ searchPhrase, limit });
-            
+
             console.log(`[AutoScanService] Scan complete. Found ${result.total} matching emails.`);
-            
+
             if (result.total > 0) {
-                console.log("[AutoScanService] TO-DO: Call a UseCase here to save these emails as Tickets/Notes to MongoDB");
+                console.log("[AutoScanService] TO-DO: DO SOMETHING");
                 // TODO: this.createTicketUseCase.execute(result.tickets)
             }
         } catch (error) {
