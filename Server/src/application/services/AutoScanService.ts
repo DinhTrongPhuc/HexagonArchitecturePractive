@@ -7,7 +7,7 @@ export class AutoScanService {
 
     constructor(private readonly scanSupportTicketsUseCase: ScanSupportTicketsUseCase) { }
 
-    public startAutoScan(intervalMs: number = 300000): boolean { // Mặc định 5 phút
+    public startAutoScan(intervalMs: number = 60000): boolean { // Mặc định 1 phút
         if (this.isScanning) {
             console.log("Auto scan is already running.");
             return false;
@@ -50,7 +50,7 @@ export class AutoScanService {
     }
 
     private async runScanJob() {
-        console.log("[AutoScanService] Running automated email scan job...");
+        console.log("[AutoScanService] Running automated email scan Ticket...");
         try {
             const limit = process.env.OUTLOOK_SEARCH_LIMIT ? Number(process.env.OUTLOOK_SEARCH_LIMIT) : 5;
             const searchPhrase = process.env.OUTLOOK_SEARCH_PHRASE || "xem phiếu hỗ trợ";
@@ -61,7 +61,7 @@ export class AutoScanService {
 
             if (result.total > 0) {
                 console.log("[AutoScanService] TO-DO: DO SOMETHING");
-                // TODO: this.createTicketUseCase.execute(result.tickets)
+                // TODO: this.createTicketUseCase.execute(result.tickets), maybe response to client
             }
         } catch (error) {
             console.error("[AutoScanService] Automated email scan job failed:", error);

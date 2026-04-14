@@ -22,6 +22,8 @@ export class ScanSupportTicketsUseCase
         const searchPhrase = request.searchPhrase?.trim() || DEFAULT_SEARCH_PHRASE;
         const limit = this.normalizeLimit(request.limit);
 
+        console.log(`[UseCase] Scanning Outlook for: "${searchPhrase}" (limit: ${limit})...`);
+
         const tickets = await this.emailScannerPort.scanSupportTickets({
             searchPhrase,
             limit,
@@ -31,6 +33,8 @@ export class ScanSupportTicketsUseCase
                 ? { senderAddress: process.env.OUTLOOK_TARGET_MAILBOX }
                 : {}),
         });
+
+        console.log(`[UseCase] Scan completed. Found ${tickets.length} tickets.`);
 
         return {
             searchPhrase,

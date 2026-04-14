@@ -21,9 +21,9 @@ function TicketCard({ ticket }: { ticket: ScannedSupportTicket }) {
             <div className="ticket-card-header">
                 <div>
                     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <div className="ticket-chip">
+                        <div className="ticket-chip" title={ticket.id}>
                             <Hash size={14} />
-                            <span>{ticket.id.slice(0, 12)}</span>
+                            <span>...{ticket.id.slice(-12)}</span>
                         </div>
                         <div className="ticket-chip ticket-chip-accent">
                             <span>{ticket.isRead === false ? 'Unread' : 'Read status unavailable'}</span>
@@ -55,9 +55,9 @@ function TicketCard({ ticket }: { ticket: ScannedSupportTicket }) {
                     <span>{formatDateTime(ticket.receivedAt)}</span>
                 </div>
                 {ticket.conversationId && (
-                    <div className="ticket-meta-item">
+                    <div className="ticket-meta-item" title={ticket.conversationId}>
                         <Inbox size={14} />
-                        <span>{ticket.conversationId.slice(0, 18)}</span>
+                        <span>...{ticket.conversationId.slice(-18)}</span>
                     </div>
                 )}
             </div>
@@ -102,12 +102,14 @@ export default function OutlookScanPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [isAutoScanning, setIsAutoScanning] = useState(false);
+    const [lastUpdatedAt, setLastUpdatedAt] = useState<Date>(new Date());
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
     const checkAutoStatus = async () => {
         try {
             const status = await supportTicketsApi.getAutoStatus();
             setIsAutoScanning(status.isScanning);
-        } catch(e) {
+        } catch (e) {
             console.error("Failed to fetch auto scan status", e);
         }
     };
@@ -125,8 +127,10 @@ export default function OutlookScanPage() {
         }
     };
 
-    const runScan = async () => {
-        setLoading(true);
+    const runScan = async (isSilent = false) => {
+        if (!isSilent) setLoading(true);
+        else setIsRefreshing(true);
+
         setError('');
 
         try {
@@ -135,22 +139,41 @@ export default function OutlookScanPage() {
                 limit,
             });
             setResult(data);
+            setLastUpdatedAt(new Date());
         } catch (err: any) {
             const message = err.response?.data?.error || err.message || 'Scan failed';
-            setError(message);
+            if (!isSilent) setError(message);
+            console.error("Scan error:", err);
         } finally {
-            setLoading(false);
+            if (!isSilent) setLoading(false);
+            else setIsRefreshing(false);
         }
     };
 
     useEffect(() => {
         runScan();
         checkAutoStatus();
-        
+
         // Cập nhật trạng thái ngầm định kỳ lỡ như server tự ngắt
-        const interval = setInterval(checkAutoStatus, 10000);
-        return () => clearInterval(interval);
+        const statusInterval = setInterval(checkAutoStatus, 10000);
+        return () => clearInterval(statusInterval);
     }, []);
+
+    // Hiệu ứng tự động làm mới khi chế độ Auto Scanning bật
+    useEffect(() => {
+        let refreshInterval: any = null;
+
+        if (isAutoScanning) {
+            // Tự động fetch lại dữ liệu mỗi 1 phút để đồng bộ với những gì hệ thống quét được đồng bộ với backend
+            refreshInterval = setInterval(() => {
+                runScan(true);
+            }, 60000);
+        }
+
+        return () => {
+            if (refreshInterval) clearInterval(refreshInterval);
+        };
+    }, [isAutoScanning, searchPhrase, limit]);
 
     return (
         <div className="outlook-page">
@@ -209,14 +232,24 @@ export default function OutlookScanPage() {
                 </div>
 
                 <div className="outlook-actions">
-                    <button className="btn btn-primary" onClick={runScan} disabled={loading}>
+                    <button className="btn btn-primary" onClick={() => runScan(false)} disabled={loading}>
                         {loading ? <Loader2 className="spinner" size={18} /> : <RefreshCw size={18} />}
                         Run Manual Scan
                     </button>
                     <button className="btn" style={{ marginLeft: '12px', background: isAutoScanning ? '#ef4444' : '#10b981', color: 'white' }} onClick={toggleAutoScan}>
                         {isAutoScanning ? 'Stop Auto Scanning' : 'Start Auto Scanning'}
                     </button>
-                    {isAutoScanning && <span style={{ marginLeft: '12px', color: '#10b981', fontSize: '0.9rem', fontWeight: 600 }}>🟢 System is listening for new emails...</span>}
+                    {isAutoScanning && (
+                        <div style={{ marginLeft: '12px', display: 'flex', flexDirection: 'column' }}>
+                            <span style={{ color: '#10b981', fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <span className={isRefreshing ? "ping-animation" : ""} style={{ width: '8px', height: '8px', background: '#10b981', borderRadius: '50%' }}></span>
+                                {isRefreshing ? 'Refreshing results...' : 'System is listening for new emails...'}
+                            </span>
+                            <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>
+                                Last sync: {lastUpdatedAt.toLocaleTimeString()}
+                            </span>
+                        </div>
+                    )}
                 </div>
 
                 {error && <div className="alert-error" style={{ marginBottom: 0 }}>{error}</div>}

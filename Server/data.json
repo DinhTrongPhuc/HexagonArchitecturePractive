@@ -123,7 +123,7 @@
     "tags": "LMS,Student Status",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-01T10:20:36.528Z",
-    "updateAt": "2026-04-07T10:07:36.004Z"
+    "updateAt": "2026-04-14T05:15:26.994Z"
   },
   {
     "id": "7f065231-8331-4e2b-b979-e92a66f93294",
@@ -304,5 +304,23 @@
     "reporter": "phucdt01@mindx.com.vn",
     "createdAt": "2026-04-13T10:22:51.822Z",
     "updateAt": "2026-04-13T10:22:51.822Z"
+  },
+  {
+    "id": "305803f4-21ed-4faf-8b83-c4a29e00f167",
+    "title": "Running class",
+    "content": "- Sau khi yêu cầu running lại lớp, bạn vui lòng chờ HO phê duyệt. Trong lúc chờ phê duyệt sẽ không thể yêu cầu lại nhiều lần.\n\n- Sau khi được duyệt (lớp về trạng thái Running), người dùng cần tranh thủ thực hiện ngay các thao tác (điểm danh, nhập điểm...).\n\n- Hệ thống sẽ tự động đóng lớp (về Finished) trong khoảng 00:00 - 08:00 sáng hôm sau.\n\n- Giới hạn: Mỗi lớp chỉ được phép sử dụng tính năng Re-running tối đa 02 lần.",
+    "tags": "Class Status,LMS",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-14T05:30:19.836Z",
+    "updateAt": "2026-04-14T05:30:43.488Z"
+  },
+  {
+    "id": "76bf92a6-a460-441a-81bb-361992f86cd7",
+    "title": "chuyển trạng thái học viên để lập phiếu drop-out",
+    "content": "- Tình trạng: Sau khi kiểm tra, Team ghi nhận học viên hiện đang ở trạng thái Completed. Theo quy định của hệ thống, CS chỉ có thể thực hiện phiếu Drop out khi học viên ở trạng thái Waitlisted.\n\n- Xử lý: BU (Business unit) vui lòng vào lớp, sau đó chọn tính năng \"Request re-running class\" (yêu cầu chạy mở lại lớp học). Sau khi yêu cầu được phê duyệt, BU vui lòng refresh lại lớp, hệ thống sẽ tự động cập nhật trạng thái của học viên đã được withdraw sang Waitlisted.\n\n- Theo nghiệp vụ hệ thống, CS cần thực hiện thao tác Withdraw học viên ra khỏi lớp trước khi lớp kết thúc. Trường hợp lớp đã chuyển sang trạng thái Finished mà học viên chưa được Withdraw, hệ thống sẽ tự động cập nhật trạng thái học viên sang Completed.",
+    "tags": "Student Status,LMS",
+    "reporter": "reporter@gmail.com",
+    "createdAt": "2026-04-14T05:33:52.797Z",
+    "updateAt": "2026-04-14T05:35:54.964Z"
   }
 ]
