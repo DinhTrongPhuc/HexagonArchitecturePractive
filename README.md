@@ -6,81 +6,76 @@ Một hệ thống quản lý ghi chú hiện đại và công cụ tự động
 
 ## ✨ Các Tính năng Chính (Features)
 
-### 1. 📧 Outlook Support Scanner (Mới)
-*   **Tích hợp Microsoft Graph API**: Kết nối trực tiếp với hòm thư Outlook công ty thông qua Azure App Registration.
-*   **Quét Mail Thông minh**: Tự động tìm kiếm các email chưa đọc có nội dung liên quan đến Odoo Support (ví dụ: "xem phiếu hỗ trợ").
-*   **Bóc tách link tự động**: Sử dụng Cheerio để trích xuất link Ticket trực tiếp từ nội dung mail HTML.
-*   **Chế độ Quét Ngầm (Auto Scan)**: Server tự động lắng nghe mail mới theo chu kỳ và cập nhật tức thì lên giao diện Frontend mà không cần load lại trang.
+### 1. 📧 Outlook Support Scanner (Mạnh mẽ & Thông minh)
+*   **Tích hợp Microsoft Graph API**: Kết nối trực tiếp với hòm thư Outlook công ty.
+*   **Gom nhóm hội thoại (Conversation Grouping)**: Tự động gộp các mail phản hồi qua lại thành một dòng duy nhất, chỉ hiển thị phản hồi mới nhất để tránh trùng lặp ticket.
+*   **Hỗ trợ nhiều nguồn gửi**: Có khả năng lọc mail từ danh sách nhiều địa chỉ cấu hình sẵn hoặc quét toàn bộ hòm thư.
+*   **Đồng bộ hóa thời gian thực**: Cơ chế Polling từ Frontend kết hợp Background Job từ Backend giúp dữ liệu luôn mới nhất.
 
 ### 2. 📝 Quản lý Ghi chú (Note Hub)
-*   **Full CRUD**: Tạo, đọc, cập nhật và xóa ghi chú với giao diện mượt mà.
-*   **Tìm kiếm & Lọc**: Tìm kiếm theo tiêu đề hoặc lọc theo tag với kỹ thuật Debounce để tối ưu hiệu năng.
-*   **Giao diện Premium**: Hỗ trợ **Dark/Light Mode**, hiệu ứng **Glassmorphism** (kính mờ) và thiết kế Responsive.
+*   **Full CRUD**: Quản lý ghi chú với Domain Model chặt chẽ (Value Objects cho Title, Content, Tags).
+*   **Giao diện Premium**: Hỗ trợ **Dark/Light Mode**, hiệu ứng **Glassmorphism** và thiết kế Responsive.
 
 ### 3. ⚙️ Công cụ Phân bổ CRM (Allocation Tool)
-*   **Xử lý dữ liệu Lead**: Reset và phân bổ lại số tiền thanh toán vào các mặt hàng (Product Items) trên MindX CRM (v1/v2).
-*   **Dry Run Mode**: Chế độ chạy thử nghiệm để kiểm tra Log tính toán trước khi tác động vào dữ liệu thật.
+*   **Xử lý dữ liệu Lead**: Reset và phân bổ lại số tiền thanh toán vào các mặt hàng trên MindX CRM (v1/v2).
 
 ---
 
-## 🛠️ Yêu cầu Hệ thống (Prerequisites)
+## 🏗️ Cấu trúc Hạ tầng (Infrastructure)
 
-*   **Node.js**: v18.0 trở lên.
-*   **Azure App Registration**: Cần có một App trên Azure với quyền `Mail.Read` và `Mail.Send` (dạng Delegated) để dùng tính năng Outlook.
-*   **Database**: Tự động hỗ trợ **MongoDB**, **File JSON**, hoặc **In-Memory**.
+Dự án áp dụng cấu trúc Adapter bền vững, cho phép thay đổi kho lưu trữ linh hoạt:
+*   **Persistence Layers**: Được tổ chức theo công nghệ:
+    *   `mongodb/`: Dành cho môi trường Production (Database thực).
+    *   `json/`: Dành cho lưu trữ file cục bộ (`data.json`, `tickets.json`).
+    *   `in-memory/`: Dành cho việc test nhanh hoặc chạy thử không cần lưu trữ.
 
 ---
 
-## ⚙️ Hướng dẫn Cài đặt & Chạy (Setup)
+## ⚙️ Hướng dẫn Cấu hình .env
 
-### Bước 1: Cấu hình Backend (Server)
-1. Di chuyển vào thư mục Server: `cd Server`
-2. Cài đặt thư viện: `npm install`
-3. Tạo file `.env` và cấu hình các biến sau:
-
+### Phía Backend (Server)
+Tạo file `Server/.env` với các thông số:
 ```env
 PORT=5000
-REPO_TYPE=JSON # JSON | MONGODB | MEMORY
+REPO_TYPE=JSON # Chọn: JSON | MONGODB | MEMORY
 
-# Outlook / Azure Configuration
-OUTLOOK_CLIENT_ID=your_azure_client_id
-OUTLOOK_TENANT_ID=your_azure_tenant_id
-OUTLOOK_TARGET_MAILBOX=your_email@domain.com
+# Cấu hình Quét Mail
 OUTLOOK_SEARCH_PHRASE="xem phiếu hỗ trợ"
-
-# CRM Configuration (Optional)
-CRM_TOKEN=your_crm_pat_token
+OUTLOOK_SEARCH_LIMIT=10
+OUTLOOK_SCAN_INTERVAL=60000 # Thời gian quét ngầm (ms)
+OUTLOOK_TARGET_MAILBOX=odoo@company.com, support@mindx.com # Có thể để trống hoặc nhiều mail cách nhau bởi dấu phẩy
 ```
 
-4. Chạy server: `npm run dev`
-
-### Bước 2: Cấu hình Frontend (Client)
-1. Di chuyển vào thư mục Client: `cd client`
-2. Cài đặt thư viện: `npm install`
-3. Chạy ứng dụng: `npm run dev`
-4. Truy cập: `http://localhost:5173`
-
----
-
-## 📖 Hướng dẫn Sử dụng Outlook Scanner
-
-1.  Truy cập menu **Outlook Scan**.
-2.  Nếu là lần đầu chạy, Terminal của Server sẽ hiển thị một **Code xác thực**. Hãy truy cập [microsoft.com/devicelogin](https://microsoft.com/devicelogin) và nhập mã để cấp quyền truy cập mail.
-3.  Sử dụng **"Run Manual Scan"** để tìm mail ngay lập tức.
-4.  Nhấn **"Start Auto Scanning"** để bật chế độ tự động cập nhật. Hệ thống sẽ giữ đồng bộ mỗi phút trên cả frontend (client) và backend(server).
+### Phía Frontend (Client)
+Tạo file `client/.env` (Vite yêu cầu tiền tố `VITE_`):
+```env
+VITE_OUTLOOK_SEARCH_PHRASE="xem phiếu hỗ trợ"
+VITE_OUTLOOK_SEARCH_LIMIT=10
+VITE_OUTLOOK_SCAN_INTERVAL=60000 # Thời gian làm mới giao diện (ms)
+```
 
 ---
 
-## 🏗️ Kiến trúc Dự án (Architecture)
+## 📖 Hướng dẫn Chạy dự án
 
-Dự án tuân thủ nghiêm ngặt **Hexagonal Architecture**:
-*   **Domain**: Chứa logic nghiệp vụ cốt lõi và các thực thể (Entities).
-*   **Application**: Chứa các Use Cases (ví dụ: `ScanSupportTicketsUseCase`).
-*   **Ports**: Định nghĩa các Interface cho Input (Inbound) và Output (Outbound).
-*   **Adapters**:
-    *   *Primary*: Các Controller HTTP (Express).
-    *   *Secondary*: Kết nối với Outlook (Microsoft Graph), CRM, hoặc Database (MongoDB/JSON).
+1.  **Cài đặt**: Chạy `npm install` ở cả hai thư mục `Server` và `client`.
+```bash
+cd Server
+npm install
+cd .. # Hoặc mở một terminal mới
+cd client
+npm install
+```
+2.  **Khởi chạy**: Chạy `npm run dev` đồng thời ở cả hai phía.
+```bash
+cd Server
+npm run dev
+# mở terminal mới
+cd client
+npm run dev
+```
+3.  **Xác thực**: Kiểm tra Terminal của `Server` để lấy mã **Device Login** cho Outlook trong lần chạy đầu tiên.
 
 ---
-*Dự án được phát triển nhằm mục đích Onboarding và thực hành kiến trúc phần mềm sạch.*
+*Dự án được tối ưu hóa cho Onboarding và thực hành kiến trúc phần mềm sạch.*
 **Author: Đinh Trọng Phúc - MindX Tech Team**
