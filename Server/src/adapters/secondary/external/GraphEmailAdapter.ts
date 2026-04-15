@@ -159,8 +159,18 @@ export class GraphEmailAdapter implements IEmailScannerPort {
     }
 
     private buildSearchExpression(searchPhrase: string): string {
-        const escaped = searchPhrase.replace(/"/g, '\\"').trim();
-        return `"${escaped}"`;
+        // Tách các cụm từ bằng dấu phẩy
+        const phrases = searchPhrase.split(",")
+            .map(p => p.trim())
+            .filter(p => p.length > 0);
+            
+        if (phrases.length === 0) return `""`;
+        
+        // Bọc từng cụm từ trong ngoặc kép và nối lại bằng OR
+        return phrases.map(p => {
+            const escaped = p.replace(/"/g, '\\"');
+            return `"${escaped}"`;
+        }).join(" OR ");
     }
 
     private async fetchMatchingMessages(
