@@ -10,6 +10,7 @@ import { ReadListNote } from "./application/usecases/ReadListNote";
 import { ReadNote } from "./application/usecases/ReadNote";
 import { UpdateNote } from "./application/usecases/UpdateNote";
 import { DeleteNote } from "./application/usecases/DeleteNote";
+import { GetUniqueTags } from "./application/usecases/GetUniqueTags";
 import { NoteRepository } from "./ports/outbound/repositories/NoteRepository";
 
 // router
@@ -69,6 +70,7 @@ export class App {
             const readNoteUseCase = new ReadNote(noteRepository);
             const updateNoteUseCase = new UpdateNote(noteRepository);
             const deleteNoteUseCase = new DeleteNote(noteRepository);
+            const getUniqueTagsUseCase = new GetUniqueTags(noteRepository);
 
             const crmAdapter = new MindXCrmAdapter(process.env.CRM_TOKEN!);
             const allocateUseCase = new AllocateLeadPaymentsUseCase(crmAdapter);
@@ -88,11 +90,11 @@ export class App {
                 }
                 process.exit(0);
             } else {
-                const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, readNoteUseCase, updateNoteUseCase, deleteNoteUseCase);
+                const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, readNoteUseCase, updateNoteUseCase, deleteNoteUseCase, getUniqueTagsUseCase);
                 const allocationController = new AllocationController(allocateUseCase);
                 const supportTicketController = new SupportTicketController(scanSupportTicketsUseCase, autoScanService);
 
-                server.use(createNoteRouter(noteController));
+                server.use("/notes", createNoteRouter(noteController));
                 server.use(AllocationRoutes(allocationController));
                 server.use(SupportTicketRoutes(supportTicketController));
                 server.use(errorHandler);

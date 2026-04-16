@@ -322,5 +322,32 @@
     "reporter": "reporter@gmail.com",
     "createdAt": "2026-04-14T05:33:52.797Z",
     "updateAt": "2026-04-14T05:35:54.964Z"
+  },
+  {
+    "id": "d1b8f2f2-38ee-4764-b517-e4d998528d4c",
+    "title": "Hỗ trợ tài khoản Denise",
+    "content": "- Tình huống: không thể đăng nhập, dù đã reset lại 2 lần mật khẩu\n- Chuẩn đoán ban đầu: có thể do học viên/phụ huynh thao tác sai.\n- Hướng xử lý: Tạo yêu cầu đặt lại mật khẩu và gửi về Số điện thoai phụ huynh (lead), yêu cầu BU (business unit) hướng dẫn học viên và phụ huynh đăng nhập đúng mật khẩu mới gửi về số điện thoại, đúng tên tài khoản được cấp và đúng link trang web.",
+    "tags": "Denise,Đăng nhập",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-16T03:43:07.190Z",
+    "updateAt": "2026-04-16T03:43:07.190Z"
+  },
+  {
+    "id": "f352b777-517b-4b82-b5ba-99f647f53309",
+    "title": "Sai tên học viên và phụ huynh",
+    "content": "- Tóm tắt tình huống: hệ thống đang ghi nhận tên học viên là tên phụ huynh, học viên đã học dưới tên phụ huynh qua 2 lớp và đang học tiếp lớp thứ 3, yêu cầu là đổi lại tên học viên sao cho đúng.\n- Điều tra, kết luận: khi tạo order sale/CS đã vô tình chọn sai tên học viên, order đã được phân bổ học phí đầy đủ. biết rằng với mỗi order hệ thống sẽ tụ động tạo 1 học viên, học viên được tạo sau đó sẽ không được phân bổ hay mở slot enroll vì phân bổ đã dành cho HV ban đầu.\n- Hướng xử lý: đổi tên học viên lại sao cho đúng trên CRM, yêu cầu tài khoản có quyền sửa, sau đó thông báo và hướng dẫn CS/sale tránh nhập sai thông tin ảnh hưởng tới dữ liệu vận hành hệ thống.",
+    "tags": "CRM,Information",
+    "reporter": "reporter@gmail.com",
+    "createdAt": "2026-04-16T03:52:35.844Z",
+    "updateAt": "2026-04-16T03:55:16.115Z"
+  },
+  {
+    "id": "6eb83f0a-c207-4473-a9ed-4669672d84be",
+    "title": "xóa buổi học bị duplicate",
+    "content": "- Tình huống: hệ thống ghi nhận hai buổi có cùng thời gian học trên hệ thống (trùng lịch học)\n- Yêu cầu: xáo 1 buổi\n- Hướng xử lý: sử dụng tài khoản có quyền thao tác và xóa buổi học được yêu cầu, thông báo với BU/CS để họ kiểm tra lại và thông báo học viên",
+    "tags": "Class Schedule",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-16T03:58:57.186Z",
+    "updateAt": "2026-04-16T03:58:57.186Z"
   }
 ]

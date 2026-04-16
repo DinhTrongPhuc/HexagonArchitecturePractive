@@ -57,6 +57,10 @@ export const notesApi = {
     delete: async (id: string) => {
         const res = await apiClient.delete(`/notes/${id}`);
         return res.data;
+    },
+    getTags: async () => {
+        const res = await apiClient.get<string[]>('/notes/meta/tags');
+        return res.data;
     }
 };
 

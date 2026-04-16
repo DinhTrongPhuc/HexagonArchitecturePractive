@@ -5,6 +5,7 @@ import { ListNoteUseCase } from "../../../../ports/inbound/usecases/ListNoteUseC
 import { ReadNoteUseCase } from "../../../../ports/inbound/usecases/ReadNoteUseCase";
 import { UpdateNoteUseCase } from "../../../../ports/inbound/usecases/UpdateNoteUseCase";
 import { DeleteNoteUseCase } from "../../../../ports/inbound/usecases/DeleteNoteUseCase";
+import { GetUniqueTagsUseCase } from "../../../../ports/inbound/usecases/GetUniqueTagsUseCase";
 
 export class NoteController {
     constructor(
@@ -12,7 +13,8 @@ export class NoteController {
         private readListNote: ListNoteUseCase,
         private readNote: ReadNoteUseCase,
         private updateNote: UpdateNoteUseCase,
-        private deleteNote: DeleteNoteUseCase
+        private deleteNote: DeleteNoteUseCase,
+        private getUniqueTags: GetUniqueTagsUseCase
     ) { }
 
     async create(req: Request, res: Response) {
@@ -91,5 +93,14 @@ export class NoteController {
 
         await this.deleteNote.execute(id);
         res.status(200).json({ message: "Note deleted successfully" });
+    }
+
+    async getTags(req: Request, res: Response) {
+        try {
+            const tags = await this.getUniqueTags.execute();
+            res.status(200).json(tags);
+        } catch (error: any) {
+            res.status(500).json({ error: error.message });
+        }
     }
 }

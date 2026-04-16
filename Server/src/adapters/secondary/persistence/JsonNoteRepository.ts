@@ -123,4 +123,20 @@ export class JsonNoteRepository implements NoteRepository {
         };
         await this.writeToFile(rawNotes);
     }
+
+    async getUniqueTags(): Promise<string[]> {
+        const notes = await this.readFromFile();
+        const tagSet = new Set<string>();
+        
+        notes.forEach(note => {
+            if (note.tags) {
+                note.tags.split(',').forEach((tag: string) => {
+                    const trimmed = tag.trim();
+                    if (trimmed) tagSet.add(trimmed);
+                });
+            }
+        });
+        
+        return Array.from(tagSet);
+    }
 }

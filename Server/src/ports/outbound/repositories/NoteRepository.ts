@@ -12,4 +12,5 @@ export interface NoteRepository {
     findByID(id: string): Promise<Note | null>;
     delete(id: string): Promise<void>;
     update(note: Note): Promise<void>;
+    getUniqueTags(): Promise<string[]>;
 }

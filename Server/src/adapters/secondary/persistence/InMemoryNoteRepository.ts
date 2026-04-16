@@ -42,8 +42,18 @@ export class InMemoryNoteRepository implements NoteRepository {
     }
 
     async update(note: Note): Promise<void> {
-        const noteIndex = this.Note.findIndex(note => note.id === note.id);
+        const noteIndex = this.Note.findIndex(n => n.id === note.id);
         if (noteIndex === -1) throw new Error("Note not found");
         this.Note[noteIndex] = note;
+    }
+
+    async getUniqueTags(): Promise<string[]> {
+        const tagSet = new Set<string>();
+        this.Note.forEach(note => {
+            note.tag.getValue().forEach(tag => {
+                tagSet.add(tag.getValue());
+            });
+        });
+        return Array.from(tagSet);
     }
 }

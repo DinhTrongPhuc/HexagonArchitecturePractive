@@ -61,4 +61,8 @@ export class MongoDBNoteRepository implements NoteRepository {
         }
     }
 
+    async getUniqueTags(): Promise<string[]> {
+        const tags = await this.collection.distinct("tags");
+        return tags.filter(tag => !!tag);
+    }
 }
