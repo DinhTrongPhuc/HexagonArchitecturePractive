@@ -349,5 +349,14 @@
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-16T03:58:57.186Z",
     "updateAt": "2026-04-16T03:58:57.186Z"
+  },
+  {
+    "id": "1e558763-1204-4872-8b06-7e24dbf4e868",
+    "title": "Không đăng nhập được vào compass",
+    "content": "- Tình huống: học viên có thông tin trên cả CRM lẫn LMS, nhưng phụ huynh ko dùng số điện thoại để đăng nhập vào học bạ (Compass) được.\n- Điều tra: TK Compass đăng nhập bằng mã học viên bình thường, học viên đang không được enroll vào lớp nào trên LMS, trong khi, ở thông tin lớp học vẫn thấy học viên đang ở trong lớp và có tham gia lớp học. \n- Nguyên nhân: hệ thống validate học viên phải enroll học ít nhất một lớp thì mới có thể đăng nhập compass bằng số điện thoại.\n- Hướng xử lý: enroll học viên vào đúng lớp, thử đăng nhập lại compass bằng Số điện thoại và phản hồi phụ huynh.",
+    "tags": "Đăng nhập,Compass",
+    "reporter": "reporter@gmail.com",
+    "createdAt": "2026-04-20T09:20:26.462Z",
+    "updateAt": "2026-04-20T09:20:26.462Z"
   }
 ]
