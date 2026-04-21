@@ -358,5 +358,14 @@
     "reporter": "reporter@gmail.com",
     "createdAt": "2026-04-20T09:20:26.462Z",
     "updateAt": "2026-04-20T09:20:26.462Z"
+  },
+  {
+    "id": "1417228d-8970-456a-99df-12b9f8b14638",
+    "title": "Học viên có 2 TK Denise để làm BT",
+    "content": "- Tình huống: HV (học viên)  đăng nhập denise nhưng không thấy BTVN (bài tập về nhà) của khóa học HV đang học.\n- Kiểm tra: HV có 2 Tài khoản Denise (~2 mã định danh học viên). Tech Team sẽ đăng nhập và cả 2 để xác định khóa học của học viên.\n- Kết luận: HV đang đăng nhập vào nhầm tài khoản denise nên ko thấy khóa học muốn tìm.\n- Hướng xử lý: Tech Team hướng dẫn HV vào đúng tài khoản của mình:\n\nVí Dụ: \nHọc viên Bùi Minh Vũ hiện đang có 2 tài khoản Denise để truy cập vào làm bài tập, Team đã kiểm tra cả 2 tài khoản và xác nhận được tài khoản học lớp Apps của HV là 25012864@mindx.edu.vn với mã học viên là 25012864 được tạo từ Lead Phạm Thị Yến.Có thể do HV đang đăng nhập vào tài khoản 23004005@mindx.edu.vn nên không thấy lớp Apps của khóa học lập trình.HV có 2 tài khoản Denise để làm bài tập nên dễ nhầm lẫn, BU hãy hướng dẫn HV đăng nhập đúng với TK: 25012864@mindx.edu.vn \n",
+    "tags": "Denise",
+    "reporter": "Reporter@gmail.com",
+    "createdAt": "2026-04-21T04:49:38.552Z",
+    "updateAt": "2026-04-21T04:50:02.348Z"
   }
 ]
