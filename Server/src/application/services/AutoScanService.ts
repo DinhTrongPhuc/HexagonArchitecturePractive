@@ -1,0 +1,73 @@
+import { ScanSupportTicketsUseCase } from "../usecases/ScanSupportTicketsUseCase";
+import { GraphEmailAdapter } from "../../adapters/secondary/external/GraphEmailAdapter";
+
+export class AutoScanService {
+    private isScanning: boolean = false;
+    private timerId: NodeJS.Timeout | null = null;
+
+    constructor(private readonly scanSupportTicketsUseCase: ScanSupportTicketsUseCase) { }
+
+    public startAutoScan(intervalMs?: number): boolean {
+        const envInterval = process.env.OUTLOOK_SCAN_INTERVAL ? parseInt(process.env.OUTLOOK_SCAN_INTERVAL) : 300000;
+        const finalInterval = intervalMs ?? envInterval;
+
+        if (this.isScanning) {
+            console.log("Auto scan is already running.");
+            return false;
+        }
+
+        this.isScanning = true;
+
+        // Chạy ngay lập tức lần đầu tiên
+        this.runScanJob();
+
+        // Đặt lịch lặp lại sau mỗi finalInterval
+        this.timerId = setInterval(() => {
+            if (this.isScanning) {
+                this.runScanJob();
+            }
+        }, finalInterval);
+
+        console.log(`Auto scan started with interval ${finalInterval}ms`);
+        return true;
+    }
+
+    public stopAutoScan(): boolean {
+        if (!this.isScanning) {
+            console.log("Auto scan is not running.");
+            return false;
+        }
+
+        if (this.timerId) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+        }
+
+        this.isScanning = false;
+        console.log("Auto scan stopped.");
+        return true;
+    }
+
+    public getStatus(): { isScanning: boolean } {
+        return { isScanning: this.isScanning };
+    }
+
+    private async runScanJob() {
+        console.log("[AutoScanService] Running automated email scan Ticket...");
+        try {
+            const limit = process.env.OUTLOOK_SEARCH_LIMIT ? Number(process.env.OUTLOOK_SEARCH_LIMIT) : 5;
+            const searchPhrase = process.env.OUTLOOK_SEARCH_PHRASE || "xem phiếu hỗ trợ";
+
+            const result = await this.scanSupportTicketsUseCase.execute({ searchPhrase, limit });
+
+            console.log(`[AutoScanService] Scan complete. Found ${result.total} matching emails.`);
+
+            if (result.total > 0) {
+                console.log("[AutoScanService] TO-DO: DO SOMETHING");
+                // TODO: this.createTicketUseCase.execute(result.tickets), maybe response to client
+            }
+        } catch (error) {
+            console.error("[AutoScanService] Automated email scan job failed:", error);
+        }
+    }
+}

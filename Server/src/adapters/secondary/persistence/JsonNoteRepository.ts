@@ -1,7 +1,7 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-import { NoteRepository } from "../../../ports/outbound/repositories/NoteRepository";
+import { NoteRepository, NoteQueryOptions } from "../../../ports/outbound/repositories/NoteRepository";
 import { Note } from "../../../domain/entities/Note";
 import { Title } from "../../../domain/value-object/Title";
 import { Content } from "../../../domain/value-object/Content";
@@ -45,10 +45,23 @@ export class JsonNoteRepository implements NoteRepository {
         await this.writeToFile(notes);
     }
 
-    async findAll(): Promise<Note[]> {
-        const rawNotes = await this.readFromFile();
+    async findAll(options?: NoteQueryOptions): Promise<{ data: Note[], total: number }> {
+        let rawNotes = await this.readFromFile();
+        
+        if (options?.tag) {
+            rawNotes = rawNotes.filter((data: any) => data.tags.split(',').includes(options.tag));
+        }
+        
+        const total = rawNotes.length;
+        
+        if (options?.skip !== undefined) {
+            rawNotes = rawNotes.slice(options.skip);
+        }
+        if (options?.limit !== undefined) {
+            rawNotes = rawNotes.slice(0, options.limit);
+        }
 
-        return rawNotes.map(data => new Note(
+        const data = rawNotes.map((data: any) => new Note(
             data.id,
             new Title(data.title),
             new Content(data.content),
@@ -57,6 +70,8 @@ export class JsonNoteRepository implements NoteRepository {
             new Date(data.createdAt),
             new Date(data.updateAt)
         ));
+        
+        return { data, total };
     }
 
     async findByID(id: string): Promise<Note | null> {
@@ -107,5 +122,21 @@ export class JsonNoteRepository implements NoteRepository {
             updateAt: note.updateAt
         };
         await this.writeToFile(rawNotes);
+    }
+
+    async getUniqueTags(): Promise<string[]> {
+        const notes = await this.readFromFile();
+        const tagSet = new Set<string>();
+        
+        notes.forEach(note => {
+            if (note.tags) {
+                note.tags.split(',').forEach((tag: string) => {
+                    const trimmed = tag.trim();
+                    if (trimmed) tagSet.add(trimmed);
+                });
+            }
+        });
+        
+        return Array.from(tagSet);
     }
 }

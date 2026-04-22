@@ -4,3 +4,4 @@ dist
 .vscode
 .env
 plan
+.auth

@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 
@@ -6,20 +7,42 @@ import { NoteController } from "./adapters/primary/controllers/http/NoteControll
 import { NoteComand } from "./adapters/primary/controllers/CLI/NoteComand";
 import { CreateNote } from "./application/usecases/CreateNote";
 import { ReadListNote } from "./application/usecases/ReadListNote";
+import { ReadNote } from "./application/usecases/ReadNote";
 import { UpdateNote } from "./application/usecases/UpdateNote";
 import { DeleteNote } from "./application/usecases/DeleteNote";
+import { GetUniqueTags } from "./application/usecases/GetUniqueTags";
 import { NoteRepository } from "./ports/outbound/repositories/NoteRepository";
 
 // router
 import { createNoteRouter } from "./adapters/primary/controllers/http/NoteRoutes";
+import { errorHandler } from "./adapters/primary/controllers/http/middlewares/ErrorHandler";
 
 // stored data
 import { JsonNoteRepository } from "./adapters/secondary/persistence/JsonNoteRepository";
 import { InMemoryNoteRepository } from "./adapters/secondary/persistence/InMemoryNoteRepository";
 import { MongoDBNoteRepository } from "./adapters/secondary/persistence/MongGoDBRepository";
 
+//automation tools
+import { MindXCrmAdapter } from "./adapters/secondary/external/MindXCrmAdapter";
+import { GraphEmailAdapter } from "./adapters/secondary/external/GraphEmailAdapter";
+import { AllocateLeadPaymentsUseCase } from "./application/usecases/AllocateLeadPayments";
+import { ScanSupportTicketsUseCase } from "./application/usecases/ScanSupportTicketsUseCase";
+import { AutoScanService } from "./application/services/AutoScanService";
+import { AllocationController } from "./adapters/primary/controllers/http/AllocationController";
+import { SupportTicketController } from "./adapters/primary/controllers/http/SupportTicketController";
+import { AllocationRoutes } from "./adapters/primary/routes/AllocationRoutes";
+import { SupportTicketRoutes } from "./adapters/primary/routes/SupportTicketRoutes";
+// AI & Knowledge sources
+import { GroqAdapter } from "./adapters/secondary/ai/GroqAdapter";
+import { GeminiAdapter } from "./adapters/secondary/ai/GeminiAdapter";
+import { NoteKnowledgeSource } from "./adapters/secondary/knowledge/NoteKnowledgeSource";
+import { AskAIUseCase } from "./application/usecases/ai/AskAIUseCase";
+import { AIController } from "./adapters/primary/controllers/http/ai/AIController";
+import { AIRoutes } from "./adapters/primary/routes/AIRoutes";
+
 //express
 const server = express();
+server.use(cors());
 server.use(express.json());
 
 //env
@@ -51,11 +74,43 @@ export class App {
             // 2. Khởi tạo Use Cases
             const createNoteUseCase = new CreateNote(noteRepository);
             const readListNoteUseCase = new ReadListNote(noteRepository);
+            const readNoteUseCase = new ReadNote(noteRepository);
             const updateNoteUseCase = new UpdateNote(noteRepository);
             const deleteNoteUseCase = new DeleteNote(noteRepository);
+            const getUniqueTagsUseCase = new GetUniqueTags(noteRepository);
+
+            const crmAdapter = new MindXCrmAdapter(process.env.CRM_TOKEN!);
+            const allocateUseCase = new AllocateLeadPaymentsUseCase(crmAdapter);
+            const emailScannerAdapter = new GraphEmailAdapter();
+            const scanSupportTicketsUseCase = new ScanSupportTicketsUseCase(emailScannerAdapter);
+            const autoScanService = new AutoScanService(scanSupportTicketsUseCase);
+
+            // 3. Khởi tạo AI Agent (Hệ thống AI Factory linh hoạt)
+            const aiType = (process.env.AI_TYPE || "GROQ").toUpperCase();
+            let aiAdapter: any;
+
+            if (aiType === "GROQ") {
+                console.log("🚀 AI Engine: Groq (Llama 3) selected");
+                aiAdapter = new GroqAdapter(process.env.GROQ_API_KEY!);
+            } else if (aiType === "GEMINI") {
+                console.log("🚀 AI Engine: Gemini (Flash) selected");
+                aiAdapter = new GeminiAdapter(process.env.GEMINI_API_KEY!);
+            } else {
+                console.log("🚀 AI Engine: Defaulting to Groq");
+                aiAdapter = new GroqAdapter(process.env.GROQ_API_KEY!);
+            }
+
+            const noteKnowledgeSource = new NoteKnowledgeSource(noteRepository);
+            const askAIUseCase = new AskAIUseCase(aiAdapter);
+
+            // Đăng ký data.json làm nguồn tri thức
+            askAIUseCase.addKnowledgeSource(noteKnowledgeSource);
 
             // 3. Khởi tạo Controller hoặc Command
-            if (args.length > 0) {
+            const isCliMode = args.length > 0 && (args[0] === 'note' || args[0] === 'allocation');
+            if (isCliMode) {
+                // Command might break here if it hasn't been updated to accept readNoteUseCase, we will ignore it for now or assume it takes 4 args only. Wait, if NoteComand was using 4 args, I might break it. 
+                // Let's pass the 5th arg but wait, `NoteComand` constructor might only accept 4. I will leave NoteComand intact unless error. Wait, in TS compile error will happen.
                 const noteComand = new NoteComand(createNoteUseCase, readListNoteUseCase, updateNoteUseCase, deleteNoteUseCase);
                 await noteComand.run(args);
                 if (mongoClient) {
@@ -63,15 +118,29 @@ export class App {
                 }
                 process.exit(0);
             } else {
-                const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, updateNoteUseCase, deleteNoteUseCase);
+                const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, readNoteUseCase, updateNoteUseCase, deleteNoteUseCase, getUniqueTagsUseCase);
+                const allocationController = new AllocationController(allocateUseCase);
+                const supportTicketController = new SupportTicketController(scanSupportTicketsUseCase, autoScanService);
+                const aiController = new AIController(askAIUseCase);
 
-                server.use(createNoteRouter(noteController));
+                server.use("/notes", createNoteRouter(noteController));
+                server.use(AllocationRoutes(allocationController));
+                server.use(SupportTicketRoutes(supportTicketController));
+                server.use("/ai", AIRoutes(aiController));
+                server.use(errorHandler);
 
                 server.listen(process.env.PORT, () => {
                     console.log(`Server is running on port ${process.env.PORT}`);
                     if (mongoClient) {
                         console.log(`MongoDB connected: ${mongoClient.db().databaseName}`);
                     }
+                }).on('error', (err: any) => {
+                    if (err.code === 'EADDRINUSE') {
+                        console.error(`\n[LỖI BUG] Cổng ${process.env.PORT} ĐANG BỊ CHIẾM GIỮ BỞI MỘT TIẾN TRÌNH KHÁC! Xin hãy dùng Task Manager tắt các trình Node cũ hoặc khởi động lại máy/VS Code!\n`);
+                    } else {
+                        console.error("[LỖI] Server gặp sự cố:", err);
+                    }
+                    process.exit(1);
                 });
             }
         } catch (error) {

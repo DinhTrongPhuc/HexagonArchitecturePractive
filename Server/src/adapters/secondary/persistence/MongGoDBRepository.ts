@@ -1,7 +1,7 @@
 import { Collection, MongoClient } from "mongodb";
 
 import { NoteMapper } from "./mappers/NoteMapper";
-import { NoteRepository } from "../../../ports/outbound/repositories/NoteRepository";
+import { NoteRepository, NoteQueryOptions } from "../../../ports/outbound/repositories/NoteRepository";
 import { Note } from "../../../domain/entities/Note";
 
 export class MongoDBNoteRepository implements NoteRepository {
@@ -16,9 +16,22 @@ export class MongoDBNoteRepository implements NoteRepository {
         await this.collection.insertOne(document as any);
     }
 
-    async findAll(): Promise<Note[]> {
-        const documents = await this.collection.find().toArray();
-        return documents.map(doc => NoteMapper.toDomain(doc));
+    async findAll(options?: NoteQueryOptions): Promise<{ data: Note[], total: number }> {
+        const query: any = {};
+        if (options?.tag) {
+            query.tags = options.tag;
+        }
+        
+        let cursor = this.collection.find(query);
+        const total = await this.collection.countDocuments(query);
+        
+        if (options?.skip !== undefined) cursor = cursor.skip(options.skip);
+        if (options?.limit !== undefined) cursor = cursor.limit(options.limit);
+        
+        const documents = await cursor.toArray();
+        const data = documents.map(doc => NoteMapper.toDomain(doc));
+        
+        return { data, total };
     }
 
     async findByID(id: string): Promise<Note | null> {
@@ -48,4 +61,8 @@ export class MongoDBNoteRepository implements NoteRepository {
         }
     }
 
+    async getUniqueTags(): Promise<string[]> {
+        const tags = await this.collection.distinct("tags");
+        return tags.filter(tag => !!tag);
+    }
 }

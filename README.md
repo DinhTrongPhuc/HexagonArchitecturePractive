@@ -1,69 +1,105 @@
-# 📓 Hexagonal Note System (TypeScript)
+# 📓 Solution center for IT Service Desk - Intergration Notes and AI
 
-Một ứng dụng quản lý ghi chú (Note-taking) được xây dựng theo **Kiến trúc Lục giác (Hexagonal Architecture)** hay còn gọi là **Ports & Adapters**, tập trung vào tính linh hoạt, dễ kiểm thử và khả năng bảo trì cao.
+Hệ thống quản lý ghi chú thông minh tích hợp AI để hỗ trợ người dùng trả lời câu hỏi về công nghệ và các vấn đề kỹ thuật.
 
-## ✨ Điểm nổi bật
-- **Chuẩn Kiến Trúc Hexagonal**: Tách biệt hoàn toàn Logic Nghiệp vụ (Domain) khỏi Cơ sở hạ tầng (Database, UI).
-- **Bộ nhớ linh hoạt (Swappable Storage)**: Dễ dàng hoán đổi giữa **MongoDB**, **JSON File**, hoặc **In-Memory** chỉ bằng một dòng cấu hình.
-- **Đa giao diện (Multi-Interface)**: Hỗ trợ cả **REST API (Express)** và **CLI (Command Line)** trên cùng một lõi xử lý.
-- **Domain Driven Design (DDD)**: Sử dụng **Value Objects** để đảm bảo tính toàn vẹn dữ liệu ngay từ tầng thấp nhất.
+---
 
-## 🛠️ Công nghệ sử dụng
-- **Ngôn ngữ**: TypeScript
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Cơ sở dữ liệu**: MongoDB (Official Driver)
-- **Công cụ phát triển**: `tsx`, `dotenv`
+## ✨ Các Tính năng Chính (Features)
 
-## ⚙️ Cài đặt & Cấu hình
+### 1. 🤖 AI Solution Agent (Thông minh & Linh hoạt)
+*   **Cơ chế RAG (Retrieval-Augmented Generation)**: AI không trả lời "luyên thuyên" mà dựa trực tiếp vào cơ sở dữ liệu ghi chú (`data.json`) của bạn để đưa ra giải pháp chính xác.
+*   **AI Factory**: Hỗ trợ chuyển đổi tức thì giữa các nhà cung cấp AI hàng đầu:
+    *   **Groq (Llama 3)**: Tốc độ phản hồi siêu nhanh, độ trễ cực thấp.
+    *   **Gemini (Google)**: Khả năng xử lý ngôn ngữ tự nhiên mạnh mẽ.
+*   **Giao diện Chat Glassmorphism**: Trải nghiệm hỏi đáp hiện đại với hiệu ứng mờ kính và animation mượt mà.
 
-1. **Cài đặt dependencies**:
+### 2. 📧 Outlook Support Scanner
+*   **Tích hợp Microsoft Graph API**: Tự động quét và gom nhóm các email hỗ trợ từ Outlook.
+*   **Conversation Grouping**: Tự động gộp các hội thoại email để tránh trùng lặp dữ liệu.
+
+### 3. 📝 Quản lý Ghi chú (Note Hub)
+*   **Full CRUD**: Hệ thống quản lý ghi chú với Domain Model chặt chẽ.
+*   **Modern UI**: Hỗ trợ **Dark/Light Mode**, thiết kế Responsive hoàn hảo.
+
+---
+
+## 🏗️ Kiến trúc Hệ thống (Hexagonal Architecture)
+
+Dự án được chia làm 3 lớp chính:
+*   **Domain**: Chứa thực thể (Entity) và logic nghiệp vụ cốt lõi.
+*   **Application**: Chứa các Use Case (như `AskAIUseCase`, `CreateNote`).
+*   **Adapters**:
+    *   **Primary (Driving)**: REST Controllers, CLI Commands.
+    *   **Secondary (Driven)**: Persistence (MongoDB/JSON), AI Agents (Groq/Gemini), External APIs (Outlook).
+
+---
+
+## 🗝️ Hướng dẫn lấy API Key
+
+Để hệ thống AI hoạt động, bạn cần có ít nhất một trong hai loại API Key sau:
+
+### 1. Groq API Key (Khuyên dùng vì tốc độ)
+*   Truy cập: [Groq Console](https://console.groq.com/keys)
+*   Đăng nhập bằng Google/Github.
+*   Nhấn **"Create API Key"**, đặt tên và copy mã có tiền tố `gsk_...`.
+
+### 2. Gemini API Key
+*   Truy cập: [Google AI Studio](https://aistudio.google.com/app/apikey)
+*   Đăng nhập bằng tài khoản Google.
+*   Nhấn **"Create API key in new project"** và copy mã bắt đầu bằng `AIza...`.
+
+### 3. Outlook Authentication (Lần đầu chạy)
+Hệ thống sử dụng cơ chế **Device Code Flow** của Microsoft:
+1.  Khi bạn chạy Server lần đầu, hãy quan sát Terminal.
+2.  Server sẽ hiện một thông báo: `To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code [MÃ_CODE] to authenticate.`
+3.  Bạn mở trình duyệt, truy cập link, dán mã và đăng nhập bằng tài khoản Outlook công ty.
+4.  Sau khi thành công, Server sẽ tự động lưu Token và bạn không cần làm lại bước này (trừ khi Token hết hạn).
+
+---
+
+## ⚙️ Hướng dẫn Cấu hình .env
+
+### Phía Backend (Server)
+Tạo file `Server/.env` dựa trên mẫu:
+```env
+PORT=5000
+REPO_TYPE=JSON # Chọn: JSON | MONGODB | MEMORY
+
+# AI Configuration
+AI_TYPE=GROQ # Chọn: GROQ | GEMINI
+GROQ_API_KEY=your_key_here
+GEMINI_API_KEY=your_key_here
+
+# Outlook Email Scanning
+OUTLOOK_SEARCH_PHRASE="xem phiếu hỗ trợ"
+OUTLOOK_SCAN_INTERVAL=300000 
+```
+
+---
+
+## 📖 Hướng dẫn Chạy dự án
+
+1.  **Cài đặt Dependencies**:
 ```bash
-npm install
+# Tại thư mục Server
+cd Server && npm install
+
+# Tại thư mục client
+cd client && npm install
 ```
 
-2. **Cấu hình môi trường**:
-- Từ file `.env.sample`, hãy tạo file `.env` của riêng bạn:
+2.  **Khởi chạy**:
 ```bash
-cp .env.sample .env
-```
-- Sau đó, hãy chỉnh sửa nội dung trong file `.env` (ví dụ: `MONGODB_URI`) cho phù hợp với máy của bạn.
+# Chạy Backend (Cổng 5000)
+cd Server && npm run dev
 
-3. **Ghi chú bảo mật**:
-- Tuyệt đối **KHÔNG** commit file `.env` lên GitHub. Hãy đảm bảo file này đã được thêm vào `.gitignore`.
-
-## 🚀 Cách chạy ứng dụng
-
-### 1. Chạy Web Server (API)
-```bash
-npm run dev
-```
-Server sẽ mặc định chạy tại `http://localhost:5000`.
-
-### 2. Chạy Giao diện dòng lệnh (CLI)
-Sử dụng các lệnh sau trực tiếp từ Terminal:
-- **Tạo Note**: `npm run dev note create "Tiêu đề" "Nội dung" "tag1,tag2" "email@gmail.com"`
-- **Xem danh sách**: `npm run dev note read`
-- **Cập nhật**: `npm run dev note update <id> "Tiêu đề mới" "Nội dung mới" "tags" "email"`
-- **Xóa**: `npm run dev note delete <id>`
-
-## 📁 Cấu trúc thư mục (Hexagonal Layers)
-
-```text
-src/
-  ├── domain/           # Chứa các Thực thể (Entities) và Quy tắc nghiệp vụ (Value Objects)
-  ├── application/      # Chứa các Quy trình xử lý (Use Cases)
-  ├── ports/            # Chứa các "Cổng" (Interfaces) cho UseCase và Repository
-  │     ├── usecases/   
-  │     └── repositories/
-  ├── adapters/         # Chứa các "Bộ chuyển đổi" thực hiện yêu cầu
-  │     ├── controllers # Lối vào (Inbound): HTTP API, CLI
-  │     └── persistence # Lối ra (Outbound): MongoDB, JSON, In-Memory
-  ├── app.ts            # Composition Root (Nơi lắp ráp và khởi động ứng dụng)
-  └── index.ts          # Điểm khởi chạy chính
+# Chạy Frontend (Cổng 5556)
+cd client && npm run dev
 ```
 
-## 🛡️ Tại sao dùng Kiến trúc này?
-1. **Dễ kiểm thử (Testability)**: Bạn có thể viết Unit Test cho logic của Note mà không cần phải kết nối Database thật.
-2. **Linh hoạt (Flexibility)**: Việc chuyển từ JSON sang MongoDB chỉ mất 1 giây (đổi biến môi trường).
-3. **Phân tách trách nhiệm (Separation of Concerns)**: Logic nghiệp vụ không bị "dính" vào Framework (Express) hay Database (Mongo).
+3.  **Sử dụng AI**:
+Tại Dashboard, nhập câu hỏi vào thanh tìm kiếm và nhấn nút **"Ask AI"**. Hệ thống sẽ tự động tìm các ghi chú liên quan và dùng AI để tổng hợp câu trả lời cho bạn.
+
+---
+*Dự án được thiết kế để dễ dàng mở rộng và bảo trì theo chuẩn kiến trúc sạch.*
+**Author: Đinh Trọng Phúc - MindX Tech Team**

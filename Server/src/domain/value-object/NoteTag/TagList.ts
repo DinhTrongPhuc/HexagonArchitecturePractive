@@ -16,8 +16,13 @@ export class TagList {
     return this.value;
   }
 
-  static fromString(tagString: string): TagList {
-    if (!tagString || tagString.trim() === "") {
+  static fromString(tagInput: any): TagList {
+    let tagString = tagInput;
+    if (Array.isArray(tagInput)) {
+        tagString = tagInput.join(',');
+    }
+
+    if (!tagString || typeof tagString !== 'string' || tagString.trim() === "") {
       return new TagList([]);
     }
 

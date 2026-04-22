@@ -3,55 +3,55 @@
     "id": "c76540c1-dfce-4ce4-802c-71a64910c0c9",
     "title": "Enroll Học viên",
     "content": "Học viên ban đầu đăng ký khoá 12 tháng tuy nhiên, trong quá trình học bạn đã nâng cấp khóa học (upsale) từ 12 tháng lên khóa 24 tháng, upsale sẽ khiến slot lớp học tăng số tiền cần để mở lớp trên hệ thống nên slot hiện tại không được mở nhưng thực tế đã mua đủ 3 slot của khóa 12 tháng. Học viên được phép mở lớp và enroll vào lớp, tuy nhiên để được mở những slot còn lại thì bạn vẫn cần đóng đủ tiền của khóa 24 tháng.",
-    "tags": "Enroll HV, CRM, LMS",
+    "tags": "Enroll,CRM,LMS",
     "reporter": "reporter1@gmail.com",
     "createdAt": "2026-03-30T06:53:47.856Z",
-    "updateAt": "2026-03-30T06:53:47.856Z"
+    "updateAt": "2026-04-03T09:58:15.338Z"
   },
   {
     "id": "9f22be2c-97d5-4721-9ade-b7273862d5dc",
     "title": "Lỗi enroll, không hiện mục slot để enroll",
     "content": "Học viên đã đóng học phí nhưng do chưa phân bổ đều học phí nên slot không mở để enroll. Cách xử lý, phân bổ lại học phí cho học viên",
-    "tags": "CRM,LMS,Phân bổ học phí",
+    "tags": "CRM,LMS,Allocation",
     "reporter": "tester@gmail.com",
     "createdAt": "2026-03-30T10:35:48.361Z",
-    "updateAt": "2026-03-30T10:35:48.361Z"
+    "updateAt": "2026-04-07T10:09:16.658Z"
   },
   {
     "id": "bc92784d-2177-4936-a44a-0dea50389058",
     "title": "Lỗi 0 slot học phần dù đã active trên CRM",
     "content": "lỗi hệ thống khi tạo oder hoặc phân bổ học phí cho các slot chưa đúng, hệ thống không mở slot học cho học viên. Cách xử lý, tạo lại oder mới giống với thông tin oder trước đó, phân bổ đều lại học phí cho các slot, sau đó mở lại lớp học",
-    "tags": "CRM,BUG,ENROLL",
+    "tags": "CRM,BUG,Enroll",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-03-30T12:07:04.588Z",
-    "updateAt": "2026-03-30T12:07:04.588Z"
+    "updateAt": "2026-04-03T09:58:28.074Z"
   },
   {
     "id": "c143a0e7-40cb-4628-969f-937690800375",
     "title": "Enroll học viên vào lớp do chưa active package",
     "content": "Học viên đã thanh toán đủ tiền khóa học và phân bổ đủ nhưng hệ thống cho học viên enroll. Cách xử lý, active lại package cho học viên trên CRM và enroll bằng LMS",
-    "tags": "CRM,LMS,active",
+    "tags": "CRM,LMS,Active",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-01T03:45:53.097Z",
-    "updateAt": "2026-04-01T03:45:53.097Z"
+    "updateAt": "2026-04-06T04:55:55.331Z"
   },
   {
     "id": "3b651969-8b10-4a4c-a7dd-3f52be31044c",
     "title": "Học viên đóng chưa đủ học phí",
     "content": "học viên đóng chưa đủ học phí nên không có tiền phân bổ vào các slot lớp, yêu cầu người dùng (học viên) đóng bổ sung",
-    "tags": "Học Phí,CRM,Thông báo học viên",
+    "tags": "Học phí,CRM",
     "reporter": "reporter@reportergmail.com",
     "createdAt": "2026-04-01T09:22:16.844Z",
-    "updateAt": "2026-04-01T09:22:16.844Z"
+    "updateAt": "2026-04-07T10:08:26.484Z"
   },
   {
     "id": "684e5b6e-a494-4c92-8042-c32a91bf6b58",
     "title": "Hệ Thống không tạo request teacher để add GV vào lớp",
     "content": "Theo luồng hệ thống, khi tạo lớp học mới trên hệ thống thì trạng thái của lớp học sẽ được thay đổi theo quy trình và khi lớp ở trạng thái open hệ thống sẽ tự động tạo Request teacher để Teaching add GV.Trên history của lớp team kiểm tra không ghi nhận lớp được chuyển sang trạng thái Open nên hệ thống không tự động tạo Request Teacher cho lớp cách xử lý, kiểm tra trạng thái của lớp trên mục histories của lớp và thao tác tạo mới request teacher cho lớp",
-    "tags": "request teacher,LMS",
+    "tags": "Request teacher,LMS",
     "reporter": "phudt01@mindx.com.vn",
     "createdAt": "2026-04-01T09:28:15.906Z",
-    "updateAt": "2026-04-01T09:28:15.906Z"
+    "updateAt": "2026-04-06T04:56:23.234Z"
   },
   {
     "id": "7e7e222d-bd9d-4da3-a1e6-84d8ebabf52c",
@@ -66,37 +66,37 @@
     "id": "624f4a8f-9733-4003-98b9-99d59475f2ac",
     "title": "tạo oder nhầm tên học viên thành tên phụ huynh",
     "content": "Tại thời điểm tạo oder cơ sở chọn tên phụ huynh nên hệ thống hiểu rằng khóa học đó là dành cho phụ huynh và hiển thị tên phụ huynh thay vì tên học viên. Cách xử lý , (cần role) thay đổi tên trên profile của khách hàng bằng cách tạo một oder mới và điền lại thông tin",
-    "tags": "CRM,ORDER",
+    "tags": "CRM,Order",
     "reporter": "user@usergmai.usergmaicom",
     "createdAt": "2026-04-01T09:33:13.624Z",
-    "updateAt": "2026-04-01T09:33:13.624Z"
+    "updateAt": "2026-04-03T10:04:41.984Z"
   },
   {
     "id": "3db019dd-d265-42ca-89ea-b0ec68f536e6",
     "title": "cập nhật lại ngày Oder",
     "content": "Hệ thống hoạt động với role, chỉ có role có quyền mới có thể điều chỉnh ngày.Bạn chỉ có thể add được payment sau khi tạo oder theo luồng hệ thống, do đã tạo oder vào 24/03/2026 nên không thể add payment vào trước.",
-    "tags": "ODER,CRM",
-    "reporter": "@gmial.gmialcom",
+    "tags": "Order,CRM",
+    "reporter": "reported@gmial.gmialcom",
     "createdAt": "2026-04-01T09:39:24.657Z",
-    "updateAt": "2026-04-01T09:39:24.657Z"
+    "updateAt": "2026-04-03T10:34:56.127Z"
   },
   {
     "id": "732c4993-e0d3-4731-8e37-90d86619d6b4",
     "title": "Cập nhật lại ngày add payment",
     "content": "Theo logic hệ thống bạn chỉ có thể add payment sau khi tạo oder,VÍ DỤ:  bạn đã tạo oder vào ngày 25/3 nên không thể add payment vào ngày 24/3 được.Quy định mới về thời gian add Payment T+7 ( 7 ngày sau ngày tạo order )",
-    "tags": "CRM,payment",
+    "tags": "CRM,Payment",
     "reporter": "reporter1@gmail.com",
     "createdAt": "2026-04-01T09:42:05.868Z",
-    "updateAt": "2026-04-01T09:42:05.868Z"
+    "updateAt": "2026-04-06T04:56:12.716Z"
   },
   {
     "id": "96a959c2-9e5c-4316-b20f-e83cd99891f4",
     "title": "Withdraw học viên bảo lưu ra khỏi lớp",
     "content": "Thứ nhất, vì đã thực hiện bảo lưu cho học sinh nên trạng thái hiện tại của học sinh trong lớp đã tắt (inactive) và tích uncompleted. Do đó không thể withdraw ra khỏi lớp học ở thời điểm hiện tại. để thực hiện withdraw thì cơ sở hãy chờ hết hạn bảo lưu của học sinh và thực hiện withdraw khỏi lớp học hiện tại và tiếp tục khóa học đó với lớp (mã lớp) khác.",
-    "tags": "withdraw,LMS",
+    "tags": "Withdraw,LMS",
     "reporter": "report@gmail.com",
     "createdAt": "2026-04-01T09:45:24.085Z",
-    "updateAt": "2026-04-01T09:45:24.085Z"
+    "updateAt": "2026-04-06T04:56:47.358Z"
   },
   {
     "id": "c5dd25db-9fdc-418d-9f00-6a99d9171306",
@@ -120,10 +120,10 @@
     "id": "a801a8bc-3f6f-4342-84ea-3efb06a243f3",
     "title": "Các trường hợp bị tích uncomplete trên LMS",
     "content": "Chuyển lớp (học viên đang học nhưng có mong muốn chuyển lớp khác thì tại lớp cũ sẽ được tick là uncomplete), drop-out (là những học viên đang học thì nghỉ ngang vì nhiều lý do hoặc không lý do), On-hold (Học sinh bảo lưu có thời hạn), Chuyển nhà ( học viên chuyển cơ sở học ) ",
-    "tags": "LMS,uncomplete status",
+    "tags": "LMS,Student Status",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-01T10:20:36.528Z",
-    "updateAt": "2026-04-01T10:20:36.528Z"
+    "updateAt": "2026-04-14T05:15:26.994Z"
   },
   {
     "id": "7f065231-8331-4e2b-b979-e92a66f93294",
@@ -137,19 +137,244 @@
   {
     "id": "3c9f9708-5892-4f39-a19f-0315ffa35fbc",
     "title": "Không đăng nhập được outlook",
-    "content": "Nhân viên không đăng nhập được tài khoản outlook, nguyên nhân đối với các tài khoản .com thông thường sẽ đăng nhập qua outlook tuy nhiên có những nhân viên sẽ sở hữu tài khoản đuôi .net họ sẽ đăng nhập thông qua một được link 'bitfly' được gắn trong Email, thường thì họ sẽ không đọc kỹ mail nên phải nhắc họ kiểm tra lại mail đăng nhập lại qua link đc gửi trong email",
-    "tags": "đăng nhập,OutLook",
+    "content": "Nhân viên không đăng nhập được tài khoản outlook, nguyên nhân đối với các tài khoản .com thông thường sẽ đăng nhập qua outlook tuy nhiên có những nhân viên sẽ sở hữu tài khoản đuôi .net họ sẽ đăng nhập thông qua một đường link 'bitfly' được đính kèm trong Email khi gửi tài khoản cho nhân viên, thường thì họ sẽ không đọc kỹ mail nên phải nhắc họ kiểm tra lại mail đăng nhập lại qua link được gửi trong email.",
+    "tags": "Đăng nhập,OutLook",
     "reporter": "phucdt01@gmail.com",
     "createdAt": "2026-04-02T09:20:45.973Z",
-    "updateAt": "2026-04-02T09:20:45.973Z"
+    "updateAt": "2026-04-07T10:10:35.232Z"
   },
   {
     "id": "ac918e97-ec4a-4dad-8c66-74164f483c19",
     "title": "Điểm danh lớp học ",
     "content": "Lớp học đã hoàn thành và ở trạng thái finished người dùng yêu cầu mở lại trạng thái lớp học về running để có thể điểm danh, Lưu ý: Sau khi lớp được chuyển về trạng thái Running, người dùng cần tranh thủ thực hiện ngay các thao tác (điểm danh, nhập điểm...).Hệ thống sẽ tự động đóng lớp (về Finished) trong khoảng 00:00 - 08:00 sáng hôm sau Giới hạn: Mỗi lớp chỉ được phép sử dụng tính năng Re-running tối đa 02 lần.",
     "tags": "LMS,Điểm danh",
-    "reporter": "phucdt01@gmail.com",
+    "reporter": "nguoidung@gmail.com",
     "createdAt": "2026-04-02T10:35:04.444Z",
-    "updateAt": "2026-04-02T10:35:04.444Z"
+    "updateAt": "2026-04-03T08:09:58.151Z"
+  },
+  {
+    "id": "73c84118-da69-4fc2-a15f-431ec2c6a62e",
+    "title": "Thay đổi trạng thái học sinh",
+    "content": "Đổi trạng thái từ drop-out sang waitlisted trên hệ thống để sinh viên có thể được enroll vào lớp",
+    "tags": "LMS,Student Status",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-03T11:08:13.743Z",
+    "updateAt": "2026-04-07T10:06:33.247Z"
+  },
+  {
+    "id": "492dff6c-098f-49d4-81da-2314a7e5c84a",
+    "title": "Enroll học viên nhưng học viên đã trong lớp sẵn",
+    "content": "Từ số điện thoại xác định học viên đang ở trong lớp sẵn rồi, thì chỉ cần phản hồi lại là yêu cầu cơ sở (CS) kiểm tra lại thông tin học viên.",
+    "tags": "LMS,Enroll",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-06T03:08:37.441Z",
+    "updateAt": "2026-04-06T03:08:49.586Z"
+  },
+  {
+    "id": "d1bb7f99-e2a7-416d-9684-0b98f4e5a778",
+    "title": "Enroll học viên vào lớp",
+    "content": "Học viên chưa đóng đủ học phí nên hệ thống chưa mở slot lớp học cho học viên.Team theo dõi phần thanh toán và thấy các khoản đóng phí bổ sung đều bị denied do phụ huynh đóng bổ sung x triệu đồng nhưng phần hóa đơn lại là y triệu đồng nên kế toán không thể xác nhận và thanh toán bị từ chối.Đối với những vấn đề trên, Team không thể hỗ trợ học viên enroll vào lớp học được, bạn hãy làm việc với kế toán để xác minh lại khoản học phí này",
+    "tags": "LMS,Enroll,Học phí",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-06T03:19:03.636Z",
+    "updateAt": "2026-04-06T03:19:03.636Z"
+  },
+  {
+    "id": "05841fe7-f3bd-42dc-8c91-061de214d8eb",
+    "title": "Xóa phiếu bảo lưu của học viên",
+    "content": "Hệ thống không hỗ trợ xóa phiếu bảo lưu vì hệ thống tính số lần bảo lưu của mỗi học viên (giới hạn số lần bảo lưu) nên không thể xóa phiếu bảo lưu của học viên được. Do đó chỉ có thể reject phiếu hoặc kết thúc bảo lưu trước hạn.Đối với học viên ABC, thời hạn kết thúc bảo lưu là DD/MM/YYYY, CSL/CM cần thực hiện thao tác 'Kết thúc'bảo lưu trước thời hạn, khi đó hệ thống sẽ tự động chuyển trạng thái của học viên và CS có thể enroll học viên vào lớp học như bình thường. Lưu ý: đối với thao tác kết thúc bảo lưu trước hạn chỉ có CSL/CM mới có quyền thao tác trên hệ thống LMS",
+    "tags": "LMS,Bảo lưu",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-06T04:54:24.540Z",
+    "updateAt": "2026-04-06T04:54:24.540Z"
+  },
+  {
+    "id": "ced3a066-484e-44b8-8232-dfdf35fd8fa2",
+    "title": "Thông tin tối thiểu cần để hỗ trợ enroll học viên",
+    "content": "Số điện thoại của lead, tên học viên, mã lớp mà học viên sẽ được enroll vào.",
+    "tags": "LMS,Enroll",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-07T02:54:17.044Z",
+    "updateAt": "2026-04-07T02:54:17.044Z"
+  },
+  {
+    "id": "ac0e5c74-e72a-44f6-a734-dfa64f6c140a",
+    "title": "Yêu cầu mở lại lớp",
+    "content": "- Kiểm tra trên hệ thống LMS chức năng 're-running request', kiểm tra lớp đã được hỗ trợ mở trước đó hay chưa (cần tài khoản nhân viên có đủ quyền để xem).\n- Mỗi lớp chỉ được mở lại (re-running) tối đa 2 lần (chỉ có HO và tài khoản có quyền mới có thể thay đổi trạng thái lớp học).\n- Hệ thống sẽ truy quét trong thời gian từ 0h tối đến 8h sáng, các lớp đã hoàn thành được mở vào thời gian đó sẽ quay trở về trạng thái đóng.\n- Yêu cầu CS/User thao tác trước thời gian cố định của hệ thống, nếu class quay lại trạng thái hoàn thành (finished), tức là đã đóng lớp, khi đó không thể thao tác thay đổi bất kỳ cái gì trên đó",
+    "tags": "LMS,Re-running class,Class Status",
+    "reporter": "report@gmail.com",
+    "createdAt": "2026-04-07T04:51:26.498Z",
+    "updateAt": "2026-04-07T10:07:07.309Z"
+  },
+  {
+    "id": "9ffddeff-0287-4bf6-8211-1b9e27f98c7e",
+    "title": "Học viên không thể enroll do slot vẫn đang ở trạng thái close",
+    "content": "- Kiểm tra hệ thống CRM thấy đã đóng học phí và phân bổ đầy đủ.\n- Kiểm tra LMS thấy slot enroll học viên vào lớp vẫn đang ở trạng thái đóng\n- Nguyên nhân, do dữ liệu thanh toán trên CRM chưa được đẩy sang LMS.\n- Hướng xử lý: vào hệ thống CRM và sử dụng chức năng tính toán lại bên trong chức năng order của lead đó ( cần tài khoản có quyền ). khi đó kiểm tra lại trên LMS và phản hồi với User/CS ",
+    "tags": "Enroll",
+    "reporter": "nguoidung@gmail.com",
+    "createdAt": "2026-04-07T04:57:34.601Z",
+    "updateAt": "2026-04-07T04:57:34.601Z"
+  },
+  {
+    "id": "2cd7d47e-7dc8-46c8-8265-262e3ad65881",
+    "title": "Enroll học viên",
+    "content": "- Kiểm tra hệ thống CRM thấy học phí, phân bổ đã đầy đủ và đúng nhưng slot enroll trên LMS vẫn đang ở trạng thái close.\n- Hướng xử lý (không sử dụng chức năng tính toán lại): Thực hiện save allocation lại bên CRM và refresh lại bên LMS.",
+    "tags": "Enroll,LMS,CRM",
+    "reporter": "phucdt01@mind.com.vn",
+    "createdAt": "2026-04-07T08:20:24.615Z",
+    "updateAt": "2026-04-07T08:20:24.615Z"
+  },
+  {
+    "id": "a99a6f8a-e643-462e-8b19-034a3832d81f",
+    "title": " Trạng thái Lead trên CRM",
+    "content": "Lead đã từng ở trạng thái L6B (đã thanh toán toàn bộ học phí) nhưng bây giờ CS kiểm tra lại là L6A (đã thanh toán 1 phần học phí). Nguyên nhân vẫn chưa rõ, có thể là trong quá khứ CS tạo order lead với giá khác nhưng không tính toán lại hoặc do giá khóa học tăng hoặc liên quan đến mã giảm giá bị mất,thay đổi,.... Hướng xử lý tốt nhất tìm chị Thùy =)) (Leader helpdesk).",
+    "tags": "CRM,Lead Status",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-07T10:06:00.604Z",
+    "updateAt": "2026-04-07T10:06:00.604Z"
+  },
+  {
+    "id": "e77b923b-ca23-40b5-8e8e-fcff215876e8",
+    "title": "Xóa/ đổi lịch học",
+    "content": "Chỉ có thể xóa hoặc đổi lịch học khi lớp đang ở trạng thái running, nếu lớp đang ở trạng thái finished thì phải chuyển về running. Chỉ có thể thay đổi lịch học với buổi học chưa diễn ra. Thay đổi lịch học sẽ dần đến dữ liệu giáo viên cho buổi học đó bị mất, phải thông báo với bên CS nhờ TE điều phối lại giáo viên vào lịch học mới.",
+    "tags": "Teacher,Class Schedule",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-08T07:56:33.894Z",
+    "updateAt": "2026-04-08T07:56:33.894Z"
+  },
+  {
+    "id": "611bf4ad-8c55-485c-b53f-d9942a6d4f44",
+    "title": "Enroll học viên",
+    "content": "Trạng thái enroll của học viên trên LMS và CRM đang đóng chưa active, để có thể active được cần điền những thông tin cần thiết mà hệ thống yêu cầu, chắc chắn rằng đã điền đủ thông tin và chỉ khi đó ta refresh sẽ thấy nút active, active để có thể enroll học viên.",
+    "tags": "Enroll,LMS,CRM",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-09T04:17:16.892Z",
+    "updateAt": "2026-04-09T04:17:16.892Z"
+  },
+  {
+    "id": "1263ff45-5153-45c1-adb3-27afe642bac9",
+    "title": "Lưu ý khi Enroll học viên",
+    "content": "Kiểm tra chính xác thông tin lớp học (mã lớp, khóa học), hình thức học (hybird/online/offline) và thông tin học viên rồi mới ấn enroll, tránh trường hợp enroll nhầm.",
+    "tags": "Enroll,Information",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-09T04:19:14.880Z",
+    "updateAt": "2026-04-09T04:19:14.880Z"
+  },
+  {
+    "id": "07c19a18-46df-4371-acc3-6e7bd8ef59f6",
+    "title": "Học viên chưa đóng bất kỳ khoản học phí nào ",
+    "content": "Mặc định khi tạo order thì lead sẽ ở trạng thái L5 và chỉ khi đóng học phí lead sẽ chuyển trạng thái sang L6 (đóng 1 phần hoặc toàn phần) và chỉ khi đó mới có thể thực hiện thao tác enroll",
+    "tags": "Enroll,Học phí,Lead Status",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-09T04:22:07.845Z",
+    "updateAt": "2026-04-09T04:22:07.845Z"
+  },
+  {
+    "id": "0ff105e7-8783-483e-aa37-2360e988381c",
+    "title": "Xóa buổi học",
+    "content": "Để có thể xóa buổi học thì cần phải tài khoản có quyền thao tác. Khi xóa buổi học trước thì buổi học sau sẽ được đẩy lên làm lịch thay thế tuy nhiên đảm bảo một lớp phải luôn đủ 14 buổi, do đó ta cần phải yêu cầu tới CS thêm lịch học cho buổi 14 (buổi bổ sung) sau đó CS thông báo với TE để TE điều phối giáo viên vào lớp cho buổi học ngày hôm đó ",
+    "tags": "Teacher,Class Schedule,LMS",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-10T08:40:45.354Z",
+    "updateAt": "2026-04-21T10:43:58.494Z"
+  },
+  {
+    "id": "31048294-d2b2-4f07-af57-d440d7322a4b",
+    "title": "Lỗi hiển thị điểm thưởng.",
+    "content": "Học viên có nhiều tài khoản để đăng nhập denise, những tài khoản có mức điểm thưởng khác nhau. thông báo với học viên đăng nhập đúng tài khoản để xem điểm.",
+    "tags": "Reward points,Denise,LMS",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-13T10:19:04.778Z",
+    "updateAt": "2026-04-13T10:19:04.778Z"
+  },
+  {
+    "id": "ab9ddf8f-8875-4b27-ae70-33a63de737f6",
+    "title": "Xóa điểm thưởng.",
+    "content": "Học viên bị cộng nhầm 2 lần nhận điểm thưởng, Team tech sử dụng tài khoản có quyền trên LMS để trực tiếp thao tác xóa điểm thưởng cho học viên.",
+    "tags": "Reward points,Denise,LMS",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-13T10:20:17.024Z",
+    "updateAt": "2026-04-13T10:20:17.024Z"
+  },
+  {
+    "id": "c0a3513b-6e87-4eef-9ca8-8ab38c363d38",
+    "title": "Enroll học viên",
+    "content": "Học viên ko được enroll vì chưa thanh toán đủ học phí, kiểm tra thấy có khoản phí bị từ chối. Hướng xử lý, team yêu cầu CS kiểm tra xác minh lại với kế toán, khi học phí được đóng đủ thì hệ thống sẽ tự động mở slot để enroll học viên .",
+    "tags": "Enroll,Học phí,Payment",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-13T10:22:51.822Z",
+    "updateAt": "2026-04-13T10:22:51.822Z"
+  },
+  {
+    "id": "305803f4-21ed-4faf-8b83-c4a29e00f167",
+    "title": "Running class",
+    "content": "- Sau khi yêu cầu running lại lớp, bạn vui lòng chờ HO phê duyệt. Trong lúc chờ phê duyệt sẽ không thể yêu cầu lại nhiều lần.\n\n- Sau khi được duyệt (lớp về trạng thái Running), người dùng cần tranh thủ thực hiện ngay các thao tác (điểm danh, nhập điểm...).\n\n- Hệ thống sẽ tự động đóng lớp (về Finished) trong khoảng 00:00 - 08:00 sáng hôm sau.\n\n- Giới hạn: Mỗi lớp chỉ được phép sử dụng tính năng Re-running tối đa 02 lần.",
+    "tags": "Class Status,LMS",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-14T05:30:19.836Z",
+    "updateAt": "2026-04-14T05:30:43.488Z"
+  },
+  {
+    "id": "76bf92a6-a460-441a-81bb-361992f86cd7",
+    "title": "chuyển trạng thái học viên để lập phiếu drop-out",
+    "content": "- Tình trạng: Sau khi kiểm tra, Team ghi nhận học viên hiện đang ở trạng thái Completed. Theo quy định của hệ thống, CS chỉ có thể thực hiện phiếu Drop out khi học viên ở trạng thái Waitlisted.\n\n- Xử lý: BU (Business unit) vui lòng vào lớp, sau đó chọn tính năng \"Request re-running class\" (yêu cầu chạy mở lại lớp học). Sau khi yêu cầu được phê duyệt, BU vui lòng refresh lại lớp, hệ thống sẽ tự động cập nhật trạng thái của học viên đã được withdraw sang Waitlisted.\n\n- Theo nghiệp vụ hệ thống, CS cần thực hiện thao tác Withdraw học viên ra khỏi lớp trước khi lớp kết thúc. Trường hợp lớp đã chuyển sang trạng thái Finished mà học viên chưa được Withdraw, hệ thống sẽ tự động cập nhật trạng thái học viên sang Completed.",
+    "tags": "Student Status,LMS",
+    "reporter": "reporter@gmail.com",
+    "createdAt": "2026-04-14T05:33:52.797Z",
+    "updateAt": "2026-04-14T05:35:54.964Z"
+  },
+  {
+    "id": "d1b8f2f2-38ee-4764-b517-e4d998528d4c",
+    "title": "Hỗ trợ tài khoản Denise",
+    "content": "- Tình huống: không thể đăng nhập, dù đã reset lại 2 lần mật khẩu\n- Chuẩn đoán ban đầu: có thể do học viên/phụ huynh thao tác sai.\n- Hướng xử lý: Tạo yêu cầu đặt lại mật khẩu và gửi về Số điện thoai phụ huynh (lead), yêu cầu BU (business unit) hướng dẫn học viên và phụ huynh đăng nhập đúng mật khẩu mới gửi về số điện thoại, đúng tên tài khoản được cấp và đúng link trang web.",
+    "tags": "Denise,Đăng nhập",
+    "reporter": "phucdt01@mindx.com.vn",
+    "createdAt": "2026-04-16T03:43:07.190Z",
+    "updateAt": "2026-04-16T03:43:07.190Z"
+  },
+  {
+    "id": "f352b777-517b-4b82-b5ba-99f647f53309",
+    "title": "Sai tên học viên và phụ huynh",
+    "content": "- Tóm tắt tình huống: hệ thống đang ghi nhận tên học viên là tên phụ huynh, học viên đã học dưới tên phụ huynh qua 2 lớp và đang học tiếp lớp thứ 3, yêu cầu là đổi lại tên học viên sao cho đúng.\n- Điều tra, kết luận: khi tạo order sale/CS đã vô tình chọn sai tên học viên, order đã được phân bổ học phí đầy đủ. biết rằng với mỗi order hệ thống sẽ tụ động tạo 1 học viên, học viên được tạo sau đó sẽ không được phân bổ hay mở slot enroll vì phân bổ đã dành cho HV ban đầu.\n- Hướng xử lý: đổi tên học viên lại sao cho đúng trên CRM, yêu cầu tài khoản có quyền sửa, sau đó thông báo và hướng dẫn CS/sale tránh nhập sai thông tin ảnh hưởng tới dữ liệu vận hành hệ thống.",
+    "tags": "CRM,Information",
+    "reporter": "reporter@gmail.com",
+    "createdAt": "2026-04-16T03:52:35.844Z",
+    "updateAt": "2026-04-16T03:55:16.115Z"
+  },
+  {
+    "id": "6eb83f0a-c207-4473-a9ed-4669672d84be",
+    "title": "xóa buổi học bị duplicate",
+    "content": "- Tình huống: hệ thống ghi nhận hai buổi có cùng thời gian học trên hệ thống (trùng lịch học)\n- Yêu cầu: xáo 1 buổi\n- Hướng xử lý: sử dụng tài khoản có quyền thao tác và xóa buổi học được yêu cầu, thông báo với BU/CS để họ kiểm tra lại và thông báo học viên",
+    "tags": "Class Schedule",
+    "reporter": "phucdt01@gmail.com",
+    "createdAt": "2026-04-16T03:58:57.186Z",
+    "updateAt": "2026-04-16T03:58:57.186Z"
+  },
+  {
+    "id": "1e558763-1204-4872-8b06-7e24dbf4e868",
+    "title": "Không đăng nhập được vào compass",
+    "content": "- Tình huống: học viên có thông tin trên cả CRM lẫn LMS, nhưng phụ huynh ko dùng số điện thoại để đăng nhập vào học bạ (Compass) được.\n- Điều tra: TK Compass đăng nhập bằng mã học viên bình thường, học viên đang không được enroll vào lớp nào trên LMS, trong khi, ở thông tin lớp học vẫn thấy học viên đang ở trong lớp và có tham gia lớp học. \n- Nguyên nhân: hệ thống validate học viên phải enroll học ít nhất một lớp thì mới có thể đăng nhập compass bằng số điện thoại.\n- Hướng xử lý: enroll học viên vào đúng lớp, thử đăng nhập lại compass bằng Số điện thoại và phản hồi phụ huynh.",
+    "tags": "Đăng nhập,Compass",
+    "reporter": "reporter@gmail.com",
+    "createdAt": "2026-04-20T09:20:26.462Z",
+    "updateAt": "2026-04-20T09:20:26.462Z"
+  },
+  {
+    "id": "1417228d-8970-456a-99df-12b9f8b14638",
+    "title": "Học viên có 2 TK Denise để làm BT",
+    "content": "- Tình huống: HV (học viên)  đăng nhập denise nhưng không thấy BTVN (bài tập về nhà) của khóa học HV đang học.\n- Kiểm tra: HV có 2 Tài khoản Denise (~2 mã định danh học viên). Tech Team sẽ đăng nhập và cả 2 để xác định khóa học của học viên.\n- Kết luận: HV đang đăng nhập vào nhầm tài khoản denise nên ko thấy khóa học muốn tìm.\n- Hướng xử lý: Tech Team hướng dẫn HV vào đúng tài khoản của mình:\n\nVí Dụ: \nHọc viên Bùi Minh Vũ hiện đang có 2 tài khoản Denise để truy cập vào làm bài tập, Team đã kiểm tra cả 2 tài khoản và xác nhận được tài khoản học lớp Apps của HV là 25012864@mindx.edu.vn với mã học viên là 25012864 được tạo từ Lead Phạm Thị Yến.Có thể do HV đang đăng nhập vào tài khoản 23004005@mindx.edu.vn nên không thấy lớp Apps của khóa học lập trình.HV có 2 tài khoản Denise để làm bài tập nên dễ nhầm lẫn, BU hãy hướng dẫn HV đăng nhập đúng với TK: 25012864@mindx.edu.vn \n",
+    "tags": "Denise",
+    "reporter": "Reporter@gmail.com",
+    "createdAt": "2026-04-21T04:49:38.552Z",
+    "updateAt": "2026-04-21T04:50:02.348Z"
+  },
+  {
+    "id": "2eae5e4d-57fa-4157-9667-022e11c08081",
+    "title": "Lỗi lịch dạy học của giáo viên trên LMS",
+    "content": "- Tình trạng: TK của giáo không thể thấy lịch dạy do leader đã đăng kí và Không thực hiện điểm danh cho lớp được.\n- Điều tra: GV chưa được phân quyền/ cơ sở làm việc trên hệ thống.\n- kết luận: vì hệ thống hoạt động theo quyền, Teacher chưa được phân quyền và phân cơ sở làm việc nên hệ thống không cho nhìn lịch học và dạy của cơ sở làm việc đó.\n- hướng xử lý: dùng tài khoản có quyền, add lại các cơ sở làm việc vào tài khoản giáo viên, đăng nhập thử bằng tài khoản giáo viên và xem lịch, nếu được, phản hồi lại cho BU/CS đẻ họ thông báo lại giáo viên vào kiểm tra.",
+    "tags": "Teacher,LMS,Teacher Schedule",
+    "reporter": "phucviplc12@gmail.com",
+    "createdAt": "2026-04-21T10:43:03.944Z",
+    "updateAt": "2026-04-21T10:43:03.944Z"
   }
 ]

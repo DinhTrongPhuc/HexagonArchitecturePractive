@@ -37,15 +37,9 @@ export class NoteComand {
                         break;
                     case "read":
                         const notes = await this.listNoteUseCase.execute();
-                        console.log(notes.map(n => ({
-                            id: n.id,
-                            title: n.title.getValue(),
-                            content: n.content.getValue(),
-                            tags: n.tag.getValue().map((t) => t.getValue()).join(','),
-                            reporter: n.reporter.getValue(),
-                            createdAt: n.createdAt,
-                            updateAt: n.updateAt
-                        }))); break;
+                        console.log(`Total notes: ${notes.total}`);
+                        console.log(notes.data); 
+                        break;
                     case "update":
                         const idUpdate = args[2];
                         const titleUpdate = args[3];
