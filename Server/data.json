@@ -376,5 +376,14 @@
     "reporter": "phucviplc12@gmail.com",
     "createdAt": "2026-04-21T10:43:03.944Z",
     "updateAt": "2026-04-21T10:43:03.944Z"
+  },
+  {
+    "id": "0664cec4-3fd5-4523-87fd-0aee8fdd1326",
+    "title": "Cách xử lý nếu chưa phân bổ, (hướng dẫn chi tiết sử dụng chức năng Allocation)",
+    "content": "- Nếu chưa phân bổ hãy sử dụng chức năng Allocation trong ứng dụng NotesPro này.\n- Hướng dẫn sử dụng: yêu cầu bắt buộc phải có CRM token trong file .env của project thì mới sử dụng được. nếu có rồi thì hãy bắt đầu bằnd cách điền các thông tin trong chức năng.\n- Hướng dẫn lấy ID LEAD: truy cập CRM, tìm trên thanh Link URL của LEAD đó và copy đoạn văn bản như sau id=\"xxxxxxx\" phần bên trong ngoặc kép là id, copy nó là bạn sẽ có id bạn muốn allocation",
+    "tags": "Allocation,CRM",
+    "reporter": "Reporter@gmail.com",
+    "createdAt": "2026-04-22T09:19:03.932Z",
+    "updateAt": "2026-04-22T09:19:03.932Z"
   }
 ]

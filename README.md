@@ -55,6 +55,12 @@ Hệ thống sử dụng cơ chế **Device Code Flow** của Microsoft:
 3.  Bạn mở trình duyệt, truy cập link, dán mã và đăng nhập bằng tài khoản Outlook công ty.
 4.  Sau khi thành công, Server sẽ tự động lưu Token và bạn không cần làm lại bước này (trừ khi Token hết hạn).
 
+### 4. 💡 Mẹo xử lý khi bị hết hạn mức (Rate Limit)
+Nếu bạn gặp lỗi `429 Too Many Requests` hoặc `Quota Exceeded`:
+*   **Đổi nhà cung cấp**: Chuyển `AI_TYPE` từ `GEMINI` sang `GROQ` (hoặc ngược lại) trong file `.env`.
+*   **Đổi Model**: Trong code `GeminiAdapter.ts` hoặc `GroqAdapter.ts`, bạn có thể thử đổi sang các model khác (ví dụ: `gemini-2.5-flash` sang `gemini-2.0-flash` hoặc `gemini-2.0-flash-lite` hoặc `gemma-3-1b-it`) để tận dụng hạn mức riêng của từng model.
+*   **Kiên nhẫn**: Chờ khoảng 60 giây và thử lại.
+
 ---
 
 ## ⚙️ Hướng dẫn Cấu hình .env

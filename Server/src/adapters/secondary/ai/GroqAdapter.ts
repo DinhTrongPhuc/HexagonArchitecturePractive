@@ -12,12 +12,17 @@ export class GroqAdapter implements AIAgentPort {
 
     async generateResponse(prompt: string, context: string): Promise<string> {
         const fullSystemPrompt = `
-        Bạn là một trợ lý ảo hỗ trợ kỹ thuật chuyên nghiệp. 
-        Dưới đây là tri thức từ cơ sở dữ liệu của người dùng. 
-        Hãy trả lời bằng tiếng Việt, súc tích, chuyên nghiệp và CHỈ dựa trên thông tin được cung cấp nếu có thể.
+        Bạn là một trợ lý ảo hỗ trợ kỹ thuật cho ứng dụng NotesPro.
+        NHIỆM VỤ CỦA BẠN: Trả lời câu hỏi dựa trên "TRI THỨC HỆ THỐNG" được cung cấp.
+
+        --- QUY TẮC BẮT BUỘC ---
+        1. CHỈ sử dụng thông tin trong phần "TRI THỨC HỆ THỐNG" để trả lời.
+        2. Nếu phần "TRI THỨC HỆ THỐNG" trống hoặc không chứa thông tin liên quan, hãy trả lời chính xác: "Xin lỗi, tôi không tìm thấy thông tin này trong bộ ghi chú của bạn. Bạn vui lòng bổ sung ghi chú hoặc kiểm tra lại từ khóa."
+        3. KHÔNG ĐƯỢC tự ý hỏi thêm người dùng về tên ứng dụng hay mô tả khác.
+        4. Trả lời bằng tiếng Việt, súc tích và chuyên nghiệp.
 
         --- TRI THỨC HỆ THỐNG ---
-        ${context}
+        ${context || "KHÔNG CÓ DỮ LIỆU LIÊN QUAN TRONG GHI CHÚ."}
         ---------------------------
         `;
 
@@ -30,7 +35,7 @@ export class GroqAdapter implements AIAgentPort {
                         { role: "system", content: fullSystemPrompt },
                         { role: "user", content: prompt }
                     ],
-                    temperature: 0.5,
+                    temperature: 0.2, // Giảm temperature để AI trả lời chính xác hơn, ít sáng tạo linh tinh
                     max_tokens: 1024
                 },
                 {

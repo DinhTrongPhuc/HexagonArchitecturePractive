@@ -9,22 +9,26 @@ export class GeminiAdapter implements AIAgentPort {
         const cleanedKey = apiKey?.trim();
         this.genAI = new GoogleGenerativeAI(cleanedKey);
         this.model = this.genAI.getGenerativeModel({
-            model: "gemini-2.5-flash-lite",
+            model: "gemma-3-1b",
             generationConfig: {
                 maxOutputTokens: 1000,
-                temperature: 0.7,
+                temperature: 0.2, // Giảm temperature để bớt "chém gió"
             }
         });
     }
 
     async generateResponse(prompt: string, context: string): Promise<string> {
         const fullPrompt = `
-        Bạn là một trợ lý ảo hỗ trợ kỹ thuật chuyên nghiệp. 
-        Dưới đây là tri thức từ cơ sở dữ liệu của người dùng. 
-        Hãy trả lời bằng tiếng Việt, súc tích và chuyên nghiệp.
+        Bạn là một trợ lý ảo hỗ trợ kỹ thuật cho ứng dụng NotesPro.
+        NHIỆM VỤ: Trả lời dựa trên "TRI THỨC HỆ THỐNG".
+
+        --- QUY TẮC ---
+        1. CHỈ dùng thông tin trong "TRI THỨC HỆ THỐNG".
+        2. Nếu không thấy thông tin, hãy trả lời: "Xin lỗi, tôi không tìm thấy thông tin này trong ghi chú."
+        3. KHÔNG hỏi ngược lại người dùng.
 
         --- TRI THỨC HỆ THỐNG ---
-        ${context}
+        ${context || "KHÔNG CÓ DỮ LIỆU."}
         ---------------------------
 
         CÂU HỎI: ${prompt}
@@ -36,7 +40,7 @@ export class GeminiAdapter implements AIAgentPort {
             return response.text();
         } catch (error: any) {
             console.error("Gemini Error:", error.message);
-            if (error.status === 429) return "Lỗi: Gemini hết hạn mức (Quota). Hãy thử lại sau.";
+            if (error.status === 429) return "Lỗi: Gemini hết hạn mức. Thử lại sau.";
             return `Lỗi kết nối Gemini: ${error.message}`;
         }
     }
