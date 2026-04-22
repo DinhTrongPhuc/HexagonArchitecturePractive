@@ -89,3 +89,10 @@ export const supportTicketsApi = {
         return res.data;
     }
 };
+
+export const aiApi = {
+    ask: async (prompt: string) => {
+        const res = await apiClient.post<{ answer: string }>('/ai/ask', { prompt });
+        return res.data;
+    }
+};

@@ -276,7 +276,7 @@
     "tags": "Teacher,Class Schedule,LMS",
     "reporter": "phucdt01@mindx.com.vn",
     "createdAt": "2026-04-10T08:40:45.354Z",
-    "updateAt": "2026-04-10T08:40:45.354Z"
+    "updateAt": "2026-04-21T10:43:58.494Z"
   },
   {
     "id": "31048294-d2b2-4f07-af57-d440d7322a4b",
@@ -367,5 +367,14 @@
     "reporter": "Reporter@gmail.com",
     "createdAt": "2026-04-21T04:49:38.552Z",
     "updateAt": "2026-04-21T04:50:02.348Z"
+  },
+  {
+    "id": "2eae5e4d-57fa-4157-9667-022e11c08081",
+    "title": "Lỗi lịch dạy học của giáo viên trên LMS",
+    "content": "- Tình trạng: TK của giáo không thể thấy lịch dạy do leader đã đăng kí và Không thực hiện điểm danh cho lớp được.\n- Điều tra: GV chưa được phân quyền/ cơ sở làm việc trên hệ thống.\n- kết luận: vì hệ thống hoạt động theo quyền, Teacher chưa được phân quyền và phân cơ sở làm việc nên hệ thống không cho nhìn lịch học và dạy của cơ sở làm việc đó.\n- hướng xử lý: dùng tài khoản có quyền, add lại các cơ sở làm việc vào tài khoản giáo viên, đăng nhập thử bằng tài khoản giáo viên và xem lịch, nếu được, phản hồi lại cho BU/CS đẻ họ thông báo lại giáo viên vào kiểm tra.",
+    "tags": "Teacher,LMS,Teacher Schedule",
+    "reporter": "phucviplc12@gmail.com",
+    "createdAt": "2026-04-21T10:43:03.944Z",
+    "updateAt": "2026-04-21T10:43:03.944Z"
   }
 ]

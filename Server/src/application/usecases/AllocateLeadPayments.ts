@@ -1,4 +1,7 @@
-import { ExternalCrmPort, CrmVersion } from "../../ports/outbound/repositories/ExternalCrmPort";
+import {
+  ExternalCrmPort,
+  CrmVersion,
+} from "../../ports/outbound/repositories/ExternalCrmPort";
 
 export interface AllocateRequest {
   leadId: string;
@@ -19,7 +22,9 @@ export class AllocateLeadPaymentsUseCase {
 
     const log = (msg: string) => logs.push(msg);
 
-    log(`Starting allocation for lead: ${leadId} (CRM: ${version}, Dry Run: ${isDryRun})`);
+    log(
+      `Starting allocation for lead: ${leadId} (CRM: ${version}, Dry Run: ${isDryRun})`,
+    );
 
     try {
       const order = await this.crmPort.getOrder(leadId, version);
@@ -45,17 +50,30 @@ export class AllocateLeadPaymentsUseCase {
       log(`\n--- Phase 2: Update allocations with amounts ---`);
       for (const [i, payment] of payments.entries()) {
         const isLast = i === payments.length - 1;
-        log(`[Payment ${i + 1}/${payments.length}] id=${payment.id}, amount=${payment.amount}, isLast=${isLast}`);
-        
+        log(
+          `[Payment ${i + 1}/${payments.length}] id=${payment.id}, amount=${payment.amount}, isLast=${isLast}`,
+        );
+
         if (!isDryRun) {
-          const updatedId = await this.crmPort.updatePayment(leadId, order, payment, i, payments.length, version);
+          const updatedId = await this.crmPort.updatePayment(
+            leadId,
+            order,
+            payment,
+            i,
+            payments.length,
+            version,
+          );
           log(`  ✓ Update success, order ID: ${updatedId}`);
         } else {
-          log(`  [DRY RUN] Would update payment id=${payment.id} with calculated amounts`);
+          log(
+            `  [DRY RUN] Would update payment id=${payment.id} with calculated amounts`,
+          );
         }
       }
 
-      log(`\n✓ Done. Successfully processed ${payments.length} payment(s) for lead ${leadId}`);
+      log(
+        `\n✓ Done. Successfully processed ${payments.length} payment(s) for lead ${leadId}`,
+      );
       log(`Remaining in calculation: ${order.remaining}`);
 
       return { logs };

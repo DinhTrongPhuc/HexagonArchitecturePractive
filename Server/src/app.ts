@@ -32,6 +32,13 @@ import { AllocationController } from "./adapters/primary/controllers/http/Alloca
 import { SupportTicketController } from "./adapters/primary/controllers/http/SupportTicketController";
 import { AllocationRoutes } from "./adapters/primary/routes/AllocationRoutes";
 import { SupportTicketRoutes } from "./adapters/primary/routes/SupportTicketRoutes";
+// AI & Knowledge sources
+import { GroqAdapter } from "./adapters/secondary/ai/GroqAdapter";
+import { GeminiAdapter } from "./adapters/secondary/ai/GeminiAdapter";
+import { NoteKnowledgeSource } from "./adapters/secondary/knowledge/NoteKnowledgeSource";
+import { AskAIUseCase } from "./application/usecases/ai/AskAIUseCase";
+import { AIController } from "./adapters/primary/controllers/http/ai/AIController";
+import { AIRoutes } from "./adapters/primary/routes/AIRoutes";
 
 //express
 const server = express();
@@ -78,6 +85,27 @@ export class App {
             const scanSupportTicketsUseCase = new ScanSupportTicketsUseCase(emailScannerAdapter);
             const autoScanService = new AutoScanService(scanSupportTicketsUseCase);
 
+            // 3. Khởi tạo AI Agent (Hệ thống AI Factory linh hoạt)
+            const aiType = (process.env.AI_TYPE || "GROQ").toUpperCase();
+            let aiAdapter: any;
+
+            if (aiType === "GROQ") {
+                console.log("🚀 AI Engine: Groq (Llama 3) selected");
+                aiAdapter = new GroqAdapter(process.env.GROQ_API_KEY!);
+            } else if (aiType === "GEMINI") {
+                console.log("🚀 AI Engine: Gemini (Flash) selected");
+                aiAdapter = new GeminiAdapter(process.env.GEMINI_API_KEY!);
+            } else {
+                console.log("🚀 AI Engine: Defaulting to Groq");
+                aiAdapter = new GroqAdapter(process.env.GROQ_API_KEY!);
+            }
+
+            const noteKnowledgeSource = new NoteKnowledgeSource(noteRepository);
+            const askAIUseCase = new AskAIUseCase(aiAdapter);
+
+            // Đăng ký data.json làm nguồn tri thức
+            askAIUseCase.addKnowledgeSource(noteKnowledgeSource);
+
             // 3. Khởi tạo Controller hoặc Command
             const isCliMode = args.length > 0 && (args[0] === 'note' || args[0] === 'allocation');
             if (isCliMode) {
@@ -93,10 +121,12 @@ export class App {
                 const noteController = new NoteController(createNoteUseCase, readListNoteUseCase, readNoteUseCase, updateNoteUseCase, deleteNoteUseCase, getUniqueTagsUseCase);
                 const allocationController = new AllocationController(allocateUseCase);
                 const supportTicketController = new SupportTicketController(scanSupportTicketsUseCase, autoScanService);
+                const aiController = new AIController(askAIUseCase);
 
                 server.use("/notes", createNoteRouter(noteController));
                 server.use(AllocationRoutes(allocationController));
                 server.use(SupportTicketRoutes(supportTicketController));
+                server.use("/ai", AIRoutes(aiController));
                 server.use(errorHandler);
 
                 server.listen(process.env.PORT, () => {

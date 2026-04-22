@@ -11,8 +11,8 @@ export class Note {
     private _tag: TagList, // tag[]
     private _reporter: Email,
     private readonly _createdAt: Date,
-    private _updateAt: Date
-  ) { }
+    private _updateAt: Date,
+  ) {}
 
   // Getters-----------------------------
   get title(): Title {

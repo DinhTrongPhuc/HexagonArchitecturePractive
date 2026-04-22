@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Note, notesApi } from '../api/client';
+import { Note, notesApi, aiApi } from '../api/client';
 import { NoteCard } from '../components/NoteCard';
 import { CustomSelect } from '../components/CustomSelect';
 import {
@@ -13,6 +13,8 @@ import {
     ChevronDown,
     LayoutGrid,
     ArrowUp,
+    Sparkles,
+    Bot,
 } from 'lucide-react';
 
 type SortOption = 'newest_update' | 'oldest_update' | 'newest_created' | 'oldest_created';
@@ -27,6 +29,11 @@ export default function Dashboard() {
     const [sortBy, setSortBy] = useState<SortOption>('newest_update');
     const [showAllNotes, setShowAllNotes] = useState(false);
     const [showTopBtn, setShowTopBtn] = useState(false);
+
+    // AI States
+    const [isAskingAI, setIsAskingAI] = useState(false);
+    const [aiAnswer, setAiAnswer] = useState<string | null>(null);
+    const [showAIResponse, setShowAIResponse] = useState(false);
 
     const startInputRef = useRef<HTMLInputElement>(null);
     const endInputRef = useRef<HTMLInputElement>(null);
@@ -133,6 +140,28 @@ export default function Dashboard() {
         }
     };
 
+    const handleAskAI = async (e?: React.MouseEvent) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        if (!titleQuery.trim() || isAskingAI) return;
+
+        setShowAIResponse(true);
+        setIsAskingAI(true);
+        setAiAnswer(null);
+
+        try {
+            const res = await aiApi.ask(titleQuery);
+            setAiAnswer(res.answer);
+        } catch (error: any) {
+            console.error("AI Error:", error);
+            setAiAnswer(`Error: Unable to connect to AI Agent. ${error.message || ""}`);
+        } finally {
+            setIsAskingAI(false);
+        }
+    };
+
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -145,34 +174,89 @@ export default function Dashboard() {
             <section className="dashboard-hero glass-panel">
                 <div className="dashboard-hero-inner">
                     <div className="ticket-chip ticket-chip-accent">
-                        <LayoutGrid size={14} />
-                        <span>Solution Center</span>
+                        <Bot size={14} />
+                        <span>AI - Solution Agent</span>
                     </div>
-                    <h1>Find Ticket Solutions</h1>
+                    <h1>Smart Solution Finder</h1>
                     <p>
-                        Ask any question or finding solution of ticket here. Right now it acts as a search bar, 
-                        but it will soon become an interactive AI asking chat.
+                        Search your notes or ask <strong>Gemini AI</strong> for solution guidance.
                     </p>
 
-                    <div className="dashboard-hero-search glass-panel">
-                        <div className="search-bar dashboard-title-search" style={{ width: '100%', maxWidth: '750px', height: '60px', borderRadius: '30px', margin: '0 auto' }}>
+                    <div className="dashboard-hero-search glass-panel" style={{ padding: '8px', zIndex: 10 }}>
+                        <div className="search-bar dashboard-title-search" style={{ width: '100%', maxWidth: '750px', height: '60px', borderRadius: '30px', margin: '0 auto', display: 'flex', alignItems: 'center', background: 'var(--input-bg)', border: '1px solid var(--border)' }}>
                             <input
                                 type="text"
                                 className="input search-input dashboard-title-input"
-                                placeholder="Finding solution of ticket... (e.g., How to fix Outlook sync error?)"
+                                placeholder="Describe the issue... (e.g., Lead allocation v2?)"
                                 value={titleQuery}
                                 onChange={(e) => setTitleQuery(e.target.value)}
-                                style={{ fontSize: '1.1rem', paddingLeft: '24px', height: '100%', borderRadius: '30px' }}
+                                onKeyDown={(e) => e.key === 'Enter' && handleAskAI()}
+                                style={{ fontSize: '1.1rem', paddingLeft: '24px', flex: 1, height: '100%', background: 'transparent', border: 'none', color: 'var(--text-primary)' }}
                             />
+                            <button
+                                className="btn btn-primary"
+                                onClick={handleAskAI}
+                                disabled={isAskingAI || !titleQuery.trim()}
+                                style={{
+                                    height: '44px',
+                                    borderRadius: '22px',
+                                    marginRight: '8px',
+                                    padding: '0 20px',
+                                    gap: '8px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    fontWeight: '600',
+                                    boxShadow: '0 4px 15px rgba(var(--accent-rgb), 0.3)'
+                                }}
+                            >
+                                {isAskingAI ? <Loader2 className="spinner" size={18} /> : <Sparkles size={18} />}
+                                {isAskingAI ? 'Thinking...' : 'Ask AI'}
+                            </button>
                         </div>
                     </div>
 
-                    <div className="dashboard-scroll-hint">
-                        <ChevronDown size={16} />
-                        <span>Scroll down to see the note cards</span>
-                    </div>
+                    {!showAIResponse && (
+                        <div className="dashboard-scroll-hint">
+                            <ChevronDown size={16} />
+                            <span>Scroll down for notes</span>
+                        </div>
+                    )}
                 </div>
             </section>
+
+            {showAIResponse && (
+                <section className="dashboard-ai-section" style={{ padding: '0 2rem', marginBottom: '2rem', animation: 'fadeInUp 0.5s ease' }}>
+                    <div className="ai-response-area glass-panel shadow-lg" style={{ width: '100%', maxWidth: '1100px', margin: '0 auto', textAlign: 'left', padding: '1.5rem', border: '2px solid var(--accent-hover)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.8rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--accent-hover)', fontWeight: '700', fontSize: '1.1rem' }}>
+                                <Bot size={24} />
+                                <span>AI Assistant Guidance</span>
+                            </div>
+                            <button className="action-btn" onClick={() => setShowAIResponse(false)} style={{ background: 'rgba(255,255,255,0.05)' }}>
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        {isAskingAI ? (
+                            <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                                <Loader2 className="spinner" size={48} style={{ margin: '0 auto 1.5rem', color: 'var(--accent-hover)' }} />
+                                <p style={{ fontSize: '1.1rem' }}>Analyzing your knowledge base to provide expert guidance...</p>
+                            </div>
+                        ) : (
+                            <div className="ai-answer-content" style={{ padding: '0.5rem', lineHeight: '1.8', fontSize: '1rem', color: 'var(--text-primary)', whiteSpace: 'pre-line' }}>
+                                {aiAnswer}
+                            </div>
+                        )}
+
+                        {!isAskingAI && (
+                            <div style={{ marginTop: '2rem', paddingTop: '1.2rem', borderTop: '1px solid var(--border)', fontSize: '0.85rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '8px', opacity: 0.7 }}>
+                                <Sparkles size={14} />
+                                <span>This insight is generated specifically from your notes and ticket history.</span>
+                            </div>
+                        )}
+                    </div>
+                </section>
+            )}
 
             <section className="dashboard-notes-section">
                 <div className="dashboard-notes-head">
@@ -181,7 +265,7 @@ export default function Dashboard() {
                         <p>
                             {showAllNotes
                                 ? 'All filters and all matching notes are visible now.'
-                                : 'Only a few note cards are shown at first. Open the full list to reveal everything.'}
+                                : 'Only a few note cards are shown at first.'}
                         </p>
                     </div>
 
@@ -281,7 +365,6 @@ export default function Dashboard() {
                 ) : filteredAndSortedNotes.length === 0 ? (
                     <div className="empty-state glass-panel">
                         <h2>No notes fit your search</h2>
-                        <p>Try clearing your filters or changing your search criteria.</p>
                     </div>
                 ) : (
                     <div className="notes-grid">
@@ -301,10 +384,10 @@ export default function Dashboard() {
             </section>
 
             {showTopBtn && (
-                <button 
-                    className="scroll-to-top-btn" 
+                <button
+                    className="scroll-to-top-btn"
                     onClick={scrollToTop}
-                    title="Back to Top"
+                    style={{ zIndex: 100 }}
                 >
                     <ArrowUp size={24} />
                 </button>

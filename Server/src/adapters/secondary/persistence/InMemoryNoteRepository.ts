@@ -2,14 +2,14 @@ import { NoteRepository, NoteQueryOptions } from "../../../ports/outbound/reposi
 import { Note } from "../../../domain/entities/Note";
 
 export class InMemoryNoteRepository implements NoteRepository {
-    private Note: Note[] = [];
+    private notes: Note[] = [];
 
     async save(note: Note): Promise<void> {
-        this.Note.push(note);
+        this.notes.push(note);
     }
 
     async findAll(options?: NoteQueryOptions): Promise<{ data: Note[], total: number }> {
-        let filteredNotes = this.Note;
+        let filteredNotes = this.notes;
         
         if (options?.tag) {
             filteredNotes = filteredNotes.filter(note => 
@@ -30,26 +30,26 @@ export class InMemoryNoteRepository implements NoteRepository {
     }
 
     async findByID(id: string): Promise<Note | null> {
-        const note = this.Note.find(note => note.id === id);
+        const note = this.notes.find(note => note.id === id);
         if (!note) return null;
         return note;
     }
 
     async delete(id: string): Promise<void> {
-        const note = this.Note.find(note => note.id === id);
-        if (!note) throw new Error("Note not found");
-        this.Note = this.Note.filter(note => note.id !== id);
+        const noteIndex = this.notes.findIndex(note => note.id === id);
+        if (noteIndex === -1) throw new Error("Note not found");
+        this.notes.splice(noteIndex, 1);
     }
 
     async update(note: Note): Promise<void> {
-        const noteIndex = this.Note.findIndex(n => n.id === note.id);
+        const noteIndex = this.notes.findIndex(n => n.id === note.id);
         if (noteIndex === -1) throw new Error("Note not found");
-        this.Note[noteIndex] = note;
+        this.notes[noteIndex] = note;
     }
 
     async getUniqueTags(): Promise<string[]> {
         const tagSet = new Set<string>();
-        this.Note.forEach(note => {
+        this.notes.forEach(note => {
             note.tag.getValue().forEach(tag => {
                 tagSet.add(tag.getValue());
             });
