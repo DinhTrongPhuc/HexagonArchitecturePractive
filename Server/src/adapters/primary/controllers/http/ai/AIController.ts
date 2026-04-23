@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { AskAIUseCase } from "../../../../application/usecases/ai/AskAIUseCase";
+import { AskAIUseCase } from "../../../../../application/usecases/ai/AskAIUseCase";
 
 export class AIController {
-    constructor(private askAIUseCase: AskAIUseCase) {}
+    constructor(private askAIUseCase: AskAIUseCase) { }
 
     async ask(req: Request, res: Response) {
         try {

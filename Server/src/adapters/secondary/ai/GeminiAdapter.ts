@@ -9,26 +9,27 @@ export class GeminiAdapter implements AIAgentPort {
         const cleanedKey = apiKey?.trim();
         this.genAI = new GoogleGenerativeAI(cleanedKey);
         this.model = this.genAI.getGenerativeModel({
-            model: "gemma-3-1b",
+            model: "gemini-1.5-flash-latest",
             generationConfig: {
-                maxOutputTokens: 1000,
-                temperature: 0.2, // Giảm temperature để bớt "chém gió"
+                maxOutputTokens: 1500,
+                temperature: 0.6,
             }
         });
     }
 
     async generateResponse(prompt: string, context: string): Promise<string> {
         const fullPrompt = `
-        Bạn là một trợ lý ảo hỗ trợ kỹ thuật cho ứng dụng NotesPro.
-        NHIỆM VỤ: Trả lời dựa trên "TRI THỨC HỆ THỐNG".
+        Bạn là một chuyên gia hỗ trợ kỹ thuật (IT Helpdesk) thông minh cho ứng dụng NotesPro.
+        NHIỆM VỤ: Giải quyết vấn đề của người dùng một cách tận tâm.
 
-        --- QUY TẮC ---
-        1. CHỈ dùng thông tin trong "TRI THỨC HỆ THỐNG".
-        2. Nếu không thấy thông tin, hãy trả lời: "Xin lỗi, tôi không tìm thấy thông tin này trong ghi chú."
-        3. KHÔNG hỏi ngược lại người dùng.
+        --- QUY TẮC TƯ DUY ---
+        1. ƯU TIÊN GHI CHÚ: Sử dụng tri thức trong "TRI THỨC HỆ THỐNG" làm căn cứ chính.
+        2. SUY LUẬN LOGIC: Nếu không thấy ghi chú phù hợp, hãy dựa trên kiến thức IT tổng quát để đưa ra các dự đoán và hướng dẫn kiểm tra (Checklist) cho người dùng.
+        3. KHÔNG BỎ CUỘC: Tuyệt đối không trả lời cụt lủn "Tôi không biết". Hãy luôn cố gắng hỗ trợ một phần nào đó (Gợi ý cách kiểm tra, liệt kê các nguyên nhân phổ biến).
+        4. PHONG CÁCH: Tiếng Việt, chuyên nghiệp, súc tích và có cấu trúc rõ ràng.
 
         --- TRI THỨC HỆ THỐNG ---
-        ${context || "KHÔNG CÓ DỮ LIỆU."}
+        ${context || "Chưa có dữ liệu ghi chú cụ thể."}
         ---------------------------
 
         CÂU HỎI: ${prompt}
@@ -40,7 +41,7 @@ export class GeminiAdapter implements AIAgentPort {
             return response.text();
         } catch (error: any) {
             console.error("Gemini Error:", error.message);
-            if (error.status === 429) return "Lỗi: Gemini hết hạn mức. Thử lại sau.";
+            if (error.status === 429) return "Lỗi: Gemini hết hạn mức. Hãy thử lại sau.";
             return `Lỗi kết nối Gemini: ${error.message}`;
         }
     }
